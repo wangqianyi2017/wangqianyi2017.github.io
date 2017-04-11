@@ -742,8 +742,7 @@
 
       
         
-          
-            <h1 id="搭建博客的意义"><a href="#搭建博客的意义" class="headerlink" title="搭建博客的意义"></a>搭建博客的意义</h1><p>对于我个人而言，意义如下：</p>
+          <h1 id="搭建博客的意义"><a href="#搭建博客的意义" class="headerlink" title="搭建博客的意义"></a>搭建博客的意义</h1><p>对于我个人而言，意义如下：</p>
 <ul>
 <li>作为一名程序员，我需要一个地方记录，归纳我所积累的技术知识，以便于日后快速回忆。当然，我只能写技术博客，写不出充满诗和远方的美文。</li>
 <li>分享与帮助他人。这个想法在我刚上大学第一次百度搜索技术问题的时候就有了，如果我所写的博客也能帮助到某个人，那真是一件无比快乐的事情。</li>
@@ -751,36 +750,13 @@
 <li>一点点虚荣。人总是希望自己在本职工作的探索中能够留下些什么，如果能得到他人的夸奖与认同，那更将是人生一大乐事。</li>
 <li>一点点功利。起码可以把博客网址写在个人简历上。</li>
 </ul>
-<h1 id="github及hexo所扮演的角色"><a href="#github及hexo所扮演的角色" class="headerlink" title="github及hexo所扮演的角色"></a>github及hexo所扮演的角色</h1><p>首先需要明确的是，在“搭建博客”这一需求中，github及hexo分别所扮演的角色：</p>
-<ul>
-<li>hexo：基于Node.js的静态博客框架，类似于（但不等同于）网络应用中容器的概念，例如tomcat,resin等。</li>
-<li>github：hexo的托管平台。为网络应用提供各种所需的计算资源及域名。</li>
-</ul>
-<p>更直观的类比是，日常我们部署一个java网站的通常方式为：将java web服务部署在tomcat服务器下，然后将tomcat发布到一台有公共域名的linux服务器上。其中hexo的职责类似于tomcat，github则类似于linux服务器。</p>
-<h1 id="使用github搭建个人博客是否有违道德？"><a href="#使用github搭建个人博客是否有违道德？" class="headerlink" title="使用github搭建个人博客是否有违道德？"></a>使用github搭建个人博客是否有违道德？</h1><p>众所周知，github是一个代码的托管平台，并非个人博客的发布平台，因此难免引来一些“使用github的免费资源创建个人博客是否道德”的争议。不过大家大可不必有心理包袱，因为github本身对这件事看得很开，在GitHub Pages 的<a href="https://github.com/blog/272-github-pages" target="_blank" rel="external">官方文档</a>中有如下描述：</p>
-<blockquote>
-<p>If you create a repository named you.github.com, where you is your username, and push content to it, we’ll automatically publish that to <a href="http://you.github.com" target="_blank" rel="external">http://you.github.com</a>. No FTP, no scp, no rsync, nothing. Just a simple git push and you’re done. You can put anything here you like. Use it as a customizable home for your Git repos. Create a blog and spread your ideas. Whatever you want!</p>
-</blockquote>
-<p>简直是稳得不行，手动点赞。</p>
-<h1 id="使用github-hexo搭建博客的优势"><a href="#使用github-hexo搭建博客的优势" class="headerlink" title="使用github+hexo搭建博客的优势"></a>使用github+hexo搭建博客的优势</h1><p>总体而言，使用github+hexo搭建博客的技术门槛很低，即使不是计算机相关的从业人员，按照教程操作，也能搭建出高水准的博客。</p>
-<p>分以述之，列举优势如下：</p>
-<h2 id="使用github的优势"><a href="#使用github的优势" class="headerlink" title="使用github的优势"></a>使用github的优势</h2><ul>
-<li>计算资源及域名资源完全免费，实现免费搭建个人博客的梦想。</li>
-<li>如果你是一个程序员或有志于在未来成为一名程序员，如果你完全没接触过github甚至于git，那么以此为契机赶快加入进来吧，<del>抛弃垂垂老矣的svn吧（纯属个人偏见）</del>。借由这个项目你可以体验到几乎所有github能为你带来的便利，进而爱上它。</li>
-</ul>
-<h2 id="使用hexo的优势"><a href="#使用hexo的优势" class="headerlink" title="使用hexo的优势"></a>使用hexo的优势</h2><ul>
-<li>与github无缝契合。得益于GitHub Pages功能的推出，将一个hexo应用托管至github上运行或进行日常维护均非常简单。</li>
-<li>只需要修改配置文件即可定制属于自己的个人博客。告别繁琐的css，js设计工作，尤其适合于前端知识不足的人（比如在下）。</li>
-<li>github上有大量优秀的hexo主题可供选择。</li>
-<li>使用markdown书写文章，便于迁入迁出，通用性强。</li>
-</ul>
-<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h2 id="github环境准备"><a href="#github环境准备" class="headerlink" title="github环境准备"></a>github环境准备</h2><p>github是基于git的，因此首先需要安装git,关于git的安装方法可参见我的另一篇文章：<a href="http://reimuwang.org/2017/04/11/git-1-git%E5%AE%89%E8%A3%85/" target="_blank" rel="external">git安装</a></p>
-<h2 id="hexo环境准备"><a href="#hexo环境准备" class="headerlink" title="hexo环境准备"></a>hexo环境准备</h2><blockquote>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="external">手把手教你用Hexo+Github 搭建属于自己的博客 - gdutxiaoxu的博客 - 博客频道 - CSDN.NET</a></p>
-<p><a href="https://github.com/blog/272-github-pages" target="_blank" rel="external">GitHub Pages官方文档</a></p>
-</blockquote>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/11/github-hexo搭建博客-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
