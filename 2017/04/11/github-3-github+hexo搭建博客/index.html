@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git,github,hexo,blog,next," />
+  <meta name="keywords" content="git,github,hexo," />
 
 
 
@@ -88,7 +88,7 @@
 
 
 <meta name="description" content="环境搭建github环境搭建">
-<meta name="keywords" content="git,github,hexo,blog,next">
+<meta name="keywords" content="git,github,hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="github+hexo搭建博客">
 <meta property="og:url" content="http://yoursite.com/2017/04/11/github-3-github+hexo搭建博客/index.html">
@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/github_3_1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/github_3_2.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/github_3_3.jpg">
-<meta property="og:updated_time" content="2017-04-16T13:22:50.652Z">
+<meta property="og:updated_time" content="2017-04-16T13:53:40.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="github+hexo搭建博客">
 <meta name="twitter:description" content="环境搭建github环境搭建">
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  211
+                  302
                 </span>
               
 
@@ -421,7 +421,13 @@
 <p><img src="/images/blog_pic/github_3_2.jpg" alt="github_3_2.jpg"></p>
 <p>创建后即可生成用于存储博客的仓库。</p>
 <p><img src="/images/blog_pic/github_3_3.jpg" alt="github_3_3.jpg"></p>
-<h2 id="hexo环境搭建"><a href="#hexo环境搭建" class="headerlink" title="hexo环境搭建"></a>hexo环境搭建</h2><h3 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h3><p>参见：<a href="http://reimuwang.org/2017/04/16/hexo-1-hexo%E5%AE%89%E8%A3%85/" target="_blank" rel="external">hexo安装</a></p>
+<h2 id="hexo环境搭建"><a href="#hexo环境搭建" class="headerlink" title="hexo环境搭建"></a>hexo环境搭建</h2><p>hexo安装参见：<a href="http://reimuwang.org/2017/04/16/hexo-1-hexo%E5%AE%89%E8%A3%85/" target="_blank" rel="external">hexo安装</a></p>
+<h2 id="github与hexo建立关联"><a href="#github与hexo建立关联" class="headerlink" title="github与hexo建立关联"></a>github与hexo建立关联</h2><h3 id="安装github-hexo关联扩展"><a href="#安装github-hexo关联扩展" class="headerlink" title="安装github-hexo关联扩展"></a>安装github-hexo关联扩展</h3><p>打开cmd，进入到hexo安装目录下，输入：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<h3 id="修改hexo配置文件"><a href="#修改hexo配置文件" class="headerlink" title="修改hexo配置文件"></a>修改hexo配置文件</h3><p>打开hexo根目录下的_config.yml，修改deploy属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:ReimuWang/ReimuWang.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>其中 <strong>ReimuWang</strong> 为github账号名。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>hexo使用方法参见：<a href="http://reimuwang.org/2017/04/16/hexo-2-hexo%E4%BD%BF%E7%94%A8/" target="_blank" rel="external">hexo使用</a></p>
 <blockquote>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="external">手把手教你用Hexo+Github 搭建属于自己的博客 - gdutxiaoxu的博客 - 博客频道 - CSDN.NET</a></p>
 <p><a href="https://github.com/" target="_blank" rel="external">GitHub官网</a></p>
@@ -460,10 +466,6 @@
             <a href="/tags/github/" rel="tag"># github</a>
           
             <a href="/tags/hexo/" rel="tag"># hexo</a>
-          
-            <a href="/tags/blog/" rel="tag"># blog</a>
-          
-            <a href="/tags/next/" rel="tag"># next</a>
           
         </div>
       
@@ -562,7 +564,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -584,7 +586,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -619,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#github环境搭建"><span class="nav-number">1.1.</span> <span class="nav-text">github环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git安装"><span class="nav-number">1.1.1.</span> <span class="nav-text">git安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册github账号"><span class="nav-number">1.1.2.</span> <span class="nav-text">注册github账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github添加ssh密钥"><span class="nav-number">1.1.3.</span> <span class="nav-text">github添加ssh密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建存储博客应用的仓库"><span class="nav-number">1.1.4.</span> <span class="nav-text">创建存储博客应用的仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo环境搭建"><span class="nav-number">1.2.</span> <span class="nav-text">hexo环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo安装"><span class="nav-number">1.2.1.</span> <span class="nav-text">hexo安装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#github环境搭建"><span class="nav-number">1.1.</span> <span class="nav-text">github环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git安装"><span class="nav-number">1.1.1.</span> <span class="nav-text">git安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册github账号"><span class="nav-number">1.1.2.</span> <span class="nav-text">注册github账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github添加ssh密钥"><span class="nav-number">1.1.3.</span> <span class="nav-text">github添加ssh密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建存储博客应用的仓库"><span class="nav-number">1.1.4.</span> <span class="nav-text">创建存储博客应用的仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo环境搭建"><span class="nav-number">1.2.</span> <span class="nav-text">hexo环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github与hexo建立关联"><span class="nav-number">1.3.</span> <span class="nav-text">github与hexo建立关联</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装github-hexo关联扩展"><span class="nav-number">1.3.1.</span> <span class="nav-text">安装github-hexo关联扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改hexo配置文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">修改hexo配置文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
