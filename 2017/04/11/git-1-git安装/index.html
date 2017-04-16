@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git,TortoiseGit," />
+  <meta name="keywords" content="git,tortoiseGit," />
 
 
 
@@ -87,22 +87,21 @@
 
 
 
-<meta name="description" content="面向系统windows7 64位">
-<meta name="keywords" content="git,TortoiseGit">
+<meta name="description" content="本文安装方法面向系统：windows7 64位。">
+<meta name="keywords" content="git,tortoiseGit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git安装">
 <meta property="og:url" content="http://yoursite.com/2017/04/11/git-1-git安装/index.html">
 <meta property="og:site_name" content="王艺凯的博客">
-<meta property="og:description" content="面向系统windows7 64位">
+<meta property="og:description" content="本文安装方法面向系统：windows7 64位。">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/git_1_1.jpg">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/git_1_2.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/git_1_3.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/git_1_4.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/git_1_5.jpg">
-<meta property="og:updated_time" content="2017-04-11T16:13:05.041Z">
+<meta property="og:updated_time" content="2017-04-16T07:27:56.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git安装">
-<meta name="twitter:description" content="面向系统windows7 64位">
+<meta name="twitter:description" content="本文安装方法面向系统：windows7 64位。">
 <meta name="twitter:image" content="http://yoursite.com/images/blog_pic/git_1_1.jpg">
 
 
@@ -376,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  503
+                  215
                 </span>
               
 
@@ -392,7 +391,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -411,36 +410,27 @@
       
 
       
-        <h1 id="面向系统"><a href="#面向系统" class="headerlink" title="面向系统"></a>面向系统</h1><p>windows7 64位</p>
+        <p>本文安装方法面向系统：windows7 64位。</p>
 <a id="more"></a>
 <h1 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h1><p><strong>软件下载地址</strong></p>
 <ul>
 <li>git官网下载地址：<a href="https://git-scm.com/downloads" target="_blank" rel="external">下载地址</a>。</li>
-<li>我个人也会提供一份我下载好的适用于64位win7系统的版本：<a href="http://pan.baidu.com/s/1cal5Qe" target="_blank" rel="external">下载地址</a>。</li>
+<li>windows7 64位安装包个人存档：<a href="http://pan.baidu.com/s/1cal5Qe" target="_blank" rel="external">下载地址</a>。</li>
 </ul>
-<p>下载完成后双击运行，除安装目录外，其余设定保持默认即可，一路下一步直至安装结束。</p>
+<p>安装时，除安装目录选择外，其余设定保持默认即可。</p>
 <p>安装完成后，鼠标右键会多出下图红框中的两个选项：</p>
 <p><img src="/images/blog_pic/git_1_1.jpg" alt="git_1_1.jpg"></p>
-<p>点击Git GUI Here进入git的图形化管理界面，实际使用效果来看这个界面并没有下面要说到的git bash好用，不推荐使用。</p>
-<p><img src="/images/blog_pic/git_1_2.jpg" alt="git_1_2.jpg"></p>
-<p>点击Git Bash Here进入git的操作界面。这其实是一个仿linux环境的脚本输入界面，它实现了与git操作相关的那部分shell命令。通过shell命令我们即可实现与git程序的交互。</p>
+<p>点击Git Bash Here进入git的操作界面。这其实是一个仿linux环境的脚本输入界面，它实现了与git操作相关的那部分shell命令。</p>
 <p><img src="/images/blog_pic/git_1_3.jpg" alt="git_1_3.jpg"></p>
-<p>可通过<strong>left Ctrl + 鼠标滚轮</strong>调整界面中的字体大小</p>
+<p>可通过 <strong>left Ctrl + 鼠标滚轮</strong> 调整界面中的字体大小</p>
 <p><img src="/images/blog_pic/git_1_4.jpg" alt="git_1_4.jpg"></p>
-<p>输入如下命令查看git版本，验证是否安装成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure></p>
+<p>输入如下命令查看git版本，验证是否安装成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure>
 <p>安装成功时返回版本信息：</p>
 <p><img src="/images/blog_pic/git_1_5.jpg" alt="git_1_5.jpg"></p>
-<h1 id="安装TortoiseGit"><a href="#安装TortoiseGit" class="headerlink" title="安装TortoiseGit"></a>安装TortoiseGit</h1><p>使用原生的git软件查看文件的diff信息是很痛苦的一件事，各种++–会把人看到崩溃，自带的gui功能又很简陋，因此推荐安装TortoiseGit查看diff。</p>
-<p>事实上，TortoiseGit是一个很全面的git管理软件（Tortoise还有类似的SVN管理软件），使用它我们可以完成所有git操作。不过我个人认为除了diff外，git原生软件在其他功能上实现的都不错，使用原生的软件还要更为顺手一些。</p>
-<p><strong>软件下载地址</strong></p>
-<ul>
-<li>TortoiseGit官网下载地址：<a href="https://tortoisegit.org/download/" target="_blank" rel="external">下载地址</a>。</li>
-<li>我个人也会提供一份我下载好的适用于64位win7系统的版本：<a href="http://pan.baidu.com/s/1kU50Vyf" target="_blank" rel="external">下载地址</a>。</li>
-</ul>
-<p>下载完成后双击运行，除安装目录外，其余设定保持默认即可，一路下一步直至安装结束。</p>
+<h1 id="安装tortoiseGit"><a href="#安装tortoiseGit" class="headerlink" title="安装tortoiseGit"></a>安装tortoiseGit</h1><p>tortoiseGit是git的管理工具，安装方法参见<a href="http://reimuwang.org/2017/04/16/tortoiseGit-1-tortoiseGit安装" target="_blank" rel="external">tortoiseGit安装</a></p>
 <blockquote>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://git-scm.com/downloads" target="_blank" rel="external">git官网下载</a></p>
-<p><a href="https://tortoisegit.org/download/" target="_blank" rel="external">TortoiseGit官网下载</a></p>
 </blockquote>
 
       
@@ -473,7 +463,7 @@
           
             <a href="/tags/git/" rel="tag"># git</a>
           
-            <a href="/tags/TortoiseGit/" rel="tag"># TortoiseGit</a>
+            <a href="/tags/tortoiseGit/" rel="tag"># tortoiseGit</a>
           
         </div>
       
@@ -572,7 +562,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -583,7 +573,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -629,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#面向系统"><span class="nav-number">1.</span> <span class="nav-text">面向系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装git"><span class="nav-number">2.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装TortoiseGit"><span class="nav-number">3.</span> <span class="nav-text">安装TortoiseGit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装git"><span class="nav-number">1.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装tortoiseGit"><span class="nav-number">2.</span> <span class="nav-text">安装tortoiseGit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
