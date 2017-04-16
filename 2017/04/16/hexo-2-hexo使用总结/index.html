@@ -90,13 +90,13 @@
 <meta name="description" content="本文所记录功能筛选规则：  github + hexo + next 环境下测试通过并且展现效果良好。 相同功能有多种不同实现时会依个人喜好选择其中之一。">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo使用">
-<meta property="og:url" content="http://yoursite.com/2017/04/16/hexo-2-hexo使用/index.html">
+<meta property="og:title" content="hexo使用总结">
+<meta property="og:url" content="http://yoursite.com/2017/04/16/hexo-2-hexo使用总结/index.html">
 <meta property="og:site_name" content="王艺凯的博客">
 <meta property="og:description" content="本文所记录功能筛选规则：  github + hexo + next 环境下测试通过并且展现效果良好。 相同功能有多种不同实现时会依个人喜好选择其中之一。">
-<meta property="og:updated_time" content="2017-04-16T13:51:50.843Z">
+<meta property="og:updated_time" content="2017-04-16T14:49:04.487Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo使用">
+<meta name="twitter:title" content="hexo使用总结">
 <meta name="twitter:description" content="本文所记录功能筛选规则：  github + hexo + next 环境下测试通过并且展现效果良好。 相同功能有多种不同实现时会依个人喜好选择其中之一。">
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/16/hexo-2-hexo使用/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/16/hexo-2-hexo使用总结/"/>
 
 
 
 
 
-  <title> hexo使用 | 王艺凯的博客 </title>
+  <title> hexo使用总结 | 王艺凯的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/hexo-2-hexo使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/hexo-2-hexo使用总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王艺凯">
@@ -281,7 +281,7 @@
             
             
               
-                hexo使用
+                hexo使用总结
               
             
           </h1>
@@ -337,7 +337,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/04/16/hexo-2-hexo使用/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/04/16/hexo-2-hexo使用总结/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -346,7 +346,7 @@
 
           
           
-             <span id="/2017/04/16/hexo-2-hexo使用/" class="leancloud_visitors" data-flag-title="hexo使用">
+             <span id="/2017/04/16/hexo-2-hexo使用总结/" class="leancloud_visitors" data-flag-title="hexo使用总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  53
+                  680
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -411,6 +411,46 @@
 <li>相同功能有多种不同实现时会依个人喜好选择其中之一。</li>
 </ul>
 <a id="more"></a>
+<h1 id="日常操作"><a href="#日常操作" class="headerlink" title="日常操作"></a>日常操作</h1><p>打开git bash界面，进入hexo根目录。不妨设根目录为D:\work\Hexo</p>
+<hr>
+<p>清空缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure>
+<hr>
+<p>新建文章</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new post &quot;xxx&quot;</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ul>
+<li>执行命令后，会在D:\work\Hexo\source_posts下创建文件。也可直接在该目录下使用其他方法添加文件。使用命令生成文件时文件头会附带创建时间等信息，同时会进行特殊字符转换，因此最好使用命令创建文件。</li>
+<li>文件名中的特殊字符会被转换为-，为避免不必要的麻烦，文件名中不要带特殊字符。</li>
+<li>博客展示的标题可在文本中另行指定，并不一定要与创建的文件名一致。因此文件名应携带更多便于归档的信息。例如文件名 <strong>git-1-git安装</strong> 以-分为三部分。第一部分git为该文件所属分类名；第二部分1为该文件在所属分类下按创建时间的排序；第三部分为对应博客标题移除特殊字符后的字符串。</li>
+</ul>
+<hr>
+<p>生成文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
+<hr>
+<p>将本地最新代码提交至github</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
+<hr>
+<p>本地启动hexo服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s</div></pre></td></tr></table></figure>
+<p>默认端口号为4000。若无法启动则有很大可能是因为该端口号被占用。若要指定其他端口，使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s -p 5000</div></pre></td></tr></table></figure>
+<p>其中5000即为指定的端口号。</p>
+<h1 id="文件模版示例"><a href="#文件模版示例" class="headerlink" title="文件模版示例"></a>文件模版示例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 标题</div><div class="line">date: 2017-04-16 21:42:08</div><div class="line">tags: [标签1,标签2,标签3]</div><div class="line">categories: 分类1</div><div class="line">---</div><div class="line"></div><div class="line">内容part1</div><div class="line"></div><div class="line">&lt;!-- more --&gt;</div><div class="line"></div><div class="line">内容part2</div></pre></td></tr></table></figure>
+<p><strong>说明</strong></p>
+<ul>
+<li>—与—之间的语句不会被展示出来。</li>
+<li><strong>title:</strong> 展示时该博文的题目，与实际文件名无关，可随意命名。</li>
+<li><strong>date:</strong> 该文件的创建时间，是归档排序时的依据。修改文件内容不要修改该字段。</li>
+<li><strong>tags:</strong> 标签。类型为列表。</li>
+<li><strong>categories:</strong> 所属分类。从逻辑清晰的角度考虑，一篇文章只能存在于一个分类之下。</li>
+<li><strong><!-- more -->:</strong> 不会被展示出来。该语句之上的内容会被展示在摘要中。</li>
+</ul>
+<h1 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h1><p>主题相当于hexo基本功能的定制与扩展。其中 <strong>主题next</strong> 使用说明参见<a href="">hexo主题next使用总结</a></p>
+<blockquote>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="external">手把手教你用Hexo+Github 搭建属于自己的博客 - gdutxiaoxu的博客 - 博客频道 - CSDN.NET</a></p>
+<p><a href="http://blog.csdn.net/u012246342/article/details/51543370" target="_blank" rel="external">hexo安装成功，并且正确运行，但是localhost:4000不能访问 - 温浩然 - 博客频道 - CSDN.NET</a></p>
+</blockquote>
 
       
     </div>
@@ -510,8 +550,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -573,6 +622,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#日常操作"><span class="nav-number">1.</span> <span class="nav-text">日常操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件模版示例"><span class="nav-number">2.</span> <span class="nav-text">文件模版示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主题"><span class="nav-number">3.</span> <span class="nav-text">主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
