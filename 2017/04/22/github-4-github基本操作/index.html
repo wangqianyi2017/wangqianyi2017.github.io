@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="git,github," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Thou Shalt Comment">
-<meta name="keywords">
+<meta name="description" content="创建新项目远程创建新项目，得到ssh clone地址（使用http时每次提交均需输入账号密码，ssh不需要），例如：">
+<meta name="keywords" content="git,github">
 <meta property="og:type" content="article">
-<meta property="og:title" content="github-3-github基本操作">
-<meta property="og:url" content="http://yoursite.com/2017/04/22/github-3-github基本操作/index.html">
+<meta property="og:title" content="github基本操作">
+<meta property="og:url" content="http://yoursite.com/2017/04/22/github-4-github基本操作/index.html">
 <meta property="og:site_name" content="王艺凯的博客">
-<meta property="og:description" content="Thou Shalt Comment">
-<meta property="og:updated_time" content="2017-04-22T08:44:45.799Z">
+<meta property="og:description" content="创建新项目远程创建新项目，得到ssh clone地址（使用http时每次提交均需输入账号密码，ssh不需要），例如：">
+<meta property="og:updated_time" content="2017-04-22T11:43:00.154Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="github-3-github基本操作">
-<meta name="twitter:description" content="Thou Shalt Comment">
+<meta name="twitter:title" content="github基本操作">
+<meta name="twitter:description" content="创建新项目远程创建新项目，得到ssh clone地址（使用http时每次提交均需输入账号密码，ssh不需要），例如：">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/22/github-3-github基本操作/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/22/github-4-github基本操作/"/>
 
 
 
 
 
-  <title> github-3-github基本操作 | 王艺凯的博客 </title>
+  <title> github基本操作 | 王艺凯的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -270,7 +270,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/github-3-github基本操作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/github-4-github基本操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王艺凯">
@@ -291,7 +291,7 @@
             
             
               
-                github-3-github基本操作
+                github基本操作
               
             
           </h1>
@@ -317,6 +317,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index">
+                    <span itemprop="name">github</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -325,7 +347,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/04/22/github-3-github基本操作/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/04/22/github-4-github基本操作/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -334,7 +356,7 @@
 
           
           
-             <span id="/2017/04/22/github-3-github基本操作/" class="leancloud_visitors" data-flag-title="github-3-github基本操作">
+             <span id="/2017/04/22/github-4-github基本操作/" class="leancloud_visitors" data-flag-title="github基本操作">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  0
+                  339
                 </span>
               
 
@@ -393,7 +415,32 @@
       
 
       
-        
+        <h1 id="创建新项目"><a href="#创建新项目" class="headerlink" title="创建新项目"></a>创建新项目</h1><p>远程创建新项目，得到ssh clone地址（使用http时每次提交均需输入账号密码，ssh不需要），例如：</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git@github.com:ReimuWang/gitHubTest.git</div></pre></td></tr></table></figure>
+<p>打开git bash，进入选定的存储git仓库的目录，不妨设为D:\work\git\repository</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /d/work/git/repository/</div></pre></td></tr></table></figure>
+<p>clone远端代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:ReimuWang/gitHubTest.git</div></pre></td></tr></table></figure>
+<h1 id="日常操作流程"><a href="#日常操作流程" class="headerlink" title="日常操作流程"></a>日常操作流程</h1><p>触发时机：阶段性修改完成，需提交至远端（首次填充空仓库也可视为一次较大的改动而非创建）。</p>
+<p>拉取最新代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull</div></pre></td></tr></table></figure>
+<p>查看当前工作区的更改情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure>
+<p>根据status的指示，将工作区中修改的文件添加至缓存区。可以逐个添加，只添加一部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add 文件名</div></pre></td></tr></table></figure>
+<p>或者也可以全部添加，该命令将添加所有新增文件及修改文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add *</div></pre></td></tr></table></figure>
+<p>将当前缓存区中的文件提交到本地HEAD中（该命令执行后还需输入一下本次提交的简介）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit</div></pre></td></tr></table></figure>
+<p>将本地HEAD中的文件提交至远端master分支，可积攒多个commit后进行1次提交：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<!-- more -->
+<blockquote>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://blog.csdn.net/javaandroid730/article/details/53522872" target="_blank" rel="external">入门级：GitHub和Git超超超详细使用教程！ - FynnJason的技术屋 - 博客频道 - CSDN.NET</a></p>
+<p><a href="http://www.runoob.com/w3cnote/git-guide.html" target="_blank" rel="external">Github 简明教程 | 菜鸟教程</a></p>
+</blockquote>
+
       
     </div>
 
@@ -419,6 +466,14 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+        </div>
       
 
       
@@ -486,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -549,6 +613,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建新项目"><span class="nav-number">1.</span> <span class="nav-text">创建新项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#日常操作流程"><span class="nav-number">2.</span> <span class="nav-text">日常操作流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
