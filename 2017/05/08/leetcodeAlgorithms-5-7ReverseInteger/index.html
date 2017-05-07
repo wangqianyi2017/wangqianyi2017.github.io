@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="问题地址Reverse Integer | LeetCode OJ 问题描述">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/leetcode_5_1.jpg">
-<meta property="og:updated_time" content="2017-05-07T16:24:33.392Z">
+<meta property="og:updated_time" content="2017-05-07T16:28:03.328Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-7.Reverse Integer">
 <meta name="twitter:description" content="问题地址Reverse Integer | LeetCode OJ 问题描述">
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  342
+                  341
                 </span>
               
 
@@ -423,16 +423,9 @@
 <h1 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用long型避免溢出。</p>
 <p><strong>注意</strong></p>
 <ol>
-<li>java中int型取值范围为<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[-2^31 ,2^31 -1]</div></pre></td></tr></table></figure>
-</li>
+<li>java中int型取值范围为[-2^31 ,2^31 -1]。python中不存在溢出问题，但为了满足题意，需手动设置取值范围。</li>
+<li>java中-5/2=-2,-5%2=-1，python中-5/2=-3,-5%2=1。在python中可将 被除数/被取余数 转换为正数以消除这种计算差异。</li>
 </ol>
-<p>。python中不存在溢出问题，但为了满足题意，需手动设置取值范围。</p>
-<ol>
-<li>java中<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-5/2=-2,-5%2=-1</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>，python中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-5/2=-3,-5%2=1</div></pre></td></tr></table></figure></p>
-<p>。在python中可将 被除数/被取余数 转换为正数以消除这种计算差异。</p>
 <h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p><strong>java</strong></p>
 <p>代码路径：</p>
 <ul>
