@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/18/传智springmvcMybatisDay1-1-原生态jdbc编程中的问题总结/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="java使用jdbc操作关系型数据库。mybatis是对jdbc的封装。  mybatis开发dao（持久层）的两种方式：  原始：dao接口及dao实现均需程序员自己编写。 mapper代理：程序员只需要写dao接口。   jdbc操作数据库的效率比框架高。">
-<meta property="og:updated_time" content="2017-05-19T01:22:10.549Z">
+<meta property="og:updated_time" content="2017-05-19T01:25:29.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="传智 springmvc+mybatis day1-1.原生态jdbc编程中的问题总结">
 <meta name="twitter:description" content="java使用jdbc操作关系型数据库。mybatis是对jdbc的封装。  mybatis开发dao（持久层）的两种方式：  原始：dao接口及dao实现均需程序员自己编写。 mapper代理：程序员只需要写dao接口。   jdbc操作数据库的效率比框架高。">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  639
+                  643
                 </span>
               
 
@@ -446,10 +446,16 @@
 <p>PreparedStatement是预编译的Statement。</p>
 <p>Statement的作用：通过Statement进行数据库的操作。</p>
 <p>为何使用PreparedStatement：</p>
-<ol>
-<li>防止sql注入。</li>
-<li>效率高，原因：当使用Statement时，数据库接收到sql语句后会找寻最优执行途径即进行编译，编译的结果会记录到缓存中，下次再遇到相同的sql则会直接读取缓存中已有的方案而跳过编译的步骤。但是在使用Statement时sql1:<figure class="highlight plain"><figcaption><span>* FROM user WHERE id=1```与sql2:```SELECT * FROM user WHERE id=2```是两条不同的sql，因此即便数据库缓存中已有sql1的处理结果，当其接到sql2的请求时仍需重新编译，即便这两个sql执行的最优途径实际上是相同的。PreparedStatement使用```SELECT * FROM user WHERE id=?```规避了这个问题。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">```java</div><div class="line">Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</div></pre></td></tr></table></figure></li>
-</ol>
+<p>1.防止sql注入。</p>
+<p>2.效率高，原因：当使用Statement时，数据库接收到sql语句后会找寻最优执行途径即进行编译，编译的结果会记录到缓存中，下次再遇到相同的sql则会直接读取缓存中已有的方案而跳过编译的步骤。但是在使用Statement时sql1:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">1</span></div></pre></td></tr></table></figure>
+<p>与sql2:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">2</span></div></pre></td></tr></table></figure>
+<p>是两条不同的sql，因此即便数据库缓存中已有sql1的处理结果，当其接到sql2的请求时仍需重新编译，即便这两个sql执行的最优途径实际上是相同的。PreparedStatement使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=?</div></pre></td></tr></table></figure>
+<p>规避了这个问题。</p>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div></pre></td></tr></table></figure>
 <p>该行代码作用为加载mysql驱动。””中的字符串即为mysql驱动包中驱动类的全路径。</p>
 <hr>
 <p>使用原生jdbc时，若设计不当，则数据库的连接可能会频繁的创建和关闭，浪费数据库资源，影响效率。解决方案：使用数据库连接池。</p>
