@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_2">
+<meta name="description" content="项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_3">
 <meta name="keywords" content="java,jdbc,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="传智 springmvc+mybatis day1-4.入门程序-查询用户信息">
 <meta property="og:url" content="http://yoursite.com/2017/05/20/传智springmvcMybatisDay1-4-入门程序查询用户信息/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
-<meta property="og:description" content="项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_2">
+<meta property="og:description" content="项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_3">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcMybatisDay1_4_1.jpg">
-<meta property="og:updated_time" content="2017-05-20T08:22:02.290Z">
+<meta property="og:updated_time" content="2017-05-21T05:36:56.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="传智 springmvc+mybatis day1-4.入门程序-查询用户信息">
-<meta name="twitter:description" content="项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_2">
+<meta name="twitter:description" content="项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_3">
 <meta name="twitter:image" content="http://yoursite.com/images/blog_pic/传智springmvcMybatisDay1_4_1.jpg">
 
 
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,104
+                  2,193
                 </span>
               
 
@@ -420,7 +420,7 @@
         <p>项目路径：</p>
 <ul>
 <li>仓库：chuanzhi_springmvc_mybatis</li>
-<li>项目：day1_2</li>
+<li>项目：day1_3</li>
 </ul>
 <a id="more"></a>
 <p>项目架构：</p>
@@ -439,17 +439,19 @@
 <h2 id="mapper标签中的namespace属性"><a href="#mapper标签中的namespace属性" class="headerlink" title="mapper标签中的namespace属性"></a>mapper标签中的namespace属性</h2><p>即为命名空间，其作用为分类管理sql语句。对sql语句进行隔离后可方便管理。</p>
 <p>本项目中，namespace可随意命名，只要不重名，能起到隔离作用即可。</p>
 <p>使用mapper开发dao时，namespace还另有非常重要的特殊作用，此时namespace不可随意命名，有固定的命名规范。</p>
-<h2 id="select标签中的id属性"><a href="#select标签中的id属性" class="headerlink" title="select标签中的id属性"></a>select标签中的id属性</h2><p>namespace+id唯一标识（即不同namespace下的id可同名）一个statement（mybatis以statement为基本单位管理sql语句）。其余查询标签update,insert,delete等标签中的id同理。</p>
+<h2 id="select标签中的id属性"><a href="#select标签中的id属性" class="headerlink" title="select标签中的id属性"></a>select标签中的id属性</h2><p>namespace+id唯一标识（即不同namespace下的id可同名）一个statement（mybatis以statement为基本单位管理sql语句）。其余标签update,insert,delete等标签中的id同理。</p>
 <h2 id=""><a href="#" class="headerlink" title="#{}"></a>#{}</h2><p>#{}表示一个占位符。如果#{}传入简单类型的参数，#{}中的值可随意命名。</p>
-<p>#{}会自动进行java类型向jdbc类型值的转换。例如传入一个字符串，实际执行时会自动在两边加单引号。</p>
+<p>#{}会自动进行java类型向jdbc类型值的转换。例如传入一个字符串，实际执行时会自动在两边加单引号。再比如传入一个字符串类型的参数至数据库中的datetime类型，mysql会自动将其转换为日期类型（oricle不支持该功能，传入时就必须传入日期类型）。</p>
 <h2 id="-1"><a href="#-1" class="headerlink" title="${}"></a>${}</h2><p>${}表示sql的拼接。</p>
 <p>${}类似于#{}，不同之处在于不会自动进行java类型向jdbc类型值的转换，即实际执行时维持原值。</p>
-<h2 id="select标签中的parameterType属性"><a href="#select标签中的parameterType属性" class="headerlink" title="select标签中的parameterType属性"></a>select标签中的parameterType属性</h2><p>即为输入参数的类型。#{}会接收parameterType参数的值。使用parameterType传入参数时，只能传入一个参数，且传入和接收的命名可不同。</p>
+<h2 id="select标签中的parameterType属性"><a href="#select标签中的parameterType属性" class="headerlink" title="select标签中的parameterType属性"></a>select标签中的parameterType属性</h2><p>即为输入参数的类型。#{}会接收parameterType参数的值。使用parameterType传入参数时，只能传入一个参数，且传入和接收的命名可不同。其余标签update,insert,delete等标签中的parameterType同理。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parameterType=<span class="string">"String"</span></div></pre></td></tr></table></figure>
+<p>也可写为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parameterType=<span class="string">"string"</span></div></pre></td></tr></table></figure>
 <p>也可写为</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parameterType=<span class="string">"java.lang.String"</span></div></pre></td></tr></table></figure>
-<h2 id="select标签中的resultType属性"><a href="#select标签中的resultType属性" class="headerlink" title="select标签中的resultType属性"></a>select标签中的resultType属性</h2><p>即为输出结果类型。无论查询结果返回的是一条或多条记录，resultType均指定单条记录映射的pojo或hashmap或java简单类型等。若返回的是多条记录，mybatis会自动将其封装为list。</p>
-<h1 id="测试：com-selectById-java"><a href="#测试：com-selectById-java" class="headerlink" title="测试：com.selectById.java"></a>测试：com.selectById.java</h1><p>该类测试mybatis传入简单类型，返回单条记录。</p>
+<h2 id="select标签中的resultType属性"><a href="#select标签中的resultType属性" class="headerlink" title="select标签中的resultType属性"></a>select标签中的resultType属性</h2><p>即为输出结果类型。无论查询结果返回的是一条或多条记录，resultType均指定单条记录映射的pojo或hashmap或java简单类型等。若返回的是多条记录，mybatis会自动将其封装为list。其余标签update,insert,delete等标签中的resultType同理。</p>
+<h1 id="测试：com-SelectById-java"><a href="#测试：com-SelectById-java" class="headerlink" title="测试：com.SelectById.java"></a>测试：com.SelectById.java</h1><p>该类测试mybatis传入简单类型，返回单条记录。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</div><div class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</div><div class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</div><div class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</div><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</div><div class="line"><span class="keyword">import</span> com.day1_3.user.pojo.UserPojo;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectById</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">this</span>.sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(<span class="string">"mybatis/SqlMapConfig.xml"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</div><div class="line">        UserPojo userPojo = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            userPojo = sqlSession.selectOne(<span class="string">"com.day1_3.user.pojo.UserPojo.selectById"</span>, <span class="number">1</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            sqlSession.close();</div><div class="line">        &#125;</div><div class="line">        System.out.println(JSON.toJSONString(userPojo));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="selectOne"><a href="#selectOne" class="headerlink" title="selectOne"></a>selectOne</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">userPojo = sqlSession.selectOne(<span class="string">"com.day1_3.user.pojo.UserPojo.selectById"</span>, <span class="number">1</span>);</div></pre></td></tr></table></figure>
 <p>SqlSession.selectOne(String statement, Object parameter)方法接收两个参数，返回单条记录结果（<t>类型，实际使用时会根据mxl文件中的resultType返回具体类型）。</t></p>
@@ -537,6 +539,10 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/05/21/传智springmvcMybatisDay1-5-用户添加/" rel="next" title="传智 springmvc+mybatis day1-5.用户添加">
+                <i class="fa fa-chevron-left"></i> 传智 springmvc+mybatis day1-5.用户添加
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
@@ -619,7 +625,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -630,7 +636,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -641,7 +647,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -676,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis-SqlMapConfig-xml"><span class="nav-number">1.</span> <span class="nav-text">mybatis/SqlMapConfig.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#environments标签"><span class="nav-number">1.1.</span> <span class="nav-text">environments标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mappers标签"><span class="nav-number">1.2.</span> <span class="nav-text">mappers标签</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis-sqlmap-user-xml"><span class="nav-number">2.</span> <span class="nav-text">mybatis/sqlmap/user.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mapper标签中的namespace属性"><span class="nav-number">2.1.</span> <span class="nav-text">mapper标签中的namespace属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select标签中的id属性"><span class="nav-number">2.2.</span> <span class="nav-text">select标签中的id属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">#{}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">2.4.</span> <span class="nav-text">${}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select标签中的parameterType属性"><span class="nav-number">2.5.</span> <span class="nav-text">select标签中的parameterType属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select标签中的resultType属性"><span class="nav-number">2.6.</span> <span class="nav-text">select标签中的resultType属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试：com-selectById-java"><span class="nav-number">3.</span> <span class="nav-text">测试：com.selectById.java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#selectOne"><span class="nav-number">3.1.</span> <span class="nav-text">selectOne</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sqlSession-commit"><span class="nav-number">3.2.</span> <span class="nav-text">sqlSession.commit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行该测试类"><span class="nav-number">3.3.</span> <span class="nav-text">运行该测试类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试：com-SelectByName-java"><span class="nav-number">4.</span> <span class="nav-text">测试：com.SelectByName.java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#selectList"><span class="nav-number">4.1.</span> <span class="nav-text">selectList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行该测试类-1"><span class="nav-number">4.2.</span> <span class="nav-text">运行该测试类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql注入简单举例："><span class="nav-number">4.3.</span> <span class="nav-text">sql注入简单举例：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis-SqlMapConfig-xml"><span class="nav-number">1.</span> <span class="nav-text">mybatis/SqlMapConfig.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#environments标签"><span class="nav-number">1.1.</span> <span class="nav-text">environments标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mappers标签"><span class="nav-number">1.2.</span> <span class="nav-text">mappers标签</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis-sqlmap-user-xml"><span class="nav-number">2.</span> <span class="nav-text">mybatis/sqlmap/user.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mapper标签中的namespace属性"><span class="nav-number">2.1.</span> <span class="nav-text">mapper标签中的namespace属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select标签中的id属性"><span class="nav-number">2.2.</span> <span class="nav-text">select标签中的id属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">#{}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">2.4.</span> <span class="nav-text">${}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select标签中的parameterType属性"><span class="nav-number">2.5.</span> <span class="nav-text">select标签中的parameterType属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select标签中的resultType属性"><span class="nav-number">2.6.</span> <span class="nav-text">select标签中的resultType属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试：com-SelectById-java"><span class="nav-number">3.</span> <span class="nav-text">测试：com.SelectById.java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#selectOne"><span class="nav-number">3.1.</span> <span class="nav-text">selectOne</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sqlSession-commit"><span class="nav-number">3.2.</span> <span class="nav-text">sqlSession.commit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行该测试类"><span class="nav-number">3.3.</span> <span class="nav-text">运行该测试类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试：com-SelectByName-java"><span class="nav-number">4.</span> <span class="nav-text">测试：com.SelectByName.java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#selectList"><span class="nav-number">4.1.</span> <span class="nav-text">selectList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行该测试类-1"><span class="nav-number">4.2.</span> <span class="nav-text">运行该测试类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql注入简单举例："><span class="nav-number">4.3.</span> <span class="nav-text">sql注入简单举例：</span></a></li></ol></li></ol></div>
             
 
           </div>
