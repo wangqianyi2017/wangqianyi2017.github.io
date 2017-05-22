@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_3">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcMybatisDay1_4_1.jpg">
-<meta property="og:updated_time" content="2017-05-21T05:36:56.854Z">
+<meta property="og:updated_time" content="2017-05-22T16:28:17.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="传智 springmvc+mybatis day1-4.入门程序-查询用户信息">
 <meta name="twitter:description" content="项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_3">
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,193
+                  2,218
                 </span>
               
 
@@ -426,6 +426,7 @@
 <p>项目架构：</p>
 <p><img src="/images/blog_pic/传智springmvcMybatisDay1_4_1.jpg" alt="传智springmvcMybatisDay1_4_1.jpg"></p>
 <h1 id="mybatis-SqlMapConfig-xml"><a href="#mybatis-SqlMapConfig-xml" class="headerlink" title="mybatis/SqlMapConfig.xml"></a>mybatis/SqlMapConfig.xml</h1><p>通过SqlMapConfig.xml加载mybatis运行环境。</p>
+<p>在SqlMapConfig.xml中配置数据库连接池，与spring整合后该连接池将由spring管理。</p>
 <p>SqlMapConfig.xml如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE configuration</div><div class="line">PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</div><div class="line">"http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</div><div class="line"></div><div class="line">&lt;configuration&gt;</div><div class="line">  &lt;environments default="development"&gt;</div><div class="line">    &lt;environment id="development"&gt;</div><div class="line">      &lt;transactionManager type="JDBC" /&gt;</div><div class="line">      &lt;dataSource type="POOLED"&gt;</div><div class="line">        &lt;property name="driver" value="com.mysql.jdbc.Driver" /&gt;</div><div class="line">        &lt;property name="url" value="jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8" /&gt;</div><div class="line">        &lt;property name="username" value="root" /&gt;</div><div class="line">        &lt;property name="password" value="" /&gt;</div><div class="line">      &lt;/dataSource&gt;</div><div class="line">    &lt;/environment&gt;</div><div class="line">  &lt;/environments&gt;</div><div class="line">  &lt;mappers&gt;</div><div class="line">    &lt;mapper resource="mybatis/sqlmap/User.xml" /&gt;</div><div class="line">  &lt;/mappers&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
 <h2 id="environments标签"><a href="#environments标签" class="headerlink" title="environments标签"></a>environments标签</h2><p>environments标签即为mybatis环境（与spring整合后使用spring管理mybatis的数据源，environments标签废弃）。在environments内部：</p>
@@ -625,7 +626,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
