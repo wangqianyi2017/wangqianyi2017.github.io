@@ -1,0 +1,1023 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,Collection,源码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="源码12345678910111213141516171819202122232425262728293031323334package java.util;public interface Collection&amp;lt;E&amp;gt; extends Iterable&amp;lt;E&amp;gt; &amp;#123;    int size();    boolean isEmpty();    boolean con">
+<meta name="keywords" content="java,Collection,源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java.util.Collection<E>源码分析">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/javaCollection-1-java-util-Collection-E-源码分析/index.html">
+<meta property="og:site_name" content="ReimuWang's Blog">
+<meta property="og:description" content="源码12345678910111213141516171819202122232425262728293031323334package java.util;public interface Collection&amp;lt;E&amp;gt; extends Iterable&amp;lt;E&amp;gt; &amp;#123;    int size();    boolean isEmpty();    boolean con">
+<meta property="og:updated_time" content="2017-05-23T15:57:27.028Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java.util.Collection<E>源码分析">
+<meta name="twitter:description" content="源码12345678910111213141516171819202122232425262728293031323334package java.util;public interface Collection&amp;lt;E&amp;gt; extends Iterable&amp;lt;E&amp;gt; &amp;#123;    int size();    boolean isEmpty();    boolean con">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/23/javaCollection-1-java-util-Collection-E-源码分析/"/>
+
+
+
+
+
+  <title> java.util.Collection<E>源码分析 | ReimuWang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ReimuWang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/23/javaCollection-1-java-util-Collection-E-源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ReimuWang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ReimuWang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                java.util.Collection<E>源码分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T23:37:07+08:00">
+                2017-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-Collection/" itemprop="url" rel="index">
+                    <span itemprop="name">java Collection</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/05/23/javaCollection-1-java-util-Collection-E-源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/05/23/javaCollection-1-java-util-Collection-E-源码分析/" class="leancloud_visitors" data-flag-title="java.util.Collection<E>源码分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,178
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> java.util;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Iterable</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span></span>;</div><div class="line"></div><div class="line">    <span class="function">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    Object[] toArray();</div><div class="line"></div><div class="line">    &lt;T&gt; T[] toArray(T[] a);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">containsAll</span><span class="params">(Collection&lt;?&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">retainAll</span><span class="params">(Collection&lt;?&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="层级关系"><a href="#层级关系" class="headerlink" title="层级关系"></a>层级关系</h1><h2 id="直接超类接口："><a href="#直接超类接口：" class="headerlink" title="直接超类接口："></a>直接超类接口：</h2><ul>
+<li>java.lang.Iterable<t></t></li>
+</ul>
+<h2 id="直接子类接口："><a href="#直接子类接口：" class="headerlink" title="直接子类接口："></a>直接子类接口：</h2><ul>
+<li>java.util.List<e></e></li>
+<li>java.util.Queue<e></e></li>
+<li>java.util.Set<e></e></li>
+</ul>
+<h2 id="直接实现本接口的抽象类"><a href="#直接实现本接口的抽象类" class="headerlink" title="直接实现本接口的抽象类"></a>直接实现本接口的抽象类</h2><ul>
+<li>java.util.AbstractCollection<e></e></li>
+</ul>
+<h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>Collection<e>中的E代表集合中元素的类型。</e></p>
+<p>Collection接口为集合类层级中的根接口，jdk不会提供Collection接口的直接实现类，而是会实现Collection接口的子接口（例如Set，List）。</p>
+<p>通常意义下，所有Collection接口的实现类（实际是实现Collection接口的子接口）应提供两个“标准”的构造函数：</p>
+<ul>
+<li>void（无参数）的构造函数，它创建一个空的集合。</li>
+<li>带有一个集合类型的参数的构造函数，该构造函数依传入参数创建一个新的集合。</li>
+</ul>
+<p>实际上，带有参数的构造函数允许实现类复制任何集合类生成新的集合，而非只能复制实现类本身所实现的集合。Collection接口无法从规则上限制这一点（因为接口不能包含构造函数）。但所有jdk提供的集合类的实现均自觉遵守这一规范。</p>
+<p>本接口包含“破坏性”方法。这些方法可以改变其所操作的集合。若某个具体的实现类不支持某个“破坏性”方法，则会抛出异常：UnsupportedOperationException。有时，即便某集合不支持某“破坏性”方法，但只要该方法不真的产生破坏集合的结果，也可以选择不抛出UnsupportedOperationException异常。例如：某不可变集合是不支持addAll(Collection)方法的，理论上当调用该方法时应抛出UnsupportedOperationException异常。但是若传入的集合为空，则也可不抛出异常。</p>
+<p>某些Collection接口的实现可能会对其所包含的元素有所限制。例如，有些实现禁止插入null元素，有些实现则会限制元素类型。试图插入不合法的元素时会抛出一个unchecked exception。通常为NullPointerException或ClassCastException。试图查询一个不合法的元素可能会抛出异常或者返回false。</p>
+<p>每个集合的实现类自行定义自身的同步策略。若实现类缺乏健壮的同步机制，则在多线程环境下将出现各种线程同步问题。</p>
+<p>Collection接口中的许多方法是按等号方法定义的。例如，contains(Object o)方法的api中有如下描述：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当且仅当该集合包含至少一个元素e，满足(o==<span class="keyword">null</span> ? e==<span class="keyword">null</span> : o.equals(e))，返回<span class="keyword">true</span>。</div></pre></td></tr></table></figure>
+<p>这个描述不应被理解为具体的实现类在实现Collection.contains(Object o)方法时，只要传入的o不为null，就一定会遍历集合中的元素e，并进行o.equals(e)比较。只要能实现o.equals(e)的效果，实现类并不需要一定调用o.equals(e)方法，而是可选择更优的解决方案。例如，实现类可比较两元素的hash codes（Object.hashCode()方法能确保拥有不同hash code的对象不相等）。</p>
+<p>本接口是java集合框架中的一员。</p>
+<h1 id="查询操作：int-size"><a href="#查询操作：int-size" class="headerlink" title="查询操作：int size();"></a>查询操作：int size();</h1><p>返回该集合包含的元素个数。若该集合包含的元素个数&gt;Integer.MAX_VALUE，则返回Integer.MAX_VALUE。</p>
+<h1 id="查询操作：boolean-isEmpty"><a href="#查询操作：boolean-isEmpty" class="headerlink" title="查询操作：boolean isEmpty();"></a>查询操作：boolean isEmpty();</h1><p>若该集合不包含元素则返回true。反之返回false。</p>
+<h1 id="查询操作：boolean-contains-Object-o"><a href="#查询操作：boolean-contains-Object-o" class="headerlink" title="查询操作：boolean contains(Object o);"></a>查询操作：boolean contains(Object o);</h1><p>若集合包含特定元素则返回true。更通俗的说，当且仅当该集合包含至少一个元素e，满足(o==null ? e==null : o.equals(e))，返回true</p>
+<p>该方法可能抛出如下异常：</p>
+<ul>
+<li>ClassCastException：传入参数o的类型与该集合不相容（依实现可选）</li>
+<li>NullPointerException：传入参数o为空且该集合不允许空元素存在（依实现可选）</li>
+</ul>
+<h1 id="查询操作：Iterator-iterator"><a href="#查询操作：Iterator-iterator" class="headerlink" title="查询操作：Iterator iterator();"></a>查询操作：Iterator<e> iterator();</e></h1><p>返回一个该集合的迭代器。通常情况下迭代器不保证数据有序（除非特定的实现类保证这一点）。</p>
+<h1 id="查询操作：Object-toArray"><a href="#查询操作：Object-toArray" class="headerlink" title="查询操作：Object[] toArray();"></a>查询操作：Object[] toArray();</h1><p>返回包含该集合所有元素的数组。若该集合是有序的（迭代器返回的结果有序），则返回的数组必须同样有序。</p>
+<p>返回的数组中的元素应是原集合中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变原集合。</p>
+<p>本方法是连接集合与数组之间的桥梁。</p>
+<h1 id="查询操作：-T-toArray-T-a"><a href="#查询操作：-T-toArray-T-a" class="headerlink" title="查询操作： T[] toArray(T[] a);"></a>查询操作：<t> T[] toArray(T[] a);</t></h1><p>返回包含该集合所有元素的数组。返回数组的类型由传入参数a的类型确定。若a.length&gt;=collection.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被清空）。数组下标大于集合长度的部分将被置为null。若a.length&lt;collection.size()，则不修改a，而是以a的类型新建长度为collection.size()的数组并填入collection中的值，并返回新生成的数组。</p>
+<p>若该集合是有序的（迭代器返回的结果有序），则返回的数组必须同样有序。</p>
+<p>同Object[] toArray();方法，返回的数组中的元素应是原集合中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变原集合。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] y = x.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);</div></pre></td></tr></table></figure>
+<p>其中x为一个数据类型为String的集合，则以上语句会将该集合复制一份深拷贝到数组y。</p>
+<p>注意：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray(<span class="keyword">new</span> Object[<span class="number">0</span>])</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray()</div></pre></td></tr></table></figure>
+<p>两句效果等价。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>ArrayStoreException：a的类型collection不支持（不会进行自动类型转换，例如，collection为String，a为Integer，抛出该异常；collection为Integer，a为String，抛出该异常）。</li>
+<li>NullPointerException：a为null</li>
+</ul>
+<h1 id="修改操作：boolean-add-E-e"><a href="#修改操作：boolean-add-E-e" class="headerlink" title="修改操作：boolean add(E e);"></a>修改操作：boolean add(E e);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>若集合因插入操作而改变则返回true。反之（集合不允许包含重复元素且待插入元素在集合中已存在）则返回false。因此对于那些不能包含重复元素的集合而言，该方法也可用于判断集合是否已包含e。</p>
+<p>支持该操作的集合可能会对插入操作做出限制。具体来说，某些集合禁止插入空元素，某些集合会限制插入元素的类型。</p>
+<p>若某集合禁止插入元素（不是因为集合不允许包含重复元素且待插入元素在集合中已存在，而是因为其他任意原因），则该方法应抛出异常。本机制用于保护那些常量值的集合。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持add操作。</li>
+<li>ClassCastException：e因为其所属的类禁止被插入collection。</li>
+<li>NullPointerException：e为null且collection禁止包含空元素。</li>
+<li>IllegalArgumentException：e因其某些特性禁止被插入collection。</li>
+<li>IllegalStateException：因插入限制，此时e不能被插入collection。</li>
+</ul>
+<h1 id="修改操作：boolean-remove-Object-o"><a href="#修改操作：boolean-remove-Object-o" class="headerlink" title="修改操作：boolean remove(Object o);"></a>修改操作：boolean remove(Object o);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>移除一个collection符合条件的元素e：(o==null ? e==null : o.equals(e))。若有多个e符合条件，则本方法只会移除其中一个，具体移除哪一个依具体实现而定。</p>
+<p>若本方法改变了原集合则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>ClassCastException：传入参数o的类型与该集合不相容（依实现可选）</li>
+<li>NullPointerException：传入参数o为空且该集合不允许空元素存在（依实现可选）</li>
+<li>UnsupportedOperationException：collection不支持remove操作。</li>
+</ul>
+<h1 id="批量操作：boolean-containsAll-Collection-lt-gt-c"><a href="#批量操作：boolean-containsAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean containsAll(Collection&lt;?&gt; c);"></a>批量操作：boolean containsAll(Collection&lt;?&gt; c);</h1><p>若该集合中包含c中所有元素则返回true。</p>
+<p>该方法类似于collection.contains(Object o)</p>
+<p>该方法可能抛出如下异常：</p>
+<ul>
+<li>ClassCastException：传入参数c中至少一个元素的类型与该集合不相容（依实现可选）</li>
+<li>NullPointerException：传入参数c中包含至少一个空元素且该集合不允许空元素存在；或者传入参数c本身为空（依实现可选）</li>
+</ul>
+<h1 id="批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><a href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c" class="headerlink" title="批量操作：boolean addAll(Collection&lt;? extends E&gt; c);"></a>批量操作：boolean addAll(Collection&lt;? extends E&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>将c中所有元素插入该集合。本方法并未定义如下事件发生时的解决策略：在将c中的元素添加至该集合的过程中c发生变化（这也意味着如下事件的解决策略同样未定义：将一个非空集合添加至自身）。</p>
+<p>若该集合因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持addAll操作。</li>
+<li>ClassCastException：c中任意一个元素因为其所属的类禁止被插入collection。</li>
+<li>NullPointerException：c中任意一个元素为null且collection禁止包含空元素；或者c为null。</li>
+<li>IllegalArgumentException：c中任意一个元素因其某些特性禁止被插入collection。</li>
+<li>IllegalStateException：因插入限制，此时并非c中所有元素都能被插入collection。</li>
+</ul>
+<p>该方法类似于boolean add(E e);</p>
+<h1 id="批量操作：boolean-removeAll-Collection-lt-gt-c"><a href="#批量操作：boolean-removeAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean removeAll(Collection&lt;?&gt; c);"></a>批量操作：boolean removeAll(Collection&lt;?&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>从该集合中移除所有与c的交集元素（求差集）。</p>
+<p>若该集合因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持removeAll操作。</li>
+<li>ClassCastException：传入参数c中至少有一个元素的类型与该集合不相容（依实现可选）</li>
+<li>NullPointerException：传入参数c中至少有一个元素为空且该集合不允许空元素存在（依实现可选）；或者传入参数c为空。</li>
+</ul>
+<p>该方法类似于boolean remove(Object o);</p>
+<h1 id="批量操作：boolean-retainAll-Collection-lt-gt-c"><a href="#批量操作：boolean-retainAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean retainAll(Collection&lt;?&gt; c);"></a>批量操作：boolean retainAll(Collection&lt;?&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>保留该集合中与c的交集元素。</p>
+<p>若该集合因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持retainAll操作。</li>
+<li>ClassCastException：传入参数c中至少有一个元素的类型与该集合不相容（依实现可选）</li>
+<li>NullPointerException：传入参数c中至少有一个元素为空且该集合不允许空元素存在（依实现可选）；或者传入参数c为空。</li>
+</ul>
+<h1 id="批量操作：void-clear"><a href="#批量操作：void-clear" class="headerlink" title="批量操作：void clear();"></a>批量操作：void clear();</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>清空该集合。该方法执行完成后集合将为空。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持clear操作。</li>
+</ul>
+<h1 id="比较及哈希：boolean-equals-Object-o"><a href="#比较及哈希：boolean-equals-Object-o" class="headerlink" title="比较及哈希：boolean equals(Object o);"></a>比较及哈希：boolean equals(Object o);</h1><p>比较o与本集合是否相等（若具体的实现类未做特殊的设置，该方法将调用Object类的equals方法，即以引用地址判断是否相等），若相等则返回true，反之返回false。</p>
+<p>jdk提供的直接继承Collection接口的子接口有3个：Queue，List，Set。其中List，Set均对equals方法有要求，它们要求其实现类在比较两个集合相等时不是用默认Object对象比较引用是否相同，而是根据集合具体的特点，比较“值”是否相等。因此，当程序员使用Queue接口，或者是自己直接实现Collection接口时，一定要考虑好这个equals方法的设计，通常情况下，我们比较两个集合的相等性时，都不希望比较的是其引用地址是否相等，因为这通常是毫无意义的。</p>
+<p>通常意义上，我们所认为的相等都是对称的，即若a.equals(b)，则必应有b.equals(a)。</p>
+<p>在jdk的集合类设计中，规定了大前提：list只能与list相等，set只能与set相等。因此，我们无法写出一个类同时实现Set及List接口，因为若这样的实现类可以存在，这意味着有一种集合既是List又是Set，与上文的逻辑相悖。</p>
+<h1 id="比较及哈希：int-hashCode"><a href="#比较及哈希：int-hashCode" class="headerlink" title="比较及哈希：int hashCode();"></a>比较及哈希：int hashCode();</h1><p>返回该集合的hash code值（若具体的实现类未做特殊的设置，该方法将调用Object类的hashCode方法）。</p>
+<p>必须注意的是，任意想要重写Object.equals(Object)方法的类都必须重写Object.hashCode()。具体来说，若c1.equals(c2)，则同样应有c1.hashCode()==c2.hashCode()。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/Collection/" rel="tag"># Collection</a>
+          
+            <a href="/tags/源码/" rel="tag"># 源码</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/23/javaCollection-2-java-lang-Iterable-T-源码分析/" rel="next" title="java.lang.Iterable<T>源码分析">
+                <i class="fa fa-chevron-left"></i> java.lang.Iterable<T>源码分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/22/传智springmvcMybatisDay1-6-用户修改和删除/" rel="prev" title="传智 springmvc+mybatis day1-6.用户修改和删除">
+                传智 springmvc+mybatis day1-6.用户修改和删除 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ReimuWang" />
+          <p class="site-author-name" itemprop="name">ReimuWang</p>
+           
+              <p class="site-description motion-element" itemprop="description">Thou Shalt Comment</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层级关系"><span class="nav-number">2.</span> <span class="nav-text">层级关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接超类接口："><span class="nav-number">2.1.</span> <span class="nav-text">直接超类接口：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接子类接口："><span class="nav-number">2.2.</span> <span class="nav-text">直接子类接口：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接实现本接口的抽象类"><span class="nav-number">2.3.</span> <span class="nav-text">直接实现本接口的抽象类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">3.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：int-size"><span class="nav-number">4.</span> <span class="nav-text">查询操作：int size();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：boolean-isEmpty"><span class="nav-number">5.</span> <span class="nav-text">查询操作：boolean isEmpty();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：boolean-contains-Object-o"><span class="nav-number">6.</span> <span class="nav-text">查询操作：boolean contains(Object o);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：Iterator-iterator"><span class="nav-number">7.</span> <span class="nav-text">查询操作：Iterator iterator();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：Object-toArray"><span class="nav-number">8.</span> <span class="nav-text">查询操作：Object[] toArray();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：-T-toArray-T-a"><span class="nav-number">9.</span> <span class="nav-text">查询操作： T[] toArray(T[] a);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：boolean-add-E-e"><span class="nav-number">10.</span> <span class="nav-text">修改操作：boolean add(E e);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：boolean-remove-Object-o"><span class="nav-number">11.</span> <span class="nav-text">修改操作：boolean remove(Object o);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-containsAll-Collection-lt-gt-c"><span class="nav-number">12.</span> <span class="nav-text">批量操作：boolean containsAll(Collection<?> c);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">13.</span> <span class="nav-text">批量操作：boolean addAll(Collection<? extends E> c);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-removeAll-Collection-lt-gt-c"><span class="nav-number">14.</span> <span class="nav-text">批量操作：boolean removeAll(Collection<?> c);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-retainAll-Collection-lt-gt-c"><span class="nav-number">15.</span> <span class="nav-text">批量操作：boolean retainAll(Collection<?> c);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：void-clear"><span class="nav-number">16.</span> <span class="nav-text">批量操作：void clear();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较及哈希：boolean-equals-Object-o"><span class="nav-number">17.</span> <span class="nav-text">比较及哈希：boolean equals(Object o);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较及哈希：int-hashCode"><span class="nav-number">18.</span> <span class="nav-text">比较及哈希：int hashCode();</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+      <div id="music163player">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28445545&auto=0&height=66"></iframe>
+      </div>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ReimuWang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "5fa5a9a1c1714e08bbe2b872a7420625",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8EnYI3lo055oPaUPw9q15PgA-gzGzoHsz", "tCqaCeEinbik59cVG6GWmixT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <a href="https://github.com/ReimuWang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+</body>
+</html>
