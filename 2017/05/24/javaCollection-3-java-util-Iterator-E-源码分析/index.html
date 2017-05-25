@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/24/javaCollection-3-java-util-Iterator-E-源码分析/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-05-23T16:09:10.058Z">
+<meta property="og:updated_time" content="2017-05-25T08:59:10.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java.util.Iterator<E>源码分析">
 <meta name="twitter:description" content="源码">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  539
+                  536
                 </span>
               
 
@@ -430,7 +430,7 @@
 <p>Enumeration接口诞生于JDK1.0，而Iterator接口诞生于1.2。Iterator是Enumeration的改进，二者所定义的功能是重叠的，因此在实现上应尽可能使用Iterator。</p>
 <p>本接口是java集合框架中的一员。</p>
 <h1 id="boolean-hasNext"><a href="#boolean-hasNext" class="headerlink" title="boolean hasNext();"></a>boolean hasNext();</h1><p>在迭代过程中，若集合还有元素则返回true。换句话说，返回ture说明仍然可以通过Iterator.next()方法取到元素，若在本方法返回false时继续调用Iterator.next()方法，则Iterator.next()方法会抛出异常。</p>
-<h1 id="E-next"><a href="#E-next" class="headerlink" title="E next();"></a>E next();</h1><p>返回迭代器游标所指向元素的深拷贝，同时游标后移一位。</p>
+<h1 id="E-next"><a href="#E-next" class="headerlink" title="E next();"></a>E next();</h1><p>返回迭代器游标所指向的元素，同时游标后移一位。</p>
 <p>该方法抛出如下异常：</p>
 <ul>
 <li>NoSuchElementException：Iterator游标所指的位置已无元素。</li>
@@ -488,6 +488,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/25/javaCollection-5-java-util-ListIterator-E-源码分析/" rel="next" title="java.util.ListIterator<E>源码分析">
+                <i class="fa fa-chevron-left"></i> java.util.ListIterator<E>源码分析
+              </a>
             
           </div>
 
@@ -571,7 +575,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

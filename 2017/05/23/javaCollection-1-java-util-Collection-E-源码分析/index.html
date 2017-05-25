@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/23/javaCollection-1-java-util-Collection-E-源码分析/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-05-23T16:08:55.058Z">
+<meta property="og:updated_time" content="2017-05-24T09:56:32.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java.util.Collection<E>源码分析">
 <meta name="twitter:description" content="源码">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,178
+                  3,170
                 </span>
               
 
@@ -496,7 +496,7 @@
 <p>该方法可能抛出如下异常：</p>
 <ul>
 <li>ClassCastException：传入参数c中至少一个元素的类型与该集合不相容（依实现可选）</li>
-<li>NullPointerException：传入参数c中包含至少一个空元素且该集合不允许空元素存在；或者传入参数c本身为空（依实现可选）</li>
+<li>NullPointerException：传入参数c中包含至少一个空元素且该集合不允许空元素存在（依实现可选）；或者传入参数c本身为空</li>
 </ul>
 <h1 id="批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><a href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c" class="headerlink" title="批量操作：boolean addAll(Collection&lt;? extends E&gt; c);"></a>批量操作：boolean addAll(Collection&lt;? extends E&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
 <p>将c中所有元素插入该集合。本方法并未定义如下事件发生时的解决策略：在将c中的元素添加至该集合的过程中c发生变化（这也意味着如下事件的解决策略同样未定义：将一个非空集合添加至自身）。</p>
@@ -509,7 +509,7 @@
 <li>IllegalArgumentException：c中任意一个元素因其某些特性禁止被插入collection。</li>
 <li>IllegalStateException：因插入限制，此时并非c中所有元素都能被插入collection。</li>
 </ul>
-<p>该方法类似于boolean add(E e);</p>
+<p>该方法类似于collection.boolean add(E e);</p>
 <h1 id="批量操作：boolean-removeAll-Collection-lt-gt-c"><a href="#批量操作：boolean-removeAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean removeAll(Collection&lt;?&gt; c);"></a>批量操作：boolean removeAll(Collection&lt;?&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
 <p>从该集合中移除所有与c的交集元素（求差集）。</p>
 <p>若该集合因本方法发生变化则返回true，反之返回false。</p>
@@ -517,9 +517,9 @@
 <ul>
 <li>UnsupportedOperationException：collection不支持removeAll操作。</li>
 <li>ClassCastException：传入参数c中至少有一个元素的类型与该集合不相容（依实现可选）</li>
-<li>NullPointerException：传入参数c中至少有一个元素为空且该集合不允许空元素存在（依实现可选）；或者传入参数c为空。</li>
+<li>NullPointerException：本集合中至少有一个元素为空且c不允许空元素存在（依实现可选）；或者传入参数c为空。</li>
 </ul>
-<p>该方法类似于boolean remove(Object o);</p>
+<p>该方法类似于collection.boolean remove(Object o);</p>
 <h1 id="批量操作：boolean-retainAll-Collection-lt-gt-c"><a href="#批量操作：boolean-retainAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean retainAll(Collection&lt;?&gt; c);"></a>批量操作：boolean retainAll(Collection&lt;?&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
 <p>保留该集合中与c的交集元素。</p>
 <p>若该集合因本方法发生变化则返回true，反之返回false。</p>
@@ -527,11 +527,11 @@
 <ul>
 <li>UnsupportedOperationException：collection不支持retainAll操作。</li>
 <li>ClassCastException：传入参数c中至少有一个元素的类型与该集合不相容（依实现可选）</li>
-<li>NullPointerException：传入参数c中至少有一个元素为空且该集合不允许空元素存在（依实现可选）；或者传入参数c为空。</li>
+<li>NullPointerException：本集合中至少有一个元素为空且c不允许空元素存在（依实现可选）；或者传入参数c为空。</li>
 </ul>
 <h1 id="批量操作：void-clear"><a href="#批量操作：void-clear" class="headerlink" title="批量操作：void clear();"></a>批量操作：void clear();</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
 <p>清空该集合。该方法执行完成后集合将为空。</p>
-<p>该方法可能会抛出如下异常：</p>
+<p>该方法会抛出如下异常：</p>
 <ul>
 <li>UnsupportedOperationException：collection不支持clear操作。</li>
 </ul>
@@ -673,7 +673,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
