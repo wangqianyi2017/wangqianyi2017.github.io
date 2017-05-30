@@ -90,13 +90,13 @@
 <meta name="description" content="源码">
 <meta name="keywords" content="java,源码,Collection">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java.util.Iterator<E>源码分析">
-<meta property="og:url" content="http://yoursite.com/2017/05/24/javaCollection-3-java-util-Iterator-E-源码分析/index.html">
+<meta property="og:title" content="java7源码-java.util.Iterator<E>">
+<meta property="og:url" content="http://yoursite.com/2017/05/24/java7源码-javautilIteratorE/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-05-25T14:06:03.886Z">
+<meta property="og:updated_time" content="2017-05-30T09:10:14.952Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java.util.Iterator<E>源码分析">
+<meta name="twitter:title" content="java7源码-java.util.Iterator<E>">
 <meta name="twitter:description" content="源码">
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/24/javaCollection-3-java-util-Iterator-E-源码分析/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/24/java7源码-javautilIteratorE/"/>
 
 
 
 
 
-  <title> java.util.Iterator<E>源码分析 | ReimuWang's Blog </title>
+  <title> java7源码-java.util.Iterator<E> | ReimuWang's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -270,7 +270,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/24/javaCollection-3-java-util-Iterator-E-源码分析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/24/java7源码-javautilIteratorE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ReimuWang">
@@ -291,7 +291,7 @@
             
             
               
-                java.util.Iterator<E>源码分析
+                java7源码-java.util.Iterator<E>
               
             
           </h1>
@@ -329,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-Collection/" itemprop="url" rel="index">
-                    <span itemprop="name">java Collection</span>
+                  <a href="/categories/java7源码/" itemprop="url" rel="index">
+                    <span itemprop="name">java7源码</span>
                   </a>
                 </span>
 
@@ -347,7 +347,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/05/24/javaCollection-3-java-util-Iterator-E-源码分析/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/05/24/java7源码-javautilIteratorE/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -356,7 +356,7 @@
 
           
           
-             <span id="/2017/05/24/javaCollection-3-java-util-Iterator-E-源码分析/" class="leancloud_visitors" data-flag-title="java.util.Iterator<E>源码分析">
+             <span id="/2017/05/24/java7源码-javautilIteratorE/" class="leancloud_visitors" data-flag-title="java7源码-java.util.Iterator<E>">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  536
+                  515
                 </span>
               
 
@@ -416,32 +416,34 @@
 
       
         <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><a id="more"></a>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> java.util;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">package java.util;</div><div class="line"></div><div class="line">public interface Iterator&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    boolean hasNext();</div><div class="line"></div><div class="line">    E next();</div><div class="line"></div><div class="line">    void remove();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="层级关系"><a href="#层级关系" class="headerlink" title="层级关系"></a>层级关系</h1><h2 id="直接子类接口："><a href="#直接子类接口：" class="headerlink" title="直接子类接口："></a>直接子类接口：</h2><ul>
-<li><a href="http://reimuwang.org/2017/05/25/javaCollection-5-java-util-ListIterator-E-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" target="_blank" rel="external">java.util.ListIterator<e></e></a></li>
+<li><a href="">java.util.ListIterator<e></e></a></li>
 </ul>
 <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>Iterator<e>中的E代表该迭代器返回的元素类型。</e></p>
-<p>Iterator是基于Collection的，在java的集合框架中Iterator用于代替Enumeration遍历Collection中的元素。Iterator与Enumeration有如下两点不同：</p>
+<p>Iterator是基于集合的，在java的集合框架中Iterator用于代替Enumeration遍历集合中的元素。Iterator与Enumeration有如下两点不同：</p>
 <ul>
-<li>在迭代过程中，Iterator允许删除（仅仅是删除，添加不行）集合中的元素；而Enumeration则不能删除。</li>
-<li>Iterator使用了改进了方法名（更为精简易读）。</li>
+<li>在迭代过程中，Iterator允许删除集合中的元素；而Enumeration则不能删除。</li>
+<li>Iterator使用了改进的方法名（更为精简易读）。</li>
 </ul>
-<p>foreach的底层实现虽然使用了Iterator，但是因为隐藏了具体的Iterator对象，因此也无法调用对应的Iterator.remove()方法。</p>
 <p>Enumeration接口诞生于JDK1.0，而Iterator接口诞生于1.2。Iterator是Enumeration的改进，二者所定义的功能是重叠的，因此在实现上应尽可能使用Iterator。</p>
 <p>本接口是java集合框架中的一员。</p>
-<h1 id="boolean-hasNext"><a href="#boolean-hasNext" class="headerlink" title="boolean hasNext();"></a>boolean hasNext();</h1><p>在迭代过程中，若集合还有元素则返回true。换句话说，返回ture说明仍然可以通过Iterator.next()方法取到元素，若在本方法返回false时继续调用Iterator.next()方法，则Iterator.next()方法会抛出异常。</p>
-<h1 id="E-next"><a href="#E-next" class="headerlink" title="E next();"></a>E next();</h1><p>返回迭代器游标所指向的元素，同时游标后移一位。</p>
+<h1 id="boolean-hasNext"><a href="#boolean-hasNext" class="headerlink" title="boolean hasNext();"></a>boolean hasNext();</h1><h2 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean hasNext();</div></pre></td></tr></table></figure>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>在迭代过程中，若集合还有元素则返回true。换句话说，返回ture说明仍然可以通过next()方法取到元素，若在本方法返回false时继续调用next()方法，则next()方法会抛出异常。</p>
+<h1 id="E-next"><a href="#E-next" class="headerlink" title="E next();"></a>E next();</h1><h2 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E next();</div></pre></td></tr></table></figure>
+<h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><p>返回iterator游标所指向的元素，同时游标后移一位。</p>
 <p>该方法抛出如下异常：</p>
 <ul>
-<li>NoSuchElementException：Iterator游标所指的位置已无元素。</li>
+<li>NoSuchElementException：iterator游标所指的位置已无元素。</li>
 </ul>
-<h1 id="void-remove"><a href="#void-remove" class="headerlink" title="void remove();"></a>void remove();</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>移除当前游标所指元素的前一个元素。即上一次调用Iterator.next()方法所返回的元素。因此，调用Iterator.remove()之前必须调用一次Iterator.next()。调用一次Iterator.next()后多次调用Iterator.remove()是不允许的。Iterator.remove()必须与Iterator.next()一一配对。</p>
-<p>本方法没有设计应对以下事件的对策：在迭代过程中，被迭代集合因本方法以外的原因发生了改变。</p>
+<h1 id="void-remove"><a href="#void-remove" class="headerlink" title="void remove();"></a>void remove();</h1><h2 id="源码-3"><a href="#源码-3" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void remove();</div></pre></td></tr></table></figure>
+<h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>移除当前游标所指元素的前一个元素。即上一次调用next()方法所返回的元素。因此，调用本方法之前必须调用一次next()方法。调用一次next()方法后多次调用本方法是不允许的。本方法必须与next()方法一一配对。</p>
+<p>本方法没有定义应对以下事件的对策：在迭代过程中，被迭代集合因本方法以外的原因发生了改变。</p>
 <p>该方法抛出如下异常：</p>
 <ul>
-<li>UnsupportedOperationException：Iterator不支持remove操作。</li>
-<li>IllegalStateException：在调用本方法前没有调用与之配对的Iterator.next()方法（包含调用一次Iterator.next()后多次调用本方法的情况）。</li>
+<li>UnsupportedOperationException：iterator不支持本方法。</li>
+<li>IllegalStateException：在调用本方法前没有调用与之配对的next()方法（包含调用一次next()方法后多次调用本方法的情况）。</li>
 </ul>
 
       
@@ -632,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层级关系"><span class="nav-number">2.</span> <span class="nav-text">层级关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接子类接口："><span class="nav-number">2.1.</span> <span class="nav-text">直接子类接口：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">3.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#boolean-hasNext"><span class="nav-number">4.</span> <span class="nav-text">boolean hasNext();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-next"><span class="nav-number">5.</span> <span class="nav-text">E next();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#void-remove"><span class="nav-number">6.</span> <span class="nav-text">void remove();</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层级关系"><span class="nav-number">2.</span> <span class="nav-text">层级关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接子类接口："><span class="nav-number">2.1.</span> <span class="nav-text">直接子类接口：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">3.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#boolean-hasNext"><span class="nav-number">4.</span> <span class="nav-text">boolean hasNext();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-1"><span class="nav-number">4.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">4.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-next"><span class="nav-number">5.</span> <span class="nav-text">E next();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-2"><span class="nav-number">5.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-1"><span class="nav-number">5.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#void-remove"><span class="nav-number">6.</span> <span class="nav-text">void remove();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-3"><span class="nav-number">6.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-2"><span class="nav-number">6.2.</span> <span class="nav-text">描述</span></a></li></ol></li></ol></div>
             
 
           </div>
