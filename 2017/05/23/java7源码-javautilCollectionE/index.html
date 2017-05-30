@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/23/java7源码-javautilCollectionE/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-05-29T16:36:49.759Z">
+<meta property="og:updated_time" content="2017-05-30T08:49:29.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java7源码-java.util.Collection<E>">
 <meta name="twitter:description" content="源码">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,158
+                  3,036
                 </span>
               
 
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  12
+                  11
                 </span>
               
             </div>
@@ -437,110 +437,125 @@
 </ul>
 <p>实际上，带有参数的构造函数允许实现类以任何集合为基础生成新的集合，而非只能以实现类本身所实现的集合为基础。本接口无法从规则上限制这一点（因为接口不能包含构造函数）。但所有jdk提供的集合的实现均自觉遵守这一规范。</p>
 <p>本接口包含“破坏性”方法。这些方法可以改变其所属的集合。若某个具体的实现类不支持某个“破坏性”方法，则会抛出UnsupportedOperationException。有时，即便某集合不支持某“破坏性”方法，但只要该方法不产生真的破坏性的结果，也可以不抛出UnsupportedOperationException。例如：某不可变集合不支持addAll(Collection&lt;? extends E&gt; c)方法，理论上当调用该方法时应抛出UnsupportedOperationException。但是若null==c，则也可不抛出UnsupportedOperationException。</p>
-<p>// TODO<br>某些本接口的实现可能会对其所包含的元素有所限制。例如，有些实现禁止插入null元素，有些实现则会限制元素类型。试图插入不合法的元素时会抛出一个unchecked exception。通常为NullPointerException或ClassCastException。试图查询一个不合法的元素可能会抛出异常或者返回false。</p>
-<p>每个集合的实现类自行定义自身的同步策略。若实现类缺乏健壮的同步机制，则在多线程环境下将出现各种线程同步问题。</p>
-<p>Collection接口中的许多方法是按等号方法定义的。例如，contains(Object o)方法的api中有如下描述：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当且仅当该集合包含至少一个元素e，满足(o==<span class="keyword">null</span> ? e==<span class="keyword">null</span> : o.equals(e))，返回<span class="keyword">true</span>。</div></pre></td></tr></table></figure>
-<p>这个描述不应被理解为具体的实现类在实现Collection.contains(Object o)方法时，只要传入的o不为null，就一定会遍历集合中的元素e，并进行o.equals(e)比较。只要能实现o.equals(e)的效果，实现类并不需要一定调用o.equals(e)方法，而是可选择更优的解决方案。例如，实现类可比较两元素的hash codes（Object.hashCode()方法能确保拥有不同hash code的对象不相等）。</p>
+<p>某些本接口的实现可能会对其所包含的元素有所限制。例如，有些实现禁止插入空元素，有些实现则会限制元素类型。试图插入不合法的元素会抛出一个unchecked exception。通常为NullPointerException或ClassCastException。试图查询一个不合法的元素可能会抛出异常或者返回false。</p>
+<p>每个集合的实现类自行定义自身的同步策略。若实现类缺乏健壮的同步机制，则在并发环境下可能发生会有同步问题。</p>
+<p>本接口中的许多方法是按equals方法定义的。例如contains(Object o)方法的api中有如下描述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当且仅当该集合包含至少一个元素e，满足(o==null ? e==null : o.equals(e))时，返回true。</div></pre></td></tr></table></figure>
+<p>这个描述不应被理解为具体的实现类在实现该方法时，只要传入的o不为null，就一定会遍历集合中的元素e，并进行o.equals(e)比较。只要能实现o.equals(e)的效果，实现类并不需要一定调用o.equals(e)方法，而是可选择更优的解决方案。例如，实现类可比较两元素的hash code。</p>
 <p>本接口是java集合框架中的一员。</p>
-<h1 id="查询操作：int-size"><a href="#查询操作：int-size" class="headerlink" title="查询操作：int size();"></a>查询操作：int size();</h1><p>返回该集合包含的元素个数。若该集合包含的元素个数&gt;Integer.MAX_VALUE，则返回Integer.MAX_VALUE。</p>
-<h1 id="查询操作：boolean-isEmpty"><a href="#查询操作：boolean-isEmpty" class="headerlink" title="查询操作：boolean isEmpty();"></a>查询操作：boolean isEmpty();</h1><p>若该集合不包含元素则返回true。反之返回false。</p>
-<h1 id="查询操作：boolean-contains-Object-o"><a href="#查询操作：boolean-contains-Object-o" class="headerlink" title="查询操作：boolean contains(Object o);"></a>查询操作：boolean contains(Object o);</h1><p>若集合包含特定元素则返回true。更通俗的说，当且仅当该集合包含至少一个元素e，满足(o==null ? e==null : o.equals(e))，返回true</p>
+<h1 id="查询操作：int-size"><a href="#查询操作：int-size" class="headerlink" title="查询操作：int size();"></a>查询操作：int size();</h1><h2 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int size();</div></pre></td></tr></table></figure>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>返回collection包含的元素个数。若collection包含的元素个数&gt;Integer.MAX_VALUE，则返回Integer.MAX_VALUE。</p>
+<h1 id="查询操作：boolean-isEmpty"><a href="#查询操作：boolean-isEmpty" class="headerlink" title="查询操作：boolean isEmpty();"></a>查询操作：boolean isEmpty();</h1><h2 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean isEmpty();</div></pre></td></tr></table></figure>
+<h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><p>若collection不包含元素则返回true。反之返回false。</p>
+<h1 id="查询操作：boolean-contains-Object-o"><a href="#查询操作：boolean-contains-Object-o" class="headerlink" title="查询操作：boolean contains(Object o);"></a>查询操作：boolean contains(Object o);</h1><h2 id="源码-3"><a href="#源码-3" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean contains(Object o);</div></pre></td></tr></table></figure>
+<h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>若collection包含o则返回true。更通俗的说，当且仅当collection包含至少一个元素e，满足(o==null ? e==null : o.equals(e))，返回true。</p>
 <p>该方法可能抛出如下异常：</p>
 <ul>
-<li>ClassCastException：传入参数o的类型与该集合不相容（依实现可选）</li>
-<li>NullPointerException：传入参数o为空且该集合不允许空元素存在（依实现可选）</li>
+<li>ClassCastException：o的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：o==null且collection不允许空元素存在（依实现可选）</li>
 </ul>
-<h1 id="查询操作：Iterator-iterator"><a href="#查询操作：Iterator-iterator" class="headerlink" title="查询操作：Iterator iterator();"></a>查询操作：Iterator<e> iterator();</e></h1><p>返回一个该集合的迭代器。通常情况下迭代器不保证数据有序（除非特定的实现类保证这一点）。</p>
-<h1 id="查询操作：Object-toArray"><a href="#查询操作：Object-toArray" class="headerlink" title="查询操作：Object[] toArray();"></a>查询操作：Object[] toArray();</h1><p>返回包含该集合所有元素的数组。若该集合是有序的（迭代器返回的结果有序），则返回的数组必须同样有序。</p>
-<p>返回的数组中的元素应是原集合中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变原集合。</p>
+<h1 id="查询操作：Iterator-iterator"><a href="#查询操作：Iterator-iterator" class="headerlink" title="查询操作：Iterator iterator();"></a>查询操作：Iterator<e> iterator();</e></h1><h2 id="源码-4"><a href="#源码-4" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;E&gt; iterator();</div></pre></td></tr></table></figure>
+<h2 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h2><p>返回一个collection的迭代器。通常情况下迭代器不保证数据有序（除非特定的实现类保证这一点）。</p>
+<h1 id="查询操作：Object-toArray"><a href="#查询操作：Object-toArray" class="headerlink" title="查询操作：Object[] toArray();"></a>查询操作：Object[] toArray();</h1><h2 id="源码-5"><a href="#源码-5" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object[] toArray();</div></pre></td></tr></table></figure>
+<h2 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h2><p>返回包含collection所有元素的数组。若collection是有序的（迭代器返回的结果有序），则返回的数组必须有同样的顺序。</p>
+<p>返回的数组中的元素应是collection中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变collection。</p>
 <p>本方法是连接集合与数组之间的桥梁。</p>
-<h1 id="查询操作：-T-toArray-T-a"><a href="#查询操作：-T-toArray-T-a" class="headerlink" title="查询操作： T[] toArray(T[] a);"></a>查询操作：<t> T[] toArray(T[] a);</t></h1><p>返回包含该集合所有元素的数组。返回数组的类型由传入参数a的类型确定。若a.length&gt;=collection.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被清空）。数组下标大于集合长度的部分将被置为null。若a.length&lt;collection.size()，则不修改a，而是以a的类型新建长度为collection.size()的数组并填入collection中的值，并返回新生成的数组。</p>
-<p>若该集合是有序的（迭代器返回的结果有序），则返回的数组必须同样有序。</p>
-<p>同Object[] toArray();方法，返回的数组中的元素应是原集合中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变原集合。</p>
+<h1 id="查询操作：-T-toArray-T-a"><a href="#查询操作：-T-toArray-T-a" class="headerlink" title="查询操作： T[] toArray(T[] a);"></a>查询操作：<t> T[] toArray(T[] a);</t></h1><h2 id="源码-6"><a href="#源码-6" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt; T[] toArray(T[] a);</div></pre></td></tr></table></figure>
+<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回包含collection所有元素的数组。返回数组的类型即为a的类型。若a.length&gt;=collection.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被清空）。数组索引大于collection索引的部分将被置为null。若a.length&lt;collection.size()，则不修改a，而是以a的类型新建长度为collection.size()的数组并填入collection中的值，并返回新生成的数组。</p>
+<p>若collection是有序的（迭代器返回的结果有序），则返回的数组必须有同样的顺序。</p>
+<p>同toArray()方法，返回的数组中的元素应是collection中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变collection。</p>
 <p>例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] y = x.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] y = x.toArray(new String[0]);</div></pre></td></tr></table></figure>
 <p>其中x为一个数据类型为String的集合，则以上语句会将该集合复制一份深拷贝到数组y。</p>
-<p>注意：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray(<span class="keyword">new</span> Object[<span class="number">0</span>])</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray(new Object[0])</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray()</div></pre></td></tr></table></figure>
 <p>两句效果等价。</p>
 <p>该方法会抛出如下异常：</p>
 <ul>
-<li>ArrayStoreException：a的类型collection不支持（不会进行自动类型转换，例如，collection为String，a为Integer，抛出该异常；collection为Integer，a为String，抛出该异常）。</li>
-<li>NullPointerException：a为null</li>
+<li>ArrayStoreException：a的类型collection不支持。</li>
+<li>NullPointerException：a==null</li>
 </ul>
-<h1 id="修改操作：boolean-add-E-e"><a href="#修改操作：boolean-add-E-e" class="headerlink" title="修改操作：boolean add(E e);"></a>修改操作：boolean add(E e);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>若集合因插入操作而改变则返回true。反之（集合不允许包含重复元素且待插入元素在集合中已存在）则返回false。因此对于那些不能包含重复元素的集合而言，该方法也可用于判断集合是否已包含e。</p>
-<p>支持该操作的集合可能会对插入操作做出限制。具体来说，某些集合禁止插入空元素，某些集合会限制插入元素的类型。</p>
-<p>若某集合禁止插入元素（不是因为集合不允许包含重复元素且待插入元素在集合中已存在，而是因为其他任意原因），则该方法应抛出异常。本机制用于保护那些常量值的集合。</p>
+<h1 id="修改操作：boolean-add-E-e"><a href="#修改操作：boolean-add-E-e" class="headerlink" title="修改操作：boolean add(E e);"></a>修改操作：boolean add(E e);</h1><h2 id="源码-7"><a href="#源码-7" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean add(E e);</div></pre></td></tr></table></figure>
+<h2 id="描述-6"><a href="#描述-6" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>若collection因本方法而改变则返回true。反之则返回false（例如，collection不允许包含重复元素且e在collection中已存在）。因此对于那些不能包含重复元素的集合而言，该方法也可用于判断集合是否已包含e。</p>
+<p>支持本方法的集合可能会对本方法做出限制。例如，某些集合禁止插入空元素，某些集合会限制插入元素的类型。</p>
+<p>若某集合禁止插入元素（不是因为集合不允许包含重复元素且e在集合中已存在，而是因为其他任意原因），则该方法应抛出异常。本机制用于保护那些常量值的集合。</p>
 <p>该方法会抛出如下异常：</p>
 <ul>
-<li>UnsupportedOperationException：collection不支持add操作。</li>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
 <li>ClassCastException：e因为其所属的类禁止被插入collection。</li>
-<li>NullPointerException：e为null且collection禁止包含空元素。</li>
-<li>IllegalArgumentException：e因其某些特性禁止被插入collection。</li>
+<li>NullPointerException：e==null且collection禁止包含空元素。</li>
+<li>IllegalArgumentException：e因其某些属性禁止被插入collection。</li>
 <li>IllegalStateException：因插入限制，此时e不能被插入collection。</li>
 </ul>
-<h1 id="修改操作：boolean-remove-Object-o"><a href="#修改操作：boolean-remove-Object-o" class="headerlink" title="修改操作：boolean remove(Object o);"></a>修改操作：boolean remove(Object o);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>移除一个collection符合条件的元素e：(o==null ? e==null : o.equals(e))。若有多个e符合条件，则本方法只会移除其中一个，具体移除哪一个依具体实现而定。</p>
-<p>若本方法改变了原集合则返回true，反之返回false。</p>
+<h1 id="修改操作：boolean-remove-Object-o"><a href="#修改操作：boolean-remove-Object-o" class="headerlink" title="修改操作：boolean remove(Object o);"></a>修改操作：boolean remove(Object o);</h1><h2 id="源码-8"><a href="#源码-8" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean remove(Object o);</div></pre></td></tr></table></figure>
+<h2 id="描述-7"><a href="#描述-7" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>移除collection符合条件的元素e：(o==null ? e==null : o.equals(e))。若有多个e符合条件，则本方法只会移除其中一个，具体移除哪一个依具体实现而定。</p>
+<p>若本方法改变了collection则返回true，反之返回false。</p>
 <p>该方法可能会抛出如下异常：</p>
 <ul>
-<li>ClassCastException：传入参数o的类型与该集合不相容（依实现可选）</li>
-<li>NullPointerException：传入参数o为空且该集合不允许空元素存在（依实现可选）</li>
-<li>UnsupportedOperationException：collection不支持remove操作。</li>
+<li>ClassCastException：o的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：o==null且collection不允许空元素存在（依实现可选）</li>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
 </ul>
-<h1 id="批量操作：boolean-containsAll-Collection-lt-gt-c"><a href="#批量操作：boolean-containsAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean containsAll(Collection&lt;?&gt; c);"></a>批量操作：boolean containsAll(Collection&lt;?&gt; c);</h1><p>若该集合中包含c中所有元素则返回true。</p>
-<p>该方法类似于collection.contains(Object o)</p>
+<h1 id="批量操作：boolean-containsAll-Collection-lt-gt-c"><a href="#批量操作：boolean-containsAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean containsAll(Collection&lt;?&gt; c);"></a>批量操作：boolean containsAll(Collection&lt;?&gt; c);</h1><h2 id="源码-9"><a href="#源码-9" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean containsAll(Collection&lt;?&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-8"><a href="#描述-8" class="headerlink" title="描述"></a>描述</h2><p>若collection中包含c中所有元素则返回true。</p>
+<p>本方法类似于contains(Object o)。</p>
 <p>该方法可能抛出如下异常：</p>
 <ul>
-<li>ClassCastException：传入参数c中至少一个元素的类型与该集合不相容（依实现可选）</li>
-<li>NullPointerException：传入参数c中包含至少一个空元素且该集合不允许空元素存在（依实现可选）；或者传入参数c本身为空</li>
+<li>ClassCastException：c中至少有一个元素的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：c中包含至少一个空元素且该集合不允许空元素存在（依实现可选）；或c==null。</li>
 </ul>
-<h1 id="批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><a href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c" class="headerlink" title="批量操作：boolean addAll(Collection&lt;? extends E&gt; c);"></a>批量操作：boolean addAll(Collection&lt;? extends E&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>将c中所有元素插入该集合。本方法并未定义如下事件发生时的解决策略：在将c中的元素添加至该集合的过程中c发生变化（这也意味着如下事件的解决策略同样未定义：将一个非空集合添加至自身）。</p>
-<p>若该集合因本方法发生变化则返回true，反之返回false。</p>
+<h1 id="批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><a href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c" class="headerlink" title="批量操作：boolean addAll(Collection&lt;? extends E&gt; c);"></a>批量操作：boolean addAll(Collection&lt;? extends E&gt; c);</h1><h2 id="源码-10"><a href="#源码-10" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean addAll(Collection&lt;? extends E&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-9"><a href="#描述-9" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>将c中所有元素插入collection。本方法未定义如下事件发生时的解决策略：在将c中的元素添加至collection的过程中c发生变化（这也意味着如下事件的解决策略同样未定义：将一个非空集合添加至自身）。</p>
+<p>若collection因本方法发生变化则返回true，反之返回false。</p>
 <p>该方法会抛出如下异常：</p>
 <ul>
-<li>UnsupportedOperationException：collection不支持addAll操作。</li>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
 <li>ClassCastException：c中任意一个元素因为其所属的类禁止被插入collection。</li>
-<li>NullPointerException：c中任意一个元素为null且collection禁止包含空元素；或者c为null。</li>
-<li>IllegalArgumentException：c中任意一个元素因其某些特性禁止被插入collection。</li>
+<li>NullPointerException：c中任意一个元素为null且collection禁止包含空元素；或c==null。</li>
+<li>IllegalArgumentException：c中任意一个元素因其某些属性禁止被插入collection。</li>
 <li>IllegalStateException：因插入限制，此时并非c中所有元素都能被插入collection。</li>
 </ul>
-<p>该方法类似于collection.boolean add(E e);</p>
-<h1 id="批量操作：boolean-removeAll-Collection-lt-gt-c"><a href="#批量操作：boolean-removeAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean removeAll(Collection&lt;?&gt; c);"></a>批量操作：boolean removeAll(Collection&lt;?&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>从该集合中移除所有与c的交集元素（求差集）。</p>
-<p>若该集合因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法类似于add(E e);</p>
+<h1 id="批量操作：boolean-removeAll-Collection-lt-gt-c"><a href="#批量操作：boolean-removeAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean removeAll(Collection&lt;?&gt; c);"></a>批量操作：boolean removeAll(Collection&lt;?&gt; c);</h1><h2 id="源码-11"><a href="#源码-11" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean removeAll(Collection&lt;?&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-10"><a href="#描述-10" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>从collection中移除所有与c的交集元素（求差集）。</p>
+<p>若collection因本方法发生变化则返回true，反之返回false。</p>
 <p>该方法可能会抛出如下异常：</p>
 <ul>
-<li>UnsupportedOperationException：collection不支持removeAll操作。</li>
-<li>ClassCastException：传入参数c中至少有一个元素的类型与该集合不相容（依实现可选）</li>
-<li>NullPointerException：本集合中至少有一个元素为空且c不允许空元素存在（依实现可选）；或者传入参数c为空。</li>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
+<li>ClassCastException：c中至少有一个元素的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：collection中至少有一个元素为空且c不允许空元素存在（依实现可选）；或c==null。</li>
 </ul>
-<p>该方法类似于collection.boolean remove(Object o);</p>
-<h1 id="批量操作：boolean-retainAll-Collection-lt-gt-c"><a href="#批量操作：boolean-retainAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean retainAll(Collection&lt;?&gt; c);"></a>批量操作：boolean retainAll(Collection&lt;?&gt; c);</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>保留该集合中与c的交集元素。</p>
-<p>若该集合因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法类似于remove(Object o)。</p>
+<h1 id="批量操作：boolean-retainAll-Collection-lt-gt-c"><a href="#批量操作：boolean-retainAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean retainAll(Collection&lt;?&gt; c);"></a>批量操作：boolean retainAll(Collection&lt;?&gt; c);</h1><h2 id="源码-12"><a href="#源码-12" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean retainAll(Collection&lt;?&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-11"><a href="#描述-11" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>保留collection中与c的交集元素。</p>
+<p>若collection因本方法发生变化则返回true，反之返回false。</p>
 <p>该方法可能会抛出如下异常：</p>
 <ul>
-<li>UnsupportedOperationException：collection不支持retainAll操作。</li>
-<li>ClassCastException：传入参数c中至少有一个元素的类型与该集合不相容（依实现可选）</li>
-<li>NullPointerException：本集合中至少有一个元素为空且c不允许空元素存在（依实现可选）；或者传入参数c为空。</li>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
+<li>ClassCastException：c中至少有一个元素的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：collection中至少有一个元素为空且c不允许空元素存在（依实现可选）；或c==null。</li>
 </ul>
-<h1 id="批量操作：void-clear"><a href="#批量操作：void-clear" class="headerlink" title="批量操作：void clear();"></a>批量操作：void clear();</h1><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>清空该集合。该方法执行完成后集合将为空。</p>
+<h1 id="批量操作：void-clear"><a href="#批量操作：void-clear" class="headerlink" title="批量操作：void clear();"></a>批量操作：void clear();</h1><h2 id="源码-13"><a href="#源码-13" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void clear();</div></pre></td></tr></table></figure>
+<h2 id="描述-12"><a href="#描述-12" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>清空collection。。</p>
 <p>该方法会抛出如下异常：</p>
 <ul>
-<li>UnsupportedOperationException：collection不支持clear操作。</li>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
 </ul>
-<h1 id="比较及哈希：boolean-equals-Object-o"><a href="#比较及哈希：boolean-equals-Object-o" class="headerlink" title="比较及哈希：boolean equals(Object o);"></a>比较及哈希：boolean equals(Object o);</h1><p>比较o与本集合是否相等（若具体的实现类未做特殊的设置，该方法将调用Object类的equals方法，即以引用地址判断是否相等），若相等则返回true，反之返回false。</p>
-<p>jdk提供的直接继承Collection接口的子接口有3个：Queue，List，Set。其中List，Set均对equals方法有要求，它们要求其实现类在比较两个集合相等时不是用默认Object对象比较引用是否相同，而是根据集合具体的特点，比较“值”是否相等。因此，当程序员使用Queue接口，或者是自己直接实现Collection接口时，一定要考虑好这个equals方法的设计，通常情况下，我们比较两个集合的相等性时，都不希望比较的是其引用地址是否相等，因为这通常是毫无意义的。</p>
+<h1 id="比较及哈希：boolean-equals-Object-o"><a href="#比较及哈希：boolean-equals-Object-o" class="headerlink" title="比较及哈希：boolean equals(Object o);"></a>比较及哈希：boolean equals(Object o);</h1><h2 id="源码-14"><a href="#源码-14" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean equals(Object o);</div></pre></td></tr></table></figure>
+<h2 id="描述-13"><a href="#描述-13" class="headerlink" title="描述"></a>描述</h2><p>比较o与collection是否相等（若具体的实现类未做特殊的设置，该方法将调用Object类的equals(Object)方法，即以引用地址判断是否相等），若相等则返回true，反之返回false。</p>
+<p>jdk提供的直接继承本接口的子接口有3个：Queue，List，Set。其中List，Set均对equals方法有要求，它们要求其实现类的equals(Object o)方法不是继承自Object类，而是根据集合具体的特点，比较“值”是否相等。因此，当程序员使用Queue接口，或者是自己直接实现本接口时，一定要考虑好这个equals方法的设计，通常情况下，我们比较两个集合的相等性时，都不希望比较的是其引用地址是否相等，因为这通常是毫无意义的。</p>
 <p>通常意义上，我们所认为的相等都是对称的，即若a.equals(b)，则必应有b.equals(a)。</p>
 <p>在jdk的集合类设计中，规定了大前提：list只能与list相等，set只能与set相等。因此，我们无法写出一个类同时实现Set及List接口，因为若这样的实现类可以存在，这意味着有一种集合既是List又是Set，与上文的逻辑相悖。</p>
-<h1 id="比较及哈希：int-hashCode"><a href="#比较及哈希：int-hashCode" class="headerlink" title="比较及哈希：int hashCode();"></a>比较及哈希：int hashCode();</h1><p>返回该集合的hash code值（若具体的实现类未做特殊的设置，该方法将调用Object类的hashCode方法）。</p>
-<p>必须注意的是，任意想要重写Object.equals(Object)方法的类都必须重写Object.hashCode()。具体来说，若c1.equals(c2)，则同样应有c1.hashCode()==c2.hashCode()。</p>
+<h1 id="比较及哈希：int-hashCode"><a href="#比较及哈希：int-hashCode" class="headerlink" title="比较及哈希：int hashCode();"></a>比较及哈希：int hashCode();</h1><h2 id="源码-15"><a href="#源码-15" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int hashCode();</div></pre></td></tr></table></figure>
+<h2 id="描述-14"><a href="#描述-14" class="headerlink" title="描述"></a>描述</h2><p>返回collection的hash code值（若具体的实现类未做特殊的设置，该方法将调用Object类的hashCode()方法）。</p>
+<p>必须注意的是，任意想要重写Object类equals(Object)方法的类都必须重写Object类的hashCode()方法。具体来说，若c1.equals(c2)，则同样应有c1.hashCode()==c2.hashCode()。</p>
 
       
     </div>
@@ -730,7 +745,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层级关系"><span class="nav-number">2.</span> <span class="nav-text">层级关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接超类接口："><span class="nav-number">2.1.</span> <span class="nav-text">直接超类接口：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接子类接口："><span class="nav-number">2.2.</span> <span class="nav-text">直接子类接口：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接实现本接口的抽象类"><span class="nav-number">2.3.</span> <span class="nav-text">直接实现本接口的抽象类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">3.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：int-size"><span class="nav-number">4.</span> <span class="nav-text">查询操作：int size();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：boolean-isEmpty"><span class="nav-number">5.</span> <span class="nav-text">查询操作：boolean isEmpty();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：boolean-contains-Object-o"><span class="nav-number">6.</span> <span class="nav-text">查询操作：boolean contains(Object o);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：Iterator-iterator"><span class="nav-number">7.</span> <span class="nav-text">查询操作：Iterator iterator();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：Object-toArray"><span class="nav-number">8.</span> <span class="nav-text">查询操作：Object[] toArray();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：-T-toArray-T-a"><span class="nav-number">9.</span> <span class="nav-text">查询操作： T[] toArray(T[] a);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：boolean-add-E-e"><span class="nav-number">10.</span> <span class="nav-text">修改操作：boolean add(E e);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：boolean-remove-Object-o"><span class="nav-number">11.</span> <span class="nav-text">修改操作：boolean remove(Object o);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-containsAll-Collection-lt-gt-c"><span class="nav-number">12.</span> <span class="nav-text">批量操作：boolean containsAll(Collection<?> c);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">13.</span> <span class="nav-text">批量操作：boolean addAll(Collection<? extends E> c);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-removeAll-Collection-lt-gt-c"><span class="nav-number">14.</span> <span class="nav-text">批量操作：boolean removeAll(Collection<?> c);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-retainAll-Collection-lt-gt-c"><span class="nav-number">15.</span> <span class="nav-text">批量操作：boolean retainAll(Collection<?> c);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：void-clear"><span class="nav-number">16.</span> <span class="nav-text">批量操作：void clear();</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较及哈希：boolean-equals-Object-o"><span class="nav-number">17.</span> <span class="nav-text">比较及哈希：boolean equals(Object o);</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较及哈希：int-hashCode"><span class="nav-number">18.</span> <span class="nav-text">比较及哈希：int hashCode();</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层级关系"><span class="nav-number">2.</span> <span class="nav-text">层级关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接超类接口："><span class="nav-number">2.1.</span> <span class="nav-text">直接超类接口：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接子类接口："><span class="nav-number">2.2.</span> <span class="nav-text">直接子类接口：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接实现本接口的抽象类"><span class="nav-number">2.3.</span> <span class="nav-text">直接实现本接口的抽象类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">3.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：int-size"><span class="nav-number">4.</span> <span class="nav-text">查询操作：int size();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-1"><span class="nav-number">4.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">4.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：boolean-isEmpty"><span class="nav-number">5.</span> <span class="nav-text">查询操作：boolean isEmpty();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-2"><span class="nav-number">5.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-1"><span class="nav-number">5.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：boolean-contains-Object-o"><span class="nav-number">6.</span> <span class="nav-text">查询操作：boolean contains(Object o);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-3"><span class="nav-number">6.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-2"><span class="nav-number">6.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：Iterator-iterator"><span class="nav-number">7.</span> <span class="nav-text">查询操作：Iterator iterator();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-4"><span class="nav-number">7.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-3"><span class="nav-number">7.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：Object-toArray"><span class="nav-number">8.</span> <span class="nav-text">查询操作：Object[] toArray();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-5"><span class="nav-number">8.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-4"><span class="nav-number">8.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：-T-toArray-T-a"><span class="nav-number">9.</span> <span class="nav-text">查询操作： T[] toArray(T[] a);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-6"><span class="nav-number">9.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-5"><span class="nav-number">9.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：boolean-add-E-e"><span class="nav-number">10.</span> <span class="nav-text">修改操作：boolean add(E e);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-7"><span class="nav-number">10.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-6"><span class="nav-number">10.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：boolean-remove-Object-o"><span class="nav-number">11.</span> <span class="nav-text">修改操作：boolean remove(Object o);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-8"><span class="nav-number">11.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-7"><span class="nav-number">11.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-containsAll-Collection-lt-gt-c"><span class="nav-number">12.</span> <span class="nav-text">批量操作：boolean containsAll(Collection<?> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-9"><span class="nav-number">12.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-8"><span class="nav-number">12.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">13.</span> <span class="nav-text">批量操作：boolean addAll(Collection<? extends E> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-10"><span class="nav-number">13.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-9"><span class="nav-number">13.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-removeAll-Collection-lt-gt-c"><span class="nav-number">14.</span> <span class="nav-text">批量操作：boolean removeAll(Collection<?> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-11"><span class="nav-number">14.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-10"><span class="nav-number">14.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-retainAll-Collection-lt-gt-c"><span class="nav-number">15.</span> <span class="nav-text">批量操作：boolean retainAll(Collection<?> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-12"><span class="nav-number">15.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-11"><span class="nav-number">15.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：void-clear"><span class="nav-number">16.</span> <span class="nav-text">批量操作：void clear();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-13"><span class="nav-number">16.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-12"><span class="nav-number">16.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较及哈希：boolean-equals-Object-o"><span class="nav-number">17.</span> <span class="nav-text">比较及哈希：boolean equals(Object o);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-14"><span class="nav-number">17.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-13"><span class="nav-number">17.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较及哈希：int-hashCode"><span class="nav-number">18.</span> <span class="nav-text">比较及哈希：int hashCode();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-15"><span class="nav-number">18.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-14"><span class="nav-number">18.2.</span> <span class="nav-text">描述</span></a></li></ol></li></ol></div>
             
 
           </div>
