@@ -1,0 +1,1131 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,源码,Collection," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="源码">
+<meta name="keywords" content="java,源码,Collection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java7源码-java.util.List<E>">
+<meta property="og:url" content="http://yoursite.com/2017/05/25/java7源码-javautilListE/index.html">
+<meta property="og:site_name" content="ReimuWang's Blog">
+<meta property="og:description" content="源码">
+<meta property="og:updated_time" content="2017-05-30T16:12:31.879Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java7源码-java.util.List<E>">
+<meta name="twitter:description" content="源码">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/25/java7源码-javautilListE/"/>
+
+
+
+
+
+  <title> java7源码-java.util.List<E> | ReimuWang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ReimuWang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/java7源码-javautilListE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ReimuWang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ReimuWang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                java7源码-java.util.List<E>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T21:38:33+08:00">
+                2017-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java7源码/" itemprop="url" rel="index">
+                    <span itemprop="name">java7源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/05/25/java7源码-javautilListE/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/05/25/java7源码-javautilListE/" class="leancloud_visitors" data-flag-title="java7源码-java.util.List<E>">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  4,194
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">package java.util;</div><div class="line"></div><div class="line">public interface List&lt;E&gt; extends Collection&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    int size();</div><div class="line"></div><div class="line">    boolean isEmpty();</div><div class="line"></div><div class="line">    boolean contains(Object o);</div><div class="line"></div><div class="line">    Iterator&lt;E&gt; iterator();</div><div class="line"></div><div class="line">    Object[] toArray();</div><div class="line"></div><div class="line">    &lt;T&gt; T[] toArray(T[] a);</div><div class="line"></div><div class="line">    boolean add(E e);</div><div class="line"></div><div class="line">    boolean remove(Object o);</div><div class="line"></div><div class="line">    boolean containsAll(Collection&lt;?&gt; c);</div><div class="line"></div><div class="line">    boolean addAll(Collection&lt;? extends E&gt; c);</div><div class="line"></div><div class="line">    boolean addAll(int index, Collection&lt;? extends E&gt; c);</div><div class="line"></div><div class="line">    boolean removeAll(Collection&lt;?&gt; c);</div><div class="line"></div><div class="line">    boolean retainAll(Collection&lt;?&gt; c);</div><div class="line"></div><div class="line">    void clear();</div><div class="line"></div><div class="line">    boolean equals(Object o);</div><div class="line"></div><div class="line">    int hashCode();</div><div class="line"></div><div class="line">    E get(int index);</div><div class="line"></div><div class="line">    E set(int index, E element);</div><div class="line"></div><div class="line">    void add(int index, E element);</div><div class="line"></div><div class="line">    E remove(int index);</div><div class="line"></div><div class="line">    int indexOf(Object o);</div><div class="line"></div><div class="line">    int lastIndexOf(Object o);</div><div class="line"></div><div class="line">    ListIterator&lt;E&gt; listIterator();</div><div class="line"></div><div class="line">    ListIterator&lt;E&gt; listIterator(int index);</div><div class="line"></div><div class="line">    List&lt;E&gt; subList(int fromIndex, int toIndex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="层级关系"><a href="#层级关系" class="headerlink" title="层级关系"></a>层级关系</h1><h2 id="直接超类接口："><a href="#直接超类接口：" class="headerlink" title="直接超类接口："></a>直接超类接口：</h2><ul>
+<li><a href="http://reimuwang.org/2017/05/23/java7%E6%BA%90%E7%A0%81-javautilCollectionE/" target="_blank" rel="external">java.util.Collection<e></e></a></li>
+</ul>
+<h2 id="直接实现本接口的抽象类"><a href="#直接实现本接口的抽象类" class="headerlink" title="直接实现本接口的抽象类"></a>直接实现本接口的抽象类</h2><ul>
+<li><a href="">java.util.AbstractList<e></e></a></li>
+</ul>
+<h2 id="直接实现本接口的类"><a href="#直接实现本接口的类" class="headerlink" title="直接实现本接口的类"></a>直接实现本接口的类</h2><ul>
+<li><a href="">java.util.ArrayList<e></e></a></li>
+<li><a href="">java.util.LinkedList<e></e></a></li>
+<li><a href="">java.util.Vector<e></e></a></li>
+</ul>
+<h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>List（列表）又名sequence（序列）。是一种有序的集合。</p>
+<p>使用者能精确的知道List中每个元素的位置，能通过元素在List中的索引（即在List中的位置）访问或搜索元素。</p>
+<p>不同于Set，List允许重复元素，更通俗的说，若设e1,e2为List中的两个元素，则允许e1.equals(e2)。特别的，若List中允许空元素，则其也可允许复数个空元素。</p>
+<p>如果有人想实现一种List：禁止重复，且在试图插入重复元素时抛出运行时异常。那么很遗憾List接口不支持这种实现。</p>
+<p>与继承的超类接口Collection相比，List接口在如下方法中规定了额外的规范：iterator(),add(E e),remove(Object o),equals(Object o),hashCode()。为了方便起见，超类接口Collection中的其他方法本接口也会再写一遍。</p>
+<p>List接口提供了4个可用于基于位置（索引）访问元素的方法:get(int index)，set(int index, E element)，add(int index, E element)，remove(int index)。类似于java数组，List的索引以0开始。对某些实现（例如LinkedList）而言，这些操作获取结果的时间复杂度与索引值成比例（链表取到某个索引值的元素需要在链式结构中逐个向后查找）。因此在不确定List接口的具体实现时，比起使用这种基于索引的访问元素的方法，更推荐使用迭代器。</p>
+<p>List接口提供一个特殊的迭代器，名为：ListIterator。在通用Iterator所实现的功能的基础上，ListIterator还实现了：元素插入，元素替换，双向访问。List接口提供了一个方法获得这个ListIterator，同时该方法还可以指定ListIterator从一个特定的索引值开始。</p>
+<p>List接口提供了两个方法用于搜索特定的对象：indexOf(Object o)，lastIndexOf(Object o)。从性能的角度考虑，这两个方法应谨慎使用。在很多实现中，这两个方法采用代价昂贵的顺序查找（linear search）。</p>
+<p>List接口提供了两个方法用于在任意位置高效的插入或删除复数个元素。</p>
+<p>注意：当List允许包含自身以作为自身的元素时，这种List中的equals(Object o)及hashCode()方法往往难于定义。</p>
+<p>一些List的实现会对它们所能包含的元素有所限制。例如，一些实现禁止包含空元素，一些实现对其所能包含的元素的类型有限制。试图插入一个不合规的元素会抛出一个unchecked exception，例如NullPointerException，ClassCastException。依具体实现不同试图查询一个不合规的元素可能会抛出一个异常，或者仅仅只是返回false。</p>
+<p>本接口是java集合框架中的一员。</p>
+<h1 id="查询操作：int-size"><a href="#查询操作：int-size" class="headerlink" title="查询操作：int size();"></a>查询操作：int size();</h1><h2 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int size();</div></pre></td></tr></table></figure>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>返回list包含的元素个数。若list包含的元素个数&gt;Integer.MAX_VALUE，则返回Integer.MAX_VALUE。</p>
+<h1 id="查询操作：boolean-isEmpty"><a href="#查询操作：boolean-isEmpty" class="headerlink" title="查询操作：boolean isEmpty();"></a>查询操作：boolean isEmpty();</h1><h2 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean isEmpty();</div></pre></td></tr></table></figure>
+<h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><p>若list不包含任何元素则返回true。反之返回false。</p>
+<h1 id="查询操作：boolean-contains-Object-o"><a href="#查询操作：boolean-contains-Object-o" class="headerlink" title="查询操作：boolean contains(Object o);"></a>查询操作：boolean contains(Object o);</h1><h2 id="源码-3"><a href="#源码-3" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean contains(Object o);</div></pre></td></tr></table></figure>
+<h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>若list包含o则返回true。更通俗的说，当且仅当list包含至少一个元素e，满足(o==null ? e==null : o.equals(e))，返回true。</p>
+<p>该方法可能抛出如下异常：</p>
+<ul>
+<li>ClassCastException：o的类型与list不相容（依实现可选）</li>
+<li>NullPointerException：o==null且list不允许空元素存在（依实现可选）</li>
+</ul>
+<h1 id="查询操作：Iterator-iterator"><a href="#查询操作：Iterator-iterator" class="headerlink" title="查询操作：Iterator iterator();"></a>查询操作：Iterator<e> iterator();</e></h1><h2 id="源码-4"><a href="#源码-4" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;E&gt; iterator();</div></pre></td></tr></table></figure>
+<h2 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h2><p>返回一个list的迭代器。该迭代器遍历得到的元素有序（与list的固有顺序相同）。</p>
+<h1 id="查询操作：Object-toArray"><a href="#查询操作：Object-toArray" class="headerlink" title="查询操作：Object[] toArray();"></a>查询操作：Object[] toArray();</h1><h2 id="源码-5"><a href="#源码-5" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object[] toArray();</div></pre></td></tr></table></figure>
+<h2 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h2><p>返回包含list所有元素的数组。该数组的顺序与list的固有顺序相同。</p>
+<p>返回的数组中的元素应是list中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变list。</p>
+<p>本方法是连接集合与数组之间的桥梁。</p>
+<h1 id="查询操作：-T-toArray-T-a"><a href="#查询操作：-T-toArray-T-a" class="headerlink" title="查询操作： T[] toArray(T[] a);"></a>查询操作：<t> T[] toArray(T[] a);</t></h1><h2 id="源码-6"><a href="#源码-6" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt; T[] toArray(T[] a);</div></pre></td></tr></table></figure>
+<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回包含list所有元素的数组。该数组的顺序与list的固有顺序相同。返回数组的类型为a的类型。若a.length&gt;=list.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被清空）。数组索引大于list索引的部分将被置为null。若a.length&lt;list.size()，则不修改a，而是以a的类型新建长度为list.size()的数组并填入List中的值，并返回新生成的数组。</p>
+<p>同toArray()方法，本方法是连接集合与数组之间的桥梁。且返回的数组中的元素应是list中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变list。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] y = x.toArray(new String[0]);</div></pre></td></tr></table></figure>
+<p>其中x为一个数据类型为String的list，则以上语句会将该list复制一份深拷贝到数组y。</p>
+<p>注意：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.toArray(new Object[0])</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.toArray()</div></pre></td></tr></table></figure>
+<p>两句效果等价。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>ArrayStoreException：a的类型list中有至少一个元素不支持。</li>
+<li>NullPointerException：a==null</li>
+</ul>
+<h1 id="修改操作：boolean-add-E-e"><a href="#修改操作：boolean-add-E-e" class="headerlink" title="修改操作：boolean add(E e);"></a>修改操作：boolean add(E e);</h1><h2 id="源码-7"><a href="#源码-7" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean add(E e);</div></pre></td></tr></table></figure>
+<h2 id="描述-6"><a href="#描述-6" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>添加特定元素至list末尾。</p>
+<p>若list因本方法而改变则返回true。反之则返回false。</p>
+<p>支持本方法的list可能会对本方法做出限制。具体来说，某些list禁止插入空元素，某些list会限制插入元素的类型。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+<li>ClassCastException：e因为其所属的类禁止被插入list。</li>
+<li>NullPointerException：e==null且list禁止包含空元素。</li>
+<li>IllegalArgumentException：e因其某些属性禁止被插入list。</li>
+</ul>
+<h1 id="修改操作：boolean-remove-Object-o"><a href="#修改操作：boolean-remove-Object-o" class="headerlink" title="修改操作：boolean remove(Object o);"></a>修改操作：boolean remove(Object o);</h1><h2 id="源码-8"><a href="#源码-8" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean remove(Object o);</div></pre></td></tr></table></figure>
+<h2 id="描述-7"><a href="#描述-7" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>移除o在list中第一次出现的位置的元素。如果list中不包含o则list将不会被本方法改变。即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">o==null ? get(i)==null : o.equals(get(i))</div></pre></td></tr></table></figure>
+<p>其中为i满足相等条件的最小索引值。</p>
+<p>若本方法改变了list则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>ClassCastException：o的类型与list不相容（依实现可选）</li>
+<li>NullPointerException：o==null且list不允许空元素存在（依实现可选）</li>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+</ul>
+<h1 id="批量操作：boolean-containsAll-Collection-lt-gt-c"><a href="#批量操作：boolean-containsAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean containsAll(Collection&lt;?&gt; c);"></a>批量操作：boolean containsAll(Collection&lt;?&gt; c);</h1><h2 id="源码-9"><a href="#源码-9" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean containsAll(Collection&lt;?&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-8"><a href="#描述-8" class="headerlink" title="描述"></a>描述</h2><p>若list中包含c中所有元素则返回true。</p>
+<p>该方法类似于contains(Object o)。</p>
+<p>该方法可能抛出如下异常：</p>
+<ul>
+<li>ClassCastException：c中至少一个元素的类型与list不相容（依实现可选）</li>
+<li>NullPointerException：c中包含至少一个空元素且list不允许空元素存在（依实现可选）；或c==null</li>
+</ul>
+<h1 id="批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><a href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c" class="headerlink" title="批量操作：boolean addAll(Collection&lt;? extends E&gt; c);"></a>批量操作：boolean addAll(Collection&lt;? extends E&gt; c);</h1><h2 id="源码-10"><a href="#源码-10" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean addAll(Collection&lt;? extends E&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-9"><a href="#描述-9" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>将c中所有元素插入list的末尾，插入顺序为c的迭代器取出的顺序。</p>
+<p>本方法并未定义如下事件发生时的解决策略：在将c中的元素添加至list的过程中c发生变化（这也意味着如下事件的解决策略同样未定义：将一个非空list添加至自身）。</p>
+<p>若list因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+<li>ClassCastException：c中任意一个元素因为其所属的类禁止被插入list。</li>
+<li>NullPointerException：c中任意一个元素为null且list禁止包含空元素；或c==null。</li>
+<li>IllegalArgumentException：c中任意一个元素因其某些属性禁止被插入list。</li>
+</ul>
+<p>该方法类似于add(E e)。</p>
+<h1 id="批量操作：boolean-addAll-int-index-Collection-lt-extends-E-gt-c"><a href="#批量操作：boolean-addAll-int-index-Collection-lt-extends-E-gt-c" class="headerlink" title="批量操作：boolean addAll(int index, Collection&lt;? extends E&gt; c);"></a>批量操作：boolean addAll(int index, Collection&lt;? extends E&gt; c);</h1><h2 id="源码-11"><a href="#源码-11" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean addAll(int index, Collection&lt;? extends E&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-10"><a href="#描述-10" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>将c中所有元素插入list的指定位置（index），插入顺序为c的迭代器取出的顺序。原index位置及以后位置的元素顺次向后移动，空出装载c的位置。</p>
+<p>本方法并未定义如下事件发生时的解决策略：在将c中的元素添加至list的过程中c发生变化（这也意味着如下事件的解决策略同样未定义：将一个非空list添加至自身）。</p>
+<p>若list因本方法发生变化则返回true，反之返回false。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.addAll(set);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.addAll(list.size(), set);</div></pre></td></tr></table></figure>
+<p>二者等价。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+<li>ClassCastException：c中任意一个元素因为其所属的类禁止被插入list。</li>
+<li>NullPointerException：c中任意一个元素为null且list禁止包含空元素；或c==null。</li>
+<li>IllegalArgumentException：c中任意一个元素因其某些属性禁止被插入list。</li>
+<li>IndexOutOfBoundsException：索引越界(index &lt; 0 || index &gt; size)。</li>
+</ul>
+<h1 id="批量操作：boolean-removeAll-Collection-lt-gt-c"><a href="#批量操作：boolean-removeAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean removeAll(Collection&lt;?&gt; c);"></a>批量操作：boolean removeAll(Collection&lt;?&gt; c);</h1><h2 id="源码-12"><a href="#源码-12" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean removeAll(Collection&lt;?&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-11"><a href="#描述-11" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>从list中移除所有与c的交集元素（求差集）。</p>
+<p>若list因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+<li>ClassCastException：c中至少有一个元素的类型与list不相容（依实现可选）</li>
+<li>NullPointerException：list中至少有一个元素为空且c不允许空元素存在（依实现可选）；或c==null。</li>
+</ul>
+<p>该方法类似于remove(Object o)。</p>
+<h1 id="批量操作：boolean-retainAll-Collection-lt-gt-c"><a href="#批量操作：boolean-retainAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean retainAll(Collection&lt;?&gt; c);"></a>批量操作：boolean retainAll(Collection&lt;?&gt; c);</h1><h2 id="源码-13"><a href="#源码-13" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean retainAll(Collection&lt;?&gt; c);</div></pre></td></tr></table></figure>
+<h2 id="描述-12"><a href="#描述-12" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>保留list中与c的交集元素。</p>
+<p>若list因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+<li>ClassCastException：c中至少有一个元素的类型与list不相容（依实现可选）</li>
+<li>NullPointerException：list中至少有一个元素为空且c不允许空元素存在（依实现可选）；或c==null。</li>
+</ul>
+<h1 id="批量操作：void-clear"><a href="#批量操作：void-clear" class="headerlink" title="批量操作：void clear();"></a>批量操作：void clear();</h1><h2 id="源码-14"><a href="#源码-14" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void clear();</div></pre></td></tr></table></figure>
+<h2 id="描述-13"><a href="#描述-13" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>清空list。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+</ul>
+<h1 id="比较及哈希：boolean-equals-Object-o"><a href="#比较及哈希：boolean-equals-Object-o" class="headerlink" title="比较及哈希：boolean equals(Object o);"></a>比较及哈希：boolean equals(Object o);</h1><h2 id="源码-15"><a href="#源码-15" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean equals(Object o);</div></pre></td></tr></table></figure>
+<h2 id="描述-14"><a href="#描述-14" class="headerlink" title="描述"></a>描述</h2><p>比较o与list是否相等。当且仅当满足如下所有情况时返回true：</p>
+<ul>
+<li>o为一个List</li>
+<li>o与list长度相同。</li>
+<li>o与list所有对应位置上的元素相等(e1==null ? e2==null : e1.equals(e2))。</li>
+</ul>
+<p>换句话说，当两个List在相同位置上的元素均相等，则认为二者相等。</p>
+<p>只要满足如上相等的定义，List接口的不同实现类也可被认定为相等。</p>
+<h1 id="比较及哈希：int-hashCode"><a href="#比较及哈希：int-hashCode" class="headerlink" title="比较及哈希：int hashCode();"></a>比较及哈希：int hashCode();</h1><h2 id="源码-16"><a href="#源码-16" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int hashCode();</div></pre></td></tr></table></figure>
+<h2 id="描述-15"><a href="#描述-15" class="headerlink" title="描述"></a>描述</h2><p>返回list的hash code值。list的hash code值计算方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int hashCode = 1;</div><div class="line">for (E e : list)</div><div class="line">    hashCode = 31 * hashCode + (e == null ? 0 : e.hashCode());</div></pre></td></tr></table></figure>
+<p>这种计算方式可以保证任意list1.equals(list2)有list1.hashCode()==list2.hashCode()。</p>
+<h1 id="精确定位访问操作：E-get-int-index"><a href="#精确定位访问操作：E-get-int-index" class="headerlink" title="精确定位访问操作：E get(int index);"></a>精确定位访问操作：E get(int index);</h1><h2 id="源码-17"><a href="#源码-17" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E get(int index);</div></pre></td></tr></table></figure>
+<h2 id="描述-16"><a href="#描述-16" class="headerlink" title="描述"></a>描述</h2><p>返回list中索引位置为index的元素。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>IndexOutOfBoundsException：索引越界(index &lt; 0 || index &gt;= size)。</li>
+</ul>
+<h1 id="精确定位访问操作：E-set-int-index-E-element"><a href="#精确定位访问操作：E-set-int-index-E-element" class="headerlink" title="精确定位访问操作：E set(int index, E element);"></a>精确定位访问操作：E set(int index, E element);</h1><h2 id="源码-18"><a href="#源码-18" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E set(int index, E element);</div></pre></td></tr></table></figure>
+<h2 id="描述-17"><a href="#描述-17" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>用element替换list索引值为index的元素。方法返回被替换的元素。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+<li>ClassCastException：element因为其所属的类禁止被插入list。</li>
+<li>NullPointerException：element==null且list禁止包含空元素。</li>
+<li>IllegalArgumentException：element因其某些属性禁止被插入list。</li>
+<li>IndexOutOfBoundsException：索引越界(index &lt; 0 || index &gt;= size)。</li>
+</ul>
+<h1 id="精确定位访问操作：void-add-int-index-E-element"><a href="#精确定位访问操作：void-add-int-index-E-element" class="headerlink" title="精确定位访问操作：void add(int index, E element);"></a>精确定位访问操作：void add(int index, E element);</h1><h2 id="源码-19"><a href="#源码-19" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void add(int index, E element);</div></pre></td></tr></table></figure>
+<h2 id="描述-18"><a href="#描述-18" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>将element插入list的index下标处。原来处于index下标及以后的元素均向后移动一个位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.add(&quot;1&quot;);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.add(list.size(), <span class="string">"1"</span>);</div></pre></td></tr></table></figure>
+<p>二者等效。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+<li>ClassCastException：element因为其所属的类禁止被插入list。</li>
+<li>NullPointerException：element==null且list禁止包含空元素。</li>
+<li>IllegalArgumentException：element因其某些属性禁止被插入list。</li>
+<li>IndexOutOfBoundsException：索引越界(index &lt; 0 || index &gt; size)。</li>
+</ul>
+<h1 id="精确定位访问操作：E-remove-int-index"><a href="#精确定位访问操作：E-remove-int-index" class="headerlink" title="精确定位访问操作：E remove(int index);"></a>精确定位访问操作：E remove(int index);</h1><h2 id="源码-20"><a href="#源码-20" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">remove(int index);</div></pre></td></tr></table></figure>
+<h2 id="描述-19"><a href="#描述-19" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>移除list中索引值为index的元素。后续元素左移一个位置。返回被移除的元素。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：list不支持本方法。</li>
+<li>IndexOutOfBoundsException：索引越界(index &lt; 0 || index &gt;= size)。</li>
+</ul>
+<h1 id="搜索操作：int-indexOf-Object-o"><a href="#搜索操作：int-indexOf-Object-o" class="headerlink" title="搜索操作：int indexOf(Object o);"></a>搜索操作：int indexOf(Object o);</h1><h2 id="源码-21"><a href="#源码-21" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int indexOf(Object o);</div></pre></td></tr></table></figure>
+<h2 id="描述-20"><a href="#描述-20" class="headerlink" title="描述"></a>描述</h2><p>返回o在list中第一次出现的索引。若list不包含o则返回-1。更一般的来说，返回满足如下条件索引值最小的元素的索引：(o==null ? get(i)==null : o.equals(get(i)))。若不存在这样的元素则返回-1。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>ClassCastException：o所属的类与list不相容（依实现可选）。</li>
+<li>NullPointerException：o==null且list禁止包含空元素。</li>
+</ul>
+<h1 id="搜索操作：int-lastIndexOf-Object-o"><a href="#搜索操作：int-lastIndexOf-Object-o" class="headerlink" title="搜索操作：int lastIndexOf(Object o);"></a>搜索操作：int lastIndexOf(Object o);</h1><h2 id="源码-22"><a href="#源码-22" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int lastIndexOf(Object o);</div></pre></td></tr></table></figure>
+<h2 id="描述-21"><a href="#描述-21" class="headerlink" title="描述"></a>描述</h2><p>返回o在list中最后一次出现的索引。若list不包含o则返回-1。更一般的来说，返回满足如下条件索引值最大的元素的索引：(o==null ? get(i)==null : o.equals(get(i)))。若不存在这样的元素则返回-1。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>ClassCastException：o所属的类与list不相容（依实现可选）。</li>
+<li>NullPointerException：o==null且list禁止包含空元素。</li>
+</ul>
+<h1 id="List迭代器：ListIterator-listIterator"><a href="#List迭代器：ListIterator-listIterator" class="headerlink" title="List迭代器：ListIterator listIterator();"></a>List迭代器：ListIterator<e> listIterator();</e></h1><h2 id="源码-23"><a href="#源码-23" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ListIterator&lt;E&gt; listIterator();</div></pre></td></tr></table></figure>
+<h2 id="描述-22"><a href="#描述-22" class="headerlink" title="描述"></a>描述</h2><p>返回一个list按固有顺序迭代的listIterator。</p>
+<h1 id="List迭代器：ListIterator-listIterator-int-index"><a href="#List迭代器：ListIterator-listIterator-int-index" class="headerlink" title="List迭代器：ListIterator listIterator(int index);"></a>List迭代器：ListIterator<e> listIterator(int index);</e></h1><h2 id="源码-24"><a href="#源码-24" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ListIterator&lt;E&gt; listIterator(int index);</div></pre></td></tr></table></figure>
+<h2 id="描述-23"><a href="#描述-23" class="headerlink" title="描述"></a>描述</h2><p>返回一个list按固有顺序迭代的listIterator，迭代开始时游标位于索引[index-1,index]之间。即使用本方法得到listIterator后，若第一次调用的是listIterator.next()方法，返回的元素的索引不是0而是index；同理，若第一次调用的是listIterator.previous()方法，返回的是索引为index-1的元素。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>IndexOutOfBoundsException：索引越界(index &lt; 0 || index &gt; size)。</li>
+</ul>
+<h1 id="视图：List-subList-int-fromIndex-int-toIndex"><a href="#视图：List-subList-int-fromIndex-int-toIndex" class="headerlink" title="视图：List subList(int fromIndex, int toIndex);"></a>视图：List<e> subList(int fromIndex, int toIndex);</e></h1><h2 id="源码-25"><a href="#源码-25" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;E&gt; subList(int fromIndex, int toIndex);</div></pre></td></tr></table></figure>
+<h2 id="描述-24"><a href="#描述-24" class="headerlink" title="描述"></a>描述</h2><p>返回list的一部分，索引值区间：[fromIndex,toIndex)。特别的，若fromIndex==toIndex，则返回空List（不是null）。</p>
+<p>返回的list是原list的一个视图，前者是后者的一部分，并未从后者中分离出去。因此作用在前者之上的修改会反映在后者上，反之亦然。</p>
+<p>使用本方法的好处在于，当我们操作list的一部分时，可以直接在这一部分内部操作（仿佛这就是一个新的list），而无需被各种索引的边界分散过多的注意。</p>
+<p>例如，如果想批量移除list中的一部分，可按如下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.subList(from, to).clear();</div></pre></td></tr></table></figure>
+<p>同理，所有本接口的方法及所有java.util.Collections类提供的静态方法均支持subList取得的视图作为一个独立的list调用。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list2 = list.subList(1, 2);</div><div class="line">list2.get(0);</div></pre></td></tr></table></figure>
+<p>此时取得的元素即为list.get(1)。</p>
+<p>若在生成视图后原list发生了结构性的变化（例如长度发生了变化）则已生成的视图将被重置为未定义的状态。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>IndexOutOfBoundsException：索引越界(fromIndex &lt; 0 || toIndex &gt; size || fromIndex &gt; toIndex)。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/源码/" rel="tag"># 源码</a>
+          
+            <a href="/tags/Collection/" rel="tag"># Collection</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/杂项-博客书写规范20170530/" rel="next" title="杂项-博客书写规范_20170530">
+                <i class="fa fa-chevron-left"></i> 杂项-博客书写规范_20170530
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/25/javaCollection-5-java-util-ListIterator-E-源码分析/" rel="prev" title="java.util.ListIterator<E>源码分析">
+                java.util.ListIterator<E>源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ReimuWang" />
+          <p class="site-author-name" itemprop="name">ReimuWang</p>
+           
+              <p class="site-description motion-element" itemprop="description">Thou Shalt Comment</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层级关系"><span class="nav-number">2.</span> <span class="nav-text">层级关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接超类接口："><span class="nav-number">2.1.</span> <span class="nav-text">直接超类接口：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接实现本接口的抽象类"><span class="nav-number">2.2.</span> <span class="nav-text">直接实现本接口的抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接实现本接口的类"><span class="nav-number">2.3.</span> <span class="nav-text">直接实现本接口的类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">3.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：int-size"><span class="nav-number">4.</span> <span class="nav-text">查询操作：int size();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-1"><span class="nav-number">4.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">4.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：boolean-isEmpty"><span class="nav-number">5.</span> <span class="nav-text">查询操作：boolean isEmpty();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-2"><span class="nav-number">5.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-1"><span class="nav-number">5.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：boolean-contains-Object-o"><span class="nav-number">6.</span> <span class="nav-text">查询操作：boolean contains(Object o);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-3"><span class="nav-number">6.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-2"><span class="nav-number">6.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：Iterator-iterator"><span class="nav-number">7.</span> <span class="nav-text">查询操作：Iterator iterator();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-4"><span class="nav-number">7.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-3"><span class="nav-number">7.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：Object-toArray"><span class="nav-number">8.</span> <span class="nav-text">查询操作：Object[] toArray();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-5"><span class="nav-number">8.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-4"><span class="nav-number">8.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：-T-toArray-T-a"><span class="nav-number">9.</span> <span class="nav-text">查询操作： T[] toArray(T[] a);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-6"><span class="nav-number">9.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-5"><span class="nav-number">9.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：boolean-add-E-e"><span class="nav-number">10.</span> <span class="nav-text">修改操作：boolean add(E e);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-7"><span class="nav-number">10.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-6"><span class="nav-number">10.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：boolean-remove-Object-o"><span class="nav-number">11.</span> <span class="nav-text">修改操作：boolean remove(Object o);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-8"><span class="nav-number">11.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-7"><span class="nav-number">11.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-containsAll-Collection-lt-gt-c"><span class="nav-number">12.</span> <span class="nav-text">批量操作：boolean containsAll(Collection<?> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-9"><span class="nav-number">12.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-8"><span class="nav-number">12.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">13.</span> <span class="nav-text">批量操作：boolean addAll(Collection<? extends E> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-10"><span class="nav-number">13.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-9"><span class="nav-number">13.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-addAll-int-index-Collection-lt-extends-E-gt-c"><span class="nav-number">14.</span> <span class="nav-text">批量操作：boolean addAll(int index, Collection<? extends E> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-11"><span class="nav-number">14.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-10"><span class="nav-number">14.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-removeAll-Collection-lt-gt-c"><span class="nav-number">15.</span> <span class="nav-text">批量操作：boolean removeAll(Collection<?> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-12"><span class="nav-number">15.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-11"><span class="nav-number">15.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：boolean-retainAll-Collection-lt-gt-c"><span class="nav-number">16.</span> <span class="nav-text">批量操作：boolean retainAll(Collection<?> c);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-13"><span class="nav-number">16.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-12"><span class="nav-number">16.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：void-clear"><span class="nav-number">17.</span> <span class="nav-text">批量操作：void clear();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-14"><span class="nav-number">17.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-13"><span class="nav-number">17.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较及哈希：boolean-equals-Object-o"><span class="nav-number">18.</span> <span class="nav-text">比较及哈希：boolean equals(Object o);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-15"><span class="nav-number">18.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-14"><span class="nav-number">18.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较及哈希：int-hashCode"><span class="nav-number">19.</span> <span class="nav-text">比较及哈希：int hashCode();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-16"><span class="nav-number">19.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-15"><span class="nav-number">19.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#精确定位访问操作：E-get-int-index"><span class="nav-number">20.</span> <span class="nav-text">精确定位访问操作：E get(int index);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-17"><span class="nav-number">20.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-16"><span class="nav-number">20.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#精确定位访问操作：E-set-int-index-E-element"><span class="nav-number">21.</span> <span class="nav-text">精确定位访问操作：E set(int index, E element);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-18"><span class="nav-number">21.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-17"><span class="nav-number">21.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#精确定位访问操作：void-add-int-index-E-element"><span class="nav-number">22.</span> <span class="nav-text">精确定位访问操作：void add(int index, E element);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-19"><span class="nav-number">22.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-18"><span class="nav-number">22.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#精确定位访问操作：E-remove-int-index"><span class="nav-number">23.</span> <span class="nav-text">精确定位访问操作：E remove(int index);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-20"><span class="nav-number">23.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-19"><span class="nav-number">23.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搜索操作：int-indexOf-Object-o"><span class="nav-number">24.</span> <span class="nav-text">搜索操作：int indexOf(Object o);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-21"><span class="nav-number">24.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-20"><span class="nav-number">24.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搜索操作：int-lastIndexOf-Object-o"><span class="nav-number">25.</span> <span class="nav-text">搜索操作：int lastIndexOf(Object o);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-22"><span class="nav-number">25.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-21"><span class="nav-number">25.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#List迭代器：ListIterator-listIterator"><span class="nav-number">26.</span> <span class="nav-text">List迭代器：ListIterator listIterator();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-23"><span class="nav-number">26.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-22"><span class="nav-number">26.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#List迭代器：ListIterator-listIterator-int-index"><span class="nav-number">27.</span> <span class="nav-text">List迭代器：ListIterator listIterator(int index);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-24"><span class="nav-number">27.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-23"><span class="nav-number">27.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图：List-subList-int-fromIndex-int-toIndex"><span class="nav-number">28.</span> <span class="nav-text">视图：List subList(int fromIndex, int toIndex);</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-25"><span class="nav-number">28.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-24"><span class="nav-number">28.2.</span> <span class="nav-text">描述</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+      <div id="music163player">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=468490579&auto=0&height=66"></iframe>
+      </div>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ReimuWang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "5fa5a9a1c1714e08bbe2b872a7420625",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8EnYI3lo055oPaUPw9q15PgA-gzGzoHsz", "tCqaCeEinbik59cVG6GWmixT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <a href="https://github.com/ReimuWang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+</body>
+</html>
