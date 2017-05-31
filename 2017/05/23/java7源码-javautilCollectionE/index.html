@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/23/java7源码-javautilCollectionE/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-05-30T08:49:29.585Z">
+<meta property="og:updated_time" content="2017-05-31T08:48:09.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java7源码-java.util.Collection<E>">
 <meta name="twitter:description" content="源码">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,036
+                  3,087
                 </span>
               
 
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  11
+                  12
                 </span>
               
             </div>
@@ -458,15 +458,15 @@
 <h2 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h2><p>返回一个collection的迭代器。通常情况下迭代器不保证数据有序（除非特定的实现类保证这一点）。</p>
 <h1 id="查询操作：Object-toArray"><a href="#查询操作：Object-toArray" class="headerlink" title="查询操作：Object[] toArray();"></a>查询操作：Object[] toArray();</h1><h2 id="源码-5"><a href="#源码-5" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object[] toArray();</div></pre></td></tr></table></figure>
 <h2 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h2><p>返回包含collection所有元素的数组。若collection是有序的（迭代器返回的结果有序），则返回的数组必须有同样的顺序。</p>
-<p>返回的数组中的元素应是collection中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变collection。</p>
+<p>返回的数组与collection之间不存在引用关系（即使collection是基于数组的），数组中的元素是collection中的元素的浅拷贝。</p>
 <p>本方法是连接集合与数组之间的桥梁。</p>
 <h1 id="查询操作：-T-toArray-T-a"><a href="#查询操作：-T-toArray-T-a" class="headerlink" title="查询操作： T[] toArray(T[] a);"></a>查询操作：<t> T[] toArray(T[] a);</t></h1><h2 id="源码-6"><a href="#源码-6" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt; T[] toArray(T[] a);</div></pre></td></tr></table></figure>
-<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回包含collection所有元素的数组。返回数组的类型即为a的类型。若a.length&gt;=collection.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被清空）。数组索引大于collection索引的部分将被置为null。若a.length&lt;collection.size()，则不修改a，而是以a的类型新建长度为collection.size()的数组并填入collection中的值，并返回新生成的数组。</p>
+<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回包含collection所有元素的数组。返回数组的类型即为a的类型。若a.length==collection.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被替换）。若a.length&gt;collection.size()，数组索引大于collection索引的第一个元素将被置为null（若collection不允许包含空元素，则本方法此时可用来计算collection的长度：返回的数组第一次出现null的前一个元素的索引即为collection的长度），数组中后续元素不变。若a.length&lt;collection.size()，则不修改a，而是以a的类型新建长度为collection.size()的数组并填入collection中的值，并返回新生成的数组。</p>
 <p>若collection是有序的（迭代器返回的结果有序），则返回的数组必须有同样的顺序。</p>
-<p>同toArray()方法，返回的数组中的元素应是collection中元素的深拷贝而非其引用，这样才能随意对新返回的数组进行操作而不需担心改变collection。</p>
+<p>同toArray()方法，返回的数组与collection之间不存在引用关系（即使collection是基于数组的），数组中的元素是collection中的元素的浅拷贝。</p>
 <p>例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] y = x.toArray(new String[0]);</div></pre></td></tr></table></figure>
-<p>其中x为一个数据类型为String的集合，则以上语句会将该集合复制一份深拷贝到数组y。</p>
+<p>其中x为一个数据类型为String的集合，则以上语句会将该集合复制一份浅拷贝到数组y。</p>
 <p><strong>注意：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray(new Object[0])</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray()</div></pre></td></tr></table></figure>
