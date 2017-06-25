@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/25/java7源码-javautilListIteratorE/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-05-30T16:35:09.951Z">
+<meta property="og:updated_time" content="2017-06-13T02:28:58.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java7源码-java.util.ListIterator<E>">
 <meta name="twitter:description" content="源码">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,370
+                  1,396
                 </span>
               
 
@@ -421,53 +421,55 @@
 <li><a href="http://reimuwang.org/2017/05/24/java7%E6%BA%90%E7%A0%81-javautilIteratorE/" target="_blank" rel="external">java.util.Iterator<e></e></a></li>
 </ul>
 <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本接口为专为List接口设计的迭代器。可以双向迭代并修改list，并可获得迭代器当前的游标位置。</p>
-<p>ListIterator没有当前元素的概念。它的游标位置为两个元素之间。当调用previous()方法时将返回紧邻游标之前的一个元素同时游标前移一位；当调用next()方法时将返回紧邻游标之后的一个元素同时游标后移一位。</p>
+<p>ListIterator没有当前元素的概念。它的游标位置为两个元素之间。当调用previous()时将返回紧邻游标之前的一个元素同时游标前移一位；当调用next()时将返回紧邻游标之后的一个元素同时游标后移一位。</p>
 <p>若list的长度为n，则有n+1个位置可供放置游标。形如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">                     Element(0)   Element(1)   Element(2)   ... Element(n-1)</div><div class="line">cursor positions:  ^            ^            ^            ^                  ^</div></pre></td></tr></table></figure>
-<p>游标无法定义remove()及set(E e)方法。因为这两个方法操作的是元素本身而游标指向的是元素之间的位置。这两个方法必须与next()或previous()配对（remove()要求一一配对而set(E e)不需要），其操作的元素即为配对方法返回的元素。</p>
+<p>游标无法定义remove()及set(E e)。因为这两个方法操作的是元素本身而游标指向的是元素之间的位置。这两个方法必须与next()或previous()配对（remove()要求一一配对而set(E e)不需要），其操作的元素即为配对方法返回的元素。</p>
 <p>本接口是java集合框架中的一员。</p>
 <h1 id="查询操作：boolean-hasNext"><a href="#查询操作：boolean-hasNext" class="headerlink" title="查询操作：boolean hasNext();"></a>查询操作：boolean hasNext();</h1><h2 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean hasNext();</div></pre></td></tr></table></figure>
-<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>当向后遍历还有元素时返回true。换句话说，返回ture说明仍然可以通过next()方法取到元素，若在本方法返回false时继续调用next()方法，则next()方法会抛出异常。</p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>当向后遍历还有元素时返回true。换句话说，返回ture说明仍然可以通过next()取到元素，若在本方法返回false时继续调用next()，则next()会抛出异常。</p>
 <h1 id="查询操作：E-next"><a href="#查询操作：E-next" class="headerlink" title="查询操作：E next();"></a>查询操作：E next();</h1><h2 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E next();</div></pre></td></tr></table></figure>
 <h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><p>返回listIterator当前游标后一个元素，同时游标后移一位。在迭代list的过程中本方法可能会被反复调用，或者与previous()交替被调用。以此控制向前或向后迭代。</p>
+<p>以下语句均会返回当前游标的后一个元素：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">listIterator.next();</div><div class="line">listIterator.previous();</div></pre></td></tr></table></figure>
+<p>以下语句均会返回当前游标的前一个元素：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">listIterator.previous();</div><div class="line">listIterator.next();</div></pre></td></tr></table></figure>
-<p>均会返回同一个元素。</p>
 <p>该方法抛出如下异常：</p>
 <ul>
 <li>NoSuchElementException：游标所指的位置之后已无元素。</li>
 </ul>
 <h1 id="查询操作：boolean-hasPrevious"><a href="#查询操作：boolean-hasPrevious" class="headerlink" title="查询操作：boolean hasPrevious();"></a>查询操作：boolean hasPrevious();</h1><h2 id="源码-3"><a href="#源码-3" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean hasPrevious();</div></pre></td></tr></table></figure>
-<h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>当向前遍历还有元素时返回true。换句话说，返回ture说明仍然可以通过previous()方法取到元素，若在本方法返回false时继续调用previous()方法，则previous()方法会抛出异常。</p>
+<h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>当向前遍历还有元素时返回true。换句话说，返回ture说明仍然可以通过previous()取到元素，若在本方法返回false时继续调用previous()，则previous()会抛出异常。</p>
 <h1 id="查询操作：E-previous"><a href="#查询操作：E-previous" class="headerlink" title="查询操作：E previous();"></a>查询操作：E previous();</h1><h2 id="源码-4"><a href="#源码-4" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E previous();</div></pre></td></tr></table></figure>
 <h2 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h2><p>返回listIterator当前游标前一个元素，同时游标前移一位。在迭代list的过程中本方法可能会被反复调用，或者与next()交替被调用。以此控制向前或向后迭代。</p>
+<p>以下语句均会返回当前游标的后一个元素：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">listIterator.next();</div><div class="line">listIterator.previous();</div></pre></td></tr></table></figure>
+<p>以下语句均会返回当前游标的前一个元素：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">listIterator.previous();</div><div class="line">listIterator.next();</div></pre></td></tr></table></figure>
-<p>均会返回同一个元素。</p>
 <p>该方法抛出如下异常：</p>
 <ul>
 <li>NoSuchElementException：游标所指的位置之前已无元素。</li>
 </ul>
 <h1 id="查询操作：int-nextIndex"><a href="#查询操作：int-nextIndex" class="headerlink" title="查询操作：int nextIndex();"></a>查询操作：int nextIndex();</h1><h2 id="源码-5"><a href="#源码-5" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int nextIndex();</div></pre></td></tr></table></figure>
-<h2 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h2><p>返回listIterator当前游标后一个元素的索引。本操作不会移动游标。即本方法会返回下次调用next()方法时返回的元素的索引。特别的，当游标位于list末尾时，调用本方法不会抛出异常，而是会返回list的长度。</p>
+<h2 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h2><p>返回listIterator当前游标后一个元素的索引。本操作不会移动游标。即本方法会返回下次调用next()时返回的元素的索引。特别的，当游标位于list末尾时，调用本方法不会抛出异常，而是会返回list的长度。</p>
 <h1 id="查询操作：int-previousIndex"><a href="#查询操作：int-previousIndex" class="headerlink" title="查询操作：int previousIndex();"></a>查询操作：int previousIndex();</h1><h2 id="源码-6"><a href="#源码-6" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int previousIndex();</div></pre></td></tr></table></figure>
-<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回listIterator当前游标前一个元素的索引。本操作不会移动游标。即本方法会返回下次调用previous()方法时返回的元素的索引。特别的，当游标位于list最左边时，调用本方法不会抛出异常，而是会返回-1。</p>
+<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回listIterator当前游标前一个元素的索引。本操作不会移动游标。即本方法会返回下次调用previous()时返回的元素的索引。特别的，当游标位于list最左边时，调用本方法不会抛出异常，而是会返回-1。</p>
 <h1 id="改变操作：void-remove"><a href="#改变操作：void-remove" class="headerlink" title="改变操作：void remove();"></a>改变操作：void remove();</h1><h2 id="源码-7"><a href="#源码-7" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void remove();</div></pre></td></tr></table></figure>
 <h2 id="描述-6"><a href="#描述-6" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>移除上一次由next()或previous()返回的元素。本方法必须与next()或previous()一一配对。且每个配对之间不能调用add(E e)方法。</p>
+<p>移除上一次由next()或previous()返回的元素。本方法必须与next()或previous()一一配对。且每个配对之间不能调用add(E e)。</p>
 <p>该方法抛出如下异常：</p>
 <ul>
 <li>UnsupportedOperationException：listIterator不支持本方法。</li>
-<li>IllegalStateException：本方法未与next()或previous()一一配对，或配对之间调用了add(E e)方法。</li>
+<li>IllegalStateException：本方法未与next()或previous()一一配对，或配对之间调用了add(E e)。</li>
 </ul>
 <h1 id="改变操作：void-set-E-e"><a href="#改变操作：void-set-E-e" class="headerlink" title="改变操作：void set(E e);"></a>改变操作：void set(E e);</h1><h2 id="源码-8"><a href="#源码-8" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void set(E e);</div></pre></td></tr></table></figure>
 <h2 id="描述-7"><a href="#描述-7" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>用e替换上一次由next()或previous()返回的元素。本方法在调用前必须调用一次next()或previous()，否则不知道该替换哪个位置的元素。且在本方法与最后一次next()或previous()之间不能调用add(E e)方法或remove()方法。</p>
+<p>用e覆盖上一次由next()或previous()返回的元素的位置的元素。本方法在调用前必须调用一次next()或previous()，否则不知道该覆盖哪个位置的元素。且在本方法与最后一次next()或previous()之间不能调用add(E e)或remove()。</p>
 <ul>
 <li>UnsupportedOperationException：listIterator不支持本方法。</li>
 <li>ClassCastException：e因为其所属的类禁止被插入list。</li>
 <li>IllegalArgumentException：e因其某些属性禁止被插入list。</li>
-<li>IllegalStateException：本方法在调用前没有调用next()或previous()，或在本方法与最后一次next()或previous()之间调用add(E e)方法或remove()方法。</li>
+<li>IllegalStateException：本方法在调用前没有调用next()或previous()，或在本方法与最后一次next()或previous()之间调用add(E e)或remove()。</li>
 </ul>
 <h1 id="改变操作：void-add-E-e"><a href="#改变操作：void-add-E-e" class="headerlink" title="改变操作：void add(E e);"></a>改变操作：void add(E e);</h1><h2 id="源码-9"><a href="#源码-9" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void add(E e);</div></pre></td></tr></table></figure>
 <h2 id="描述-8"><a href="#描述-8" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
@@ -612,7 +614,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

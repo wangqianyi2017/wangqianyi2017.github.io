@@ -1,0 +1,1082 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,源码,Collection," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="源码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102">
+<meta name="keywords" content="java,源码,Collection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java7源码-java.util.AbstractCollection<E>">
+<meta property="og:url" content="http://yoursite.com/2017/06/19/java7源码-javautilAbstractCollectionE/index.html">
+<meta property="og:site_name" content="ReimuWang's Blog">
+<meta property="og:description" content="源码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102">
+<meta property="og:updated_time" content="2017-06-20T03:14:31.014Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java7源码-java.util.AbstractCollection<E>">
+<meta name="twitter:description" content="源码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/19/java7源码-javautilAbstractCollectionE/"/>
+
+
+
+
+
+  <title> java7源码-java.util.AbstractCollection<E> | ReimuWang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ReimuWang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/java7源码-javautilAbstractCollectionE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ReimuWang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ReimuWang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                java7源码-java.util.AbstractCollection<E>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T15:55:27+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java7源码/" itemprop="url" rel="index">
+                    <span itemprop="name">java7源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/06/19/java7源码-javautilAbstractCollectionE/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/06/19/java7源码-javautilAbstractCollectionE/" class="leancloud_visitors" data-flag-title="java7源码-java.util.AbstractCollection<E>">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  5,694
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  25
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div></pre></td><td class="code"><pre><div class="line">package java.util;</div><div class="line"></div><div class="line">public abstract class AbstractCollection&lt;E&gt; implements Collection&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    protected AbstractCollection() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public abstract Iterator&lt;E&gt; iterator();</div><div class="line"></div><div class="line">    public abstract int size();</div><div class="line"></div><div class="line">    public boolean isEmpty() &#123;</div><div class="line">        return size() == 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean contains(Object o) &#123;</div><div class="line">        Iterator&lt;E&gt; it = iterator();</div><div class="line">        if (o==null) &#123;</div><div class="line">            while (it.hasNext())</div><div class="line">                if (it.next()==null)</div><div class="line">                    return true;</div><div class="line">        &#125; else &#123;</div><div class="line">            while (it.hasNext())</div><div class="line">                if (o.equals(it.next()))</div><div class="line">                    return true;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Object[] toArray() &#123;</div><div class="line">        Object[] r = new Object[size()];</div><div class="line">        Iterator&lt;E&gt; it = iterator();</div><div class="line">        for (int i = 0; i &lt; r.length; i++) &#123;</div><div class="line">            if (! it.hasNext())</div><div class="line">                return Arrays.copyOf(r, i);</div><div class="line">            r[i] = it.next();</div><div class="line">        &#125;</div><div class="line">        return it.hasNext() ? finishToArray(r, it) : r;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public &lt;T&gt; T[] toArray(T[] a) &#123;</div><div class="line">        int size = size();</div><div class="line">        T[] r = a.length &gt;= size ? a :</div><div class="line">                  (T[])java.lang.reflect.Array</div><div class="line">                  .newInstance(a.getClass().getComponentType(), size);</div><div class="line">        Iterator&lt;E&gt; it = iterator();</div><div class="line"></div><div class="line">        for (int i = 0; i &lt; r.length; i++) &#123;</div><div class="line">            if (! it.hasNext()) &#123;</div><div class="line">                if (a == r) &#123;</div><div class="line">                    r[i] = null;</div><div class="line">                &#125; else if (a.length &lt; i) &#123;</div><div class="line">                    return Arrays.copyOf(r, i);</div><div class="line">                &#125; else &#123;</div><div class="line">                    System.arraycopy(r, 0, a, 0, i);</div><div class="line">                    if (a.length &gt; i) &#123;</div><div class="line">                        a[i] = null;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                return a;</div><div class="line">            &#125;</div><div class="line">            r[i] = (T)it.next();</div><div class="line">        &#125;</div><div class="line">        return it.hasNext() ? finishToArray(r, it) : r;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;</div><div class="line"></div><div class="line">    private static &lt;T&gt; T[] finishToArray(T[] r, Iterator&lt;?&gt; it) &#123;</div><div class="line">        int i = r.length;</div><div class="line">        while (it.hasNext()) &#123;</div><div class="line">            int cap = r.length;</div><div class="line">            if (i == cap) &#123;</div><div class="line">                int newCap = cap + (cap &gt;&gt; 1) + 1;</div><div class="line">                if (newCap - MAX_ARRAY_SIZE &gt; 0)</div><div class="line">                    newCap = hugeCapacity(cap + 1);</div><div class="line">                r = Arrays.copyOf(r, newCap);</div><div class="line">            &#125;</div><div class="line">            r[i++] = (T)it.next();</div><div class="line">        &#125;</div><div class="line">        return (i == r.length) ? r : Arrays.copyOf(r, i);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static int hugeCapacity(int minCapacity) &#123;</div><div class="line">        if (minCapacity &lt; 0)</div><div class="line">            throw new OutOfMemoryError</div><div class="line">                (&quot;Required array size too large&quot;);</div><div class="line">        return (minCapacity &gt; MAX_ARRAY_SIZE) ?</div><div class="line">            Integer.MAX_VALUE :</div><div class="line">            MAX_ARRAY_SIZE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean add(E e) &#123;</div><div class="line">        throw new UnsupportedOperationException();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean remove(Object o) &#123;</div><div class="line">        Iterator&lt;E&gt; it = iterator();</div><div class="line">        if (o==null) &#123;</div><div class="line">            while (it.hasNext()) &#123;</div><div class="line">                if (it.next()==null) &#123;</div><div class="line">                    it.remove();</div><div class="line">                    return true;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            while (it.hasNext()) &#123;</div><div class="line">                if (o.equals(it.next())) &#123;</div><div class="line">                    it.remove();</div><div class="line">                    return true;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean containsAll(Collection&lt;?&gt; c) &#123;</div><div class="line">        for (Object e : c)</div><div class="line">            if (!contains(e))</div><div class="line">                return false;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">        boolean modified = false;</div><div class="line">        for (E e : c)</div><div class="line">            if (add(e))</div><div class="line">                modified = true;</div><div class="line">        return modified;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean removeAll(Collection&lt;?&gt; c) &#123;</div><div class="line">        boolean modified = false;</div><div class="line">        Iterator&lt;?&gt; it = iterator();</div><div class="line">        while (it.hasNext()) &#123;</div><div class="line">            if (c.contains(it.next())) &#123;</div><div class="line">                it.remove();</div><div class="line">                modified = true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return modified;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean retainAll(Collection&lt;?&gt; c) &#123;</div><div class="line">        boolean modified = false;</div><div class="line">        Iterator&lt;E&gt; it = iterator();</div><div class="line">        while (it.hasNext()) &#123;</div><div class="line">            if (!c.contains(it.next())) &#123;</div><div class="line">                it.remove();</div><div class="line">                modified = true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return modified;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void clear() &#123;</div><div class="line">        Iterator&lt;E&gt; it = iterator();</div><div class="line">        while (it.hasNext()) &#123;</div><div class="line">            it.next();</div><div class="line">            it.remove();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String toString() &#123;</div><div class="line">        Iterator&lt;E&gt; it = iterator();</div><div class="line">        if (! it.hasNext())</div><div class="line">            return &quot;[]&quot;;</div><div class="line"></div><div class="line">        StringBuilder sb = new StringBuilder();</div><div class="line">        sb.append(&apos;[&apos;);</div><div class="line">        for (;;) &#123;</div><div class="line">            E e = it.next();</div><div class="line">            sb.append(e == this ? &quot;(this Collection)&quot; : e);</div><div class="line">            if (! it.hasNext())</div><div class="line">                return sb.append(&apos;]&apos;).toString();</div><div class="line">            sb.append(&apos;,&apos;).append(&apos; &apos;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="层级关系"><a href="#层级关系" class="headerlink" title="层级关系"></a>层级关系</h1><h1 id="本类直接实现的接口"><a href="#本类直接实现的接口" class="headerlink" title="本类直接实现的接口"></a>本类直接实现的接口</h1><ul>
+<li><a href="http://reimuwang.org/2017/05/23/java7%E6%BA%90%E7%A0%81-javautilCollectionE/" target="_blank" rel="external">java.util.Collection<e></e></a></li>
+</ul>
+<h1 id="直接继承本类的抽象类"><a href="#直接继承本类的抽象类" class="headerlink" title="直接继承本类的抽象类"></a>直接继承本类的抽象类</h1><ul>
+<li><a href="">java.util.AbstractList<e></e></a></li>
+<li><a href="">java.util.AbstractSet<e></e></a></li>
+<li><a href="">java.util.AbstractQueue<e></e></a></li>
+</ul>
+<h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本类提供了Collection接口的基本实现。</p>
+<p>如果要实现一个不需要改变的集合，程序员仅仅需要继承本类然后提供iterator()（iterator()返回的iterator必须实现hasNext()及next()）及size()的实现。</p>
+<p>例如，某个不可变的实现如下（为了填入数据，至少还需要初始化数据的代码，这里放到了构造函数中）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">import java.util.AbstractCollection;</div><div class="line">import java.util.Collection;</div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Iterator;</div><div class="line">import java.util.Map;</div><div class="line"></div><div class="line">public class UnmoCol&lt;E&gt; extends AbstractCollection&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    private Map&lt;E, Object&gt; map = new HashMap&lt;E, Object&gt;();</div><div class="line"></div><div class="line">    public UnmoCol(Collection&lt;E&gt; c) &#123;</div><div class="line">        Iterator&lt;E&gt; cIterator = c.iterator();</div><div class="line">        while(cIterator.hasNext()) this.map.put(cIterator.next(), new Object());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Iterator&lt;E&gt; iterator() &#123;</div><div class="line">        return this.map.keySet().iterator();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int size() &#123;</div><div class="line">        return this.map.size();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>调用demo如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import java.util.Collection;</div><div class="line">import java.util.HashSet;</div><div class="line">import java.util.Iterator;</div><div class="line">import java.util.Set;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Set&lt;String&gt; set = new HashSet&lt;String&gt;();</div><div class="line">        set.add(&quot;reimu&quot;);</div><div class="line">        set.add(&quot;wang&quot;);</div><div class="line">        Collection&lt;String&gt; collection = new UnmoCol&lt;String&gt;(set);</div><div class="line">        System.out.println(collection.size());</div><div class="line">        Iterator&lt;String&gt; iterator = collection.iterator();</div><div class="line">        while(iterator.hasNext()) System.out.println(iterator.next());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行本demo输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2</div><div class="line">reimu</div><div class="line">wang</div></pre></td></tr></table></figure>
+<p>如果要实现一个可变的集合，程序员必须重写本类的add方法（否则会抛出UnsupportedOperationException）。然后iterator()返回的iterator必须实现hasNext(),next(),remove()。</p>
+<p>例如，某个实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">import java.util.AbstractCollection;</div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Iterator;</div><div class="line">import java.util.Map;</div><div class="line"></div><div class="line">public class Mocol&lt;E&gt; extends AbstractCollection&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    private Map&lt;E, Object&gt; map = new HashMap&lt;E, Object&gt;();</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Iterator&lt;E&gt; iterator() &#123;</div><div class="line">        return this.map.keySet().iterator();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int size() &#123;</div><div class="line">        return this.map.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean add(E e) &#123;</div><div class="line">        return this.map.put(e, new Object()) == null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>调用demo如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import java.util.Collection;</div><div class="line">import java.util.Iterator;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Collection&lt;String&gt; collection = new Mocol&lt;String&gt;();</div><div class="line">        collection.add(&quot;reimu&quot;);</div><div class="line">        collection.add(&quot;wang&quot;);</div><div class="line">        System.out.println(collection.size());</div><div class="line">        Iterator&lt;String&gt; iterator = collection.iterator();</div><div class="line">        while(iterator.hasNext()) System.out.println(iterator.next());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行本demo输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2</div><div class="line">reimu</div><div class="line">wang</div></pre></td></tr></table></figure>
+<p>Collection类接口规范建议程序员在继承本类时实现两个构造函数：void（无参数）构造函数；接收一个collection的构造函数。</p>
+<p>本类是java集合框架中的一员。</p>
+<h1 id="测试实现类"><a href="#测试实现类" class="headerlink" title="测试实现类"></a>测试实现类</h1><p>为测试本类方法，结合本类推荐的继承规范，现写本类的测试继承类如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">import java.util.AbstractCollection;</div><div class="line">import java.util.Collection;</div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Iterator;</div><div class="line"></div><div class="line">public class AbstractCollectionTest&lt;E&gt; extends AbstractCollection&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    private HashMap&lt;E, Object&gt; map = new HashMap&lt;E, Object&gt;();</div><div class="line"></div><div class="line">    public AbstractCollectionTest() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public AbstractCollectionTest(Collection&lt;E&gt; c) &#123;</div><div class="line">        Iterator&lt;E&gt; cIterator = c.iterator();</div><div class="line">        while(cIterator.hasNext()) this.map.put(cIterator.next(), new Object());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Iterator&lt;E&gt; iterator() &#123;</div><div class="line">        return this.map.keySet().iterator();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int size() &#123;</div><div class="line">        return this.map.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean add(E e) &#123;</div><div class="line">        return map.put(e, new Object()) == null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="protected-AbstractCollection"><a href="#protected-AbstractCollection" class="headerlink" title="protected AbstractCollection()"></a>protected AbstractCollection()</h1><h2 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">protected AbstractCollection() &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>构造函数，被继承本类的子类构造函数重写。</p>
+<h1 id="查询操作：public-abstract-Iterator-iterator"><a href="#查询操作：public-abstract-Iterator-iterator" class="headerlink" title="查询操作：public abstract Iterator iterator();"></a>查询操作：public abstract Iterator<e> iterator();</e></h1><h2 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public abstract Iterator&lt;E&gt; iterator();</div></pre></td></tr></table></figure>
+<h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><p>返回一个基于abstractCollection的iterator。</p>
+<h1 id="查询操作：public-abstract-int-size"><a href="#查询操作：public-abstract-int-size" class="headerlink" title="查询操作：public abstract int size();"></a>查询操作：public abstract int size();</h1><h2 id="源码-3"><a href="#源码-3" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public abstract int size();</div></pre></td></tr></table></figure>
+<h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>返回abstractCollection包含的元素个数。若abstractCollection包含的元素个数&gt;Integer.MAX_VALUE，则返回Integer.MAX_VALUE。</p>
+<h1 id="查询操作：public-boolean-isEmpty"><a href="#查询操作：public-boolean-isEmpty" class="headerlink" title="查询操作：public boolean isEmpty()"></a>查询操作：public boolean isEmpty()</h1><h2 id="源码-4"><a href="#源码-4" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public boolean isEmpty() &#123;</div><div class="line">    return size() == 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档"><a href="#继承的文档" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>若collection不包含元素则返回true。反之返回false。</p>
+<h1 id="查询操作：public-boolean-contains-Object-o"><a href="#查询操作：public-boolean-contains-Object-o" class="headerlink" title="查询操作：public boolean contains(Object o)"></a>查询操作：public boolean contains(Object o)</h1><h2 id="源码-5"><a href="#源码-5" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public boolean contains(Object o) &#123;</div><div class="line">    Iterator&lt;E&gt; it = iterator();</div><div class="line">    if (o==null) &#123;</div><div class="line">        while (it.hasNext())</div><div class="line">            if (it.next()==null)</div><div class="line">                return true;</div><div class="line">    &#125; else &#123;</div><div class="line">        while (it.hasNext())</div><div class="line">            if (o.equals(it.next()))</div><div class="line">                return true;</div><div class="line">    &#125;</div><div class="line">    return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-1"><a href="#继承的文档-1" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>若collection包含o则返回true。更通俗的说，当且仅当collection包含至少一个元素e，满足(o==null ? e==null : o.equals(e))，返回true。</p>
+<p>该方法可能抛出如下异常：</p>
+<ul>
+<li>ClassCastException：o的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：o==null且collection不允许空元素存在（依实现可选）</li>
+</ul>
+<h2 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h2><p>abstractCollection的iterator遍历abstractCollection中的每个元素，检查每个元素是否与o相等。</p>
+<h1 id="查询操作：public-Object-toArray"><a href="#查询操作：public-Object-toArray" class="headerlink" title="查询操作：public Object[] toArray()"></a>查询操作：public Object[] toArray()</h1><h2 id="源码-6"><a href="#源码-6" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public Object[] toArray() &#123;</div><div class="line">    Object[] r = new Object[size()];</div><div class="line">    Iterator&lt;E&gt; it = iterator();</div><div class="line">    for (int i = 0; i &lt; r.length; i++) &#123;</div><div class="line">        if (! it.hasNext())    // 迭代器得到的元素少于预期</div><div class="line">            return Arrays.copyOf(r, i);</div><div class="line">        r[i] = it.next();</div><div class="line">    &#125;</div><div class="line">	// 若it.hasNext()==true说明迭代器得到的元素多于预期</div><div class="line">    return it.hasNext() ? finishToArray(r, it) : r;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-2"><a href="#继承的文档-2" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>返回包含collection所有元素的数组。若collection是有序的（迭代器返回的结果有序），则返回的数组必须有同样的顺序。</p>
+<p>返回的数组与collection之间不存在引用关系（即使collection是基于数组的），数组中的元素是collection中的元素的浅拷贝。</p>
+<p>本方法是连接集合与数组之间的桥梁。</p>
+<h2 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h2><p>本方法返回一个包含abstractCollection所有元素的数组，该数组由abstractCollection的iterator遍历而得，数组中元素的顺序与iterator遍历而得的顺序相同。</p>
+<p>返回的数组的长度等于iterator遍历而得的元素的个数。在本方法的开始会调用一次size()得到abstractCollection的长度，通常情况下这与iterator遍历而得的元素个数相同。但是当abstractCollection在迭代过程中发生结构性变化时，最终返回的数组的长度以实际iterator取出的元素个数为准，这个长度可能会与之前调用的size()方法时得到的结果不同。</p>
+<p>本方法等价于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">List&lt;E&gt; list = new ArrayList&lt;E&gt;(size());</div><div class="line">    for (E e : this)</div><div class="line">        list.add(e);</div><div class="line">    return list.toArray();</div></pre></td></tr></table></figure>
+<p>Arrays.copyOf(r, i)说明：以r为基础返回一个长度为i的数组，若i<r.length则r发生截断，实际返回的数组为r中索引[0,i-1]的元素；若i=r.length，则返回的数组与r相等；若i>r.length，返回的数组中索引为[0, r.length-1]的元素为r中对应位置的元素，返回的数组中索引为[r.length, i-1]的元素以null填充。无论如何，返回的数组都是新生成的，与r不存在引用关系。返回的数组中的元素是r中元素的浅拷贝。在本方法中，调用Arrays.copyOf(r, i)的时机为迭代过程中元素减少，迭代器能取出的元素个数小于起初调用size()得到的个数，即必有i&lt;r.length，r发生了截断。</r.length则r发生截断，实际返回的数组为r中索引[0,i-1]的元素；若i=r.length，则返回的数组与r相等；若i></p>
+<p>finishToArray(r, it)的调用时机为it返回了超出预期个数的元素，即abstractCollection在迭代过程中长度增加。此时finishToArray(r, it)会以r为基础声明一个长度足够的新数组r2，并将it中超出预期的元素添加至r2，而后返回r2。</p>
+<h1 id="查询操作：public-T-toArray-T-a"><a href="#查询操作：public-T-toArray-T-a" class="headerlink" title="查询操作：public  T[] toArray(T[] a)"></a>查询操作：public <t> T[] toArray(T[] a)</t></h1><h2 id="源码-7"><a href="#源码-7" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">public &lt;T&gt; T[] toArray(T[] a) &#123;</div><div class="line">    int size = size();</div><div class="line">    T[] r = a.length &gt;= size ? a :</div><div class="line">              (T[])java.lang.reflect.Array</div><div class="line">              .newInstance(a.getClass().getComponentType(), size);</div><div class="line">    Iterator&lt;E&gt; it = iterator();</div><div class="line"></div><div class="line">    for (int i = 0; i &lt; r.length; i++) &#123;</div><div class="line">        if (! it.hasNext()) &#123;    // 迭代器得到元素少于预期，可能原因有2:</div><div class="line">                                 // 1.迭代过程中abstractCollection的元素减少。</div><div class="line">                                 // 2.a.length&gt;size</div><div class="line">            if (a == r) &#123;    // a.length&gt;=size，此时操作a与操作r等效。</div><div class="line">                r[i] = null;</div><div class="line">            // 后续else都是在处理a.length&lt;size的情况。</div><div class="line">            // 此时r与a是两个完全不同的数组。</div><div class="line">            &#125; else if (a.length &lt; i) &#123;    // 此时少于预期的原因无论是1或2，abstractCollection依然无法放入a中。</div><div class="line">                                          // 则选择截取r返回。</div><div class="line">                return Arrays.copyOf(r, i);</div><div class="line">            &#125; else &#123;    // 此时虽然最初有a.length&lt;size，但是因为原因1，a又能装下abstractCollection了。</div><div class="line">                        // 因此仍然选择将abstractCollection存入a。</div><div class="line">                System.arraycopy(r, 0, a, 0, i);    // 因此前有值时操作的均为r，故将r中的数据复制索引[0,i-1]至a。</div><div class="line">                if (a.length &gt; i) &#123;    // a.length==i的情况没有a[i]，不需要置null。</div><div class="line">                    a[i] = null;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return a;</div><div class="line">        &#125;</div><div class="line">        r[i] = (T)it.next();</div><div class="line">    &#125;</div><div class="line">    // 迭代器得到元素多于预期。</div><div class="line">    // 可能的原因为：迭代过程中abstractCollection的元素增加。</div><div class="line">    return it.hasNext() ? finishToArray(r, it) : r;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-3"><a href="#继承的文档-3" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>返回包含collection所有元素的数组。返回数组的类型即为a的类型。若a.length==collection.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被覆盖）。若a.length&gt;collection.size()，数组范围在[0,collection.size() -1]的索引将被collection对应位置的元素覆盖；数组索引=collection.size()的元素将被置为null（若collection不允许包含空元素，则本方法此时可用来计算collection的长度：返回的数组第一次出现null的索引即为collection的长度），数组中后续元素不变。若a.length&lt;collection.size()，则不修改a，而是以a的类型新建长度为collection.size()的数组并填入collection中的值，并返回新生成的数组。</p>
+<p>若collection是有序的（迭代器返回的结果有序），则返回的数组必须有同样的顺序。</p>
+<p>同toArray()，返回的数组与collection之间不存在引用关系（即使collection是基于数组的），数组中的元素是collection中的元素的浅拷贝。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] y = x.toArray(new String[0]);</div></pre></td></tr></table></figure>
+<p>其中x为一个数据类型为String的集合，则以上语句会将该集合中的元素复制一份浅拷贝到数组y。</p>
+<p><strong>注意：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray(new Object[0])</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray()</div></pre></td></tr></table></figure>
+<p>两句效果等价。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>ArrayStoreException：a的类型collection不支持。</li>
+<li>NullPointerException：null==a。</li>
+</ul>
+<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回的数组的有效长度（填入返回的数组中属于abstractCollection中的元素的长度）等于iterator遍历而得的元素的个数。在本方法的开始会调用一次size()得到abstractCollection的长度，通常情况下这与iterator遍历而得的元素个数相同。但是当abstractCollection在迭代过程中发生结构性变化时，最终返回的数组的有效长度以iterator实际取出的元素个数为准，这个长度可能会与之前调用的size()时得到的结果不同。</p>
+<p>本方法等价于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">List&lt;E&gt; list = new ArrayList&lt;E&gt;(size());</div><div class="line">    for (E e : this)</div><div class="line">        list.add(e);</div><div class="line">    return list.toArray(a);</div></pre></td></tr></table></figure>
+<p>(T[])java.lang.reflect.Array.newInstance(a.getClass().getComponentType(), size);说明：以a中元素的类型为基础，根据反射新声明一个长度为size的数组。</p>
+<p>System.arraycopy(r, 0, a, 0, i);说明，参数含义依次为：</p>
+<ol>
+<li>r: 待复制的源数组。</li>
+<li>0: 源数组中开始复制的索引。</li>
+<li>a: 复制目标数组。</li>
+<li>0: 目标数组中接收元素的起始索引。</li>
+<li>i: 复制的元素个数。</li>
+</ol>
+<p>调用此方法时有：r.length=size&gt;a.length&gt;=i</p>
+<p>Arrays.copyOf(r, i)说明：以r为基础返回一个长度为i的数组，若i<r.length则r发生截断，实际返回的数组为r中索引[0,i-1]的元素；若i=r.length，则返回的数组与r相等；若i>r.length，返回的数组中索引为[0, r.length-1]的元素为r中对应位置的元素，返回的数组中索引为[r.length, i-1]的元素以null填充。无论如何，返回的数组都是新生成的，与r不存在引用关系。返回的数组中的元素是r中元素的浅拷贝。</r.length则r发生截断，实际返回的数组为r中索引[0,i-1]的元素；若i=r.length，则返回的数组与r相等；若i></p>
+<p>finishToArray(r, it)的调用时机为it返回了超出预期个数的元素，即abstractCollection在迭代过程中长度增加。此时finishToArray(r, it)会以r为基础声明一个长度足够的新数组r2，并将it中超出预期的元素添加至r2，而后返回r2。</p>
+<h2 id="调用示例1："><a href="#调用示例1：" class="headerlink" title="调用示例1："></a>调用示例1：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">import java.util.Collection;</div><div class="line">import java.util.HashSet;</div><div class="line">import java.util.Set;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Set&lt;String&gt; set = new HashSet&lt;String&gt;();</div><div class="line">        set.add(&quot;reimu&quot;);</div><div class="line">        set.add(&quot;wang&quot;);</div><div class="line">        Collection&lt;String&gt; collection = new UnmoCol&lt;String&gt;(set);</div><div class="line">        String[] a = &#123;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;&#125;;</div><div class="line">        String[] a1 = collection.toArray(a);</div><div class="line">        for(String e : a1) System.out.println(e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">reimu</div><div class="line">wang</div><div class="line">null</div><div class="line">4</div></pre></td></tr></table></figure>
+<h2 id="调用示例2"><a href="#调用示例2" class="headerlink" title="调用示例2"></a>调用示例2</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">package com.collectiontest.main;</div><div class="line"></div><div class="line">import java.util.Collection;</div><div class="line">import java.util.HashSet;</div><div class="line">import java.util.Set;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Set&lt;String&gt; set = new HashSet&lt;String&gt;();</div><div class="line">        set.add(&quot;reimu&quot;);</div><div class="line">        set.add(&quot;wang&quot;);</div><div class="line">        Collection&lt;String&gt; collection = new UnmoCol&lt;String&gt;(set);</div><div class="line">        String[] a = &#123;&#125;;</div><div class="line">        String[] a1 = collection.toArray(a);</div><div class="line">        for(String e : a1) System.out.println(e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="输出结果："><a href="#输出结果：" class="headerlink" title="输出结果："></a>输出结果：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">reimu</div><div class="line">wang</div></pre></td></tr></table></figure>
+<h1 id="private-static-final-int-MAX-ARRAY-SIZE"><a href="#private-static-final-int-MAX-ARRAY-SIZE" class="headerlink" title="private static final int MAX_ARRAY_SIZE"></a>private static final int MAX_ARRAY_SIZE</h1><h2 id="源码-8"><a href="#源码-8" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;</div></pre></td></tr></table></figure>
+<h2 id="描述-6"><a href="#描述-6" class="headerlink" title="描述"></a>描述</h2><p>通常情况下，允许创建的最大数组长度。</p>
+<p>某些虚拟机会在数组中存储同步关键词，因此在声明容量较大的数组时应注意避免OutOfMemoryError，-8是一个相对安全的经验之谈，具体是否出错还要看具体的jvm实现。</p>
+<h1 id="private-static-T-finishToArray-T-r-Iterator-lt-gt-it"><a href="#private-static-T-finishToArray-T-r-Iterator-lt-gt-it" class="headerlink" title="private static  T[] finishToArray(T[] r, Iterator&lt;?&gt; it)"></a>private static <t> T[] finishToArray(T[] r, Iterator&lt;?&gt; it)</t></h1><h2 id="源码-9"><a href="#源码-9" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">private static &lt;T&gt; T[] finishToArray(T[] r, Iterator&lt;?&gt; it) &#123;</div><div class="line">    int i = r.length;</div><div class="line">    while (it.hasNext()) &#123;</div><div class="line">        int cap = r.length;</div><div class="line">        if (i == cap) &#123;    // 本if中是一次扩容操作：</div><div class="line">                           // 当前待插入索引i==r.length时需扩容。</div><div class="line">            // 若本句越界，则不会进入后面的if条件，会在调用Arrays.copyOf(r, newCap);时抛出异常。</div><div class="line">            int newCap = cap + (cap &gt;&gt; 1) + 1;</div><div class="line">            // 满足进入本if的条件很苛刻：</div><div class="line">            // newCap &gt; MAX_ARRAY_SIZE &amp;&amp; newCap &lt; Integer.MAX_VALUE。只有7个值。</div><div class="line">            if (newCap - MAX_ARRAY_SIZE &gt; 0)    // 进入本if说明当前的newCap OutOfMemoryError的风险较高。</div><div class="line">                // 使用cap重新计算一个相对安全的newCap</div><div class="line">                newCap = hugeCapacity(cap + 1);</div><div class="line">            // 执行扩容操作。扩容后r已指向了一个全新的数组。</div><div class="line">            r = Arrays.copyOf(r, newCap);</div><div class="line">        &#125;</div><div class="line">        r[i++] = (T)it.next();</div><div class="line">    &#125;</div><div class="line">    // 若扩容后的数组过大则将多余位置截断。</div><div class="line">    return (i == r.length) ? r : Arrays.copyOf(r, i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述-7"><a href="#描述-7" class="headerlink" title="描述"></a>描述</h2><p>在调用toArray(T[] a)或toArray()时，若迭代器返回的元素个数多于预期，则会调用本方法返回新数组，对原数组进行扩容，并将迭代器中多于预期的元素填入新数组。</p>
+<p>hugeCapacity(cap + 1);见紧随本方法之后的下一个方法。cap + 1为此时能允许的最小长度，因为cap已经不够用了。</p>
+<p>Arrays.copyOf(r, i)说明：以r为基础返回一个长度为i的数组，若i<r.length则r发生截断，实际返回的数组为r中索引[0,i-1]的元素；若i=r.length，则返回的数组与r相等；若i>r.length，返回的数组中索引为[0, r.length-1]的元素为r中对应位置的元素，返回的数组中索引为[r.length, i-1]的元素以null填充。无论如何，返回的数组都是新生成的，与r不存在引用关系。返回的数组中的元素是r中元素的浅拷贝。</r.length则r发生截断，实际返回的数组为r中索引[0,i-1]的元素；若i=r.length，则返回的数组与r相等；若i></p>
+<h1 id="private-static-int-hugeCapacity-int-minCapacity"><a href="#private-static-int-hugeCapacity-int-minCapacity" class="headerlink" title="private static int hugeCapacity(int minCapacity)"></a>private static int hugeCapacity(int minCapacity)</h1><h2 id="源码-10"><a href="#源码-10" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">private static int hugeCapacity(int minCapacity) &#123;</div><div class="line">    if (minCapacity &lt; 0)    // minCapacity本来为一个极大的数，此处minCapacity&lt;0说明其已越界。</div><div class="line">        throw new OutOfMemoryError</div><div class="line">            (&quot;Required array size too large&quot;);</div><div class="line">    // 如果可能尽量将大小的上限控制为MAX_ARRAY_SIZE。</div><div class="line">    // 如果调用方能接受的容量范围在(MAX_ARRAY_SIZE,Integer.MAX_VALUE]，</div><div class="line">    // 此时虽然OutOfMemoryError的风险较大，但系统仍会返回Integer.MAX_VALUE。</div><div class="line">    return (minCapacity &gt; MAX_ARRAY_SIZE) ?</div><div class="line">        Integer.MAX_VALUE :</div><div class="line">        MAX_ARRAY_SIZE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述-8"><a href="#描述-8" class="headerlink" title="描述"></a>描述</h2><p>当数组规模极大时才需要调用本方法。minCapacity为调用方能接受的最小扩容后的数组长度。本方法判断minCapacity的值系统是否可接受，若能接受则基于minCapacity返回一个合理的扩容后的长度，若不能接受则抛出OutOfMemoryError。</p>
+<h1 id="修改操作：public-boolean-add-E-e"><a href="#修改操作：public-boolean-add-E-e" class="headerlink" title="修改操作：public boolean add(E e)"></a>修改操作：public boolean add(E e)</h1><h2 id="源码-11"><a href="#源码-11" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public boolean add(E e) &#123;</div><div class="line">    throw new UnsupportedOperationException();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-4"><a href="#继承的文档-4" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>若collection因本方法而改变则返回true。反之则返回false（例如，collection不允许包含重复元素且e在collection中已存在）。因此对于那些不能包含重复元素的集合而言，该方法也可用于判断集合是否已包含e。</p>
+<p>支持本方法的集合可能会对本方法做出限制。例如，某些集合禁止插入空元素，某些集合会限制插入元素的类型。</p>
+<p>若某集合禁止插入元素（不是因为集合不允许包含重复元素且e在集合中已存在，而是因为其他任意原因），则该方法应抛出异常。本机制用于保护那些常量值的集合。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
+<li>ClassCastException：e因为其所属的类禁止被插入collection。</li>
+<li>NullPointerException：e==null且collection禁止包含空元素。</li>
+<li>IllegalArgumentException：e因其某些属性禁止被插入collection。</li>
+<li>IllegalStateException：因插入限制，此时e不能被插入collection。</li>
+</ul>
+<h2 id="描述-9"><a href="#描述-9" class="headerlink" title="描述"></a>描述</h2><p>本方法始终抛出UnsupportedOperationException。</p>
+<h1 id="修改操作：public-boolean-remove-Object-o"><a href="#修改操作：public-boolean-remove-Object-o" class="headerlink" title="修改操作：public boolean remove(Object o)"></a>修改操作：public boolean remove(Object o)</h1><h2 id="源码-12"><a href="#源码-12" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public boolean remove(Object o) &#123;</div><div class="line">    Iterator&lt;E&gt; it = iterator();</div><div class="line">    if (o==null) &#123;</div><div class="line">        while (it.hasNext()) &#123;</div><div class="line">            if (it.next()==null) &#123;</div><div class="line">                it.remove();</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        while (it.hasNext()) &#123;</div><div class="line">            if (o.equals(it.next())) &#123;</div><div class="line">                it.remove();</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-5"><a href="#继承的文档-5" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>移除collection符合条件的元素e：(o==null ? e==null : o.equals(e))。若有多个e符合条件，则本方法只会移除其中一个，具体移除哪一个依具体实现而定。</p>
+<p>若本方法改变了collection则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>ClassCastException：o的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：o==null且collection不允许空元素存在（依实现可选）</li>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
+</ul>
+<h2 id="描述-10"><a href="#描述-10" class="headerlink" title="描述"></a>描述</h2><p>使用abstractCollection的iterator遍历abstractCollection，并用iterator.remove()移除abstractCollection符合条件的元素e：(o==null ? e==null : o.equals(e))。若有多个e符合条件，则本方法只会移除iterator遍历得到的第一个。</p>
+<p>注意：若abstractCollection包含o且其iterator未实现remove()，则抛出UnsupportedOperationException。</p>
+<h1 id="批量操作：public-boolean-containsAll-Collection-lt-gt-c"><a href="#批量操作：public-boolean-containsAll-Collection-lt-gt-c" class="headerlink" title="批量操作：public boolean containsAll(Collection&lt;?&gt; c)"></a>批量操作：public boolean containsAll(Collection&lt;?&gt; c)</h1><h2 id="源码-13"><a href="#源码-13" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public boolean containsAll(Collection&lt;?&gt; c) &#123;</div><div class="line">    for (Object e : c)</div><div class="line">        if (!contains(e))</div><div class="line">            return false;</div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-6"><a href="#继承的文档-6" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>若collection中包含c中所有元素则返回true。</p>
+<p>本方法类似于contains(Object o)。</p>
+<p>该方法可能抛出如下异常：</p>
+<ul>
+<li>ClassCastException：c中至少有一个元素的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：c中包含至少一个空元素且collection不允许空元素存在（依实现可选）；或c==null。</li>
+</ul>
+<h1 id="批量操作：public-boolean-addAll-Collection-lt-extends-E-gt-c"><a href="#批量操作：public-boolean-addAll-Collection-lt-extends-E-gt-c" class="headerlink" title="批量操作：public boolean addAll(Collection&lt;? extends E&gt; c)"></a>批量操作：public boolean addAll(Collection&lt;? extends E&gt; c)</h1><h2 id="源码-14"><a href="#源码-14" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">    boolean modified = false;</div><div class="line">    for (E e : c)</div><div class="line">        if (add(e))</div><div class="line">            modified = true;</div><div class="line">    return modified;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-7"><a href="#继承的文档-7" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>将c中所有元素插入collection。本方法未定义如下事件发生时的解决策略：在将c中的元素添加至collection的过程中c发生变化（这也意味着如下事件的解决策略同样未定义：将一个非空集合添加至自身）。</p>
+<p>若collection因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
+<li>ClassCastException：c中任意一个元素因为其所属的类禁止被插入collection。</li>
+<li>NullPointerException：c中任意一个元素为null且collection禁止包含空元素；或c==null。</li>
+<li>IllegalArgumentException：c中任意一个元素因其某些属性禁止被插入collection。</li>
+<li>IllegalStateException：因插入限制，此时并非c中所有元素都能被插入collection。</li>
+</ul>
+<p>该方法类似于add(E e)。</p>
+<h2 id="描述-11"><a href="#描述-11" class="headerlink" title="描述"></a>描述</h2><p>在c!=null的前提下，若未重写add(E e)，则本方法将抛出UnsupportedOperationException。</p>
+<h1 id="批量操作：public-boolean-removeAll-Collection-lt-gt-c"><a href="#批量操作：public-boolean-removeAll-Collection-lt-gt-c" class="headerlink" title="批量操作：public boolean removeAll(Collection&lt;?&gt; c)"></a>批量操作：public boolean removeAll(Collection&lt;?&gt; c)</h1><h2 id="源码-15"><a href="#源码-15" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public boolean removeAll(Collection&lt;?&gt; c) &#123;</div><div class="line">    boolean modified = false;</div><div class="line">    Iterator&lt;?&gt; it = iterator();</div><div class="line">    while (it.hasNext()) &#123;</div><div class="line">        if (c.contains(it.next())) &#123;</div><div class="line">            it.remove();</div><div class="line">            modified = true;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return modified;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-8"><a href="#继承的文档-8" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>从collection中移除所有与c的交集元素（求差集）。</p>
+<p>若collection因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
+<li>ClassCastException：c中至少有一个元素的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：collection中至少有一个元素为空且c不允许空元素存在（依实现可选）；或c==null。</li>
+</ul>
+<p>该方法类似于remove(Object o)。</p>
+<h2 id="描述-12"><a href="#描述-12" class="headerlink" title="描述"></a>描述</h2><p>若iterator未实现remove()且abstractCollection至少有一个元素在c中则抛出UnsupportedOperationException。</p>
+<h1 id="批量操作：public-boolean-retainAll-Collection-lt-gt-c"><a href="#批量操作：public-boolean-retainAll-Collection-lt-gt-c" class="headerlink" title="批量操作：public boolean retainAll(Collection&lt;?&gt; c)"></a>批量操作：public boolean retainAll(Collection&lt;?&gt; c)</h1><h2 id="源码-16"><a href="#源码-16" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public boolean retainAll(Collection&lt;?&gt; c) &#123;</div><div class="line">    boolean modified = false;</div><div class="line">    Iterator&lt;E&gt; it = iterator();</div><div class="line">    while (it.hasNext()) &#123;</div><div class="line">        if (!c.contains(it.next())) &#123;</div><div class="line">            it.remove();</div><div class="line">            modified = true;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return modified;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-9"><a href="#继承的文档-9" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>保留collection中与c的交集元素。</p>
+<p>若collection因本方法发生变化则返回true，反之返回false。</p>
+<p>该方法可能会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
+<li>ClassCastException：c中至少有一个元素的类型与collection不相容（依实现可选）</li>
+<li>NullPointerException：collection中至少有一个元素为空且c不允许空元素存在（依实现可选）；或c==null。</li>
+</ul>
+<h2 id="描述-13"><a href="#描述-13" class="headerlink" title="描述"></a>描述</h2><p>若iterator未实现remove()且abstractCollection至少有一个元素不在c中则抛出UnsupportedOperationException。</p>
+<h1 id="批量操作：public-void-clear"><a href="#批量操作：public-void-clear" class="headerlink" title="批量操作：public void clear()"></a>批量操作：public void clear()</h1><h2 id="源码-17"><a href="#源码-17" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public void clear() &#123;</div><div class="line">    Iterator&lt;E&gt; it = iterator();</div><div class="line">    while (it.hasNext()) &#123;</div><div class="line">        it.next();</div><div class="line">        it.remove();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承的文档-10"><a href="#继承的文档-10" class="headerlink" title="继承的文档"></a>继承的文档</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
+<p>清空collection。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>UnsupportedOperationException：collection不支持本方法。</li>
+</ul>
+<h2 id="描述-14"><a href="#描述-14" class="headerlink" title="描述"></a>描述</h2><p>若iterator未实现remove()且abstractCollection非空则抛出UnsupportedOperationException。</p>
+<h1 id="字符串变换：public-String-toString"><a href="#字符串变换：public-String-toString" class="headerlink" title="字符串变换：public String toString()"></a>字符串变换：public String toString()</h1><h2 id="源码-18"><a href="#源码-18" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public String toString() &#123;</div><div class="line">    Iterator&lt;E&gt; it = iterator();</div><div class="line">    if (! it.hasNext())</div><div class="line">        return &quot;[]&quot;;</div><div class="line"></div><div class="line">    StringBuilder sb = new StringBuilder();</div><div class="line">    sb.append(&apos;[&apos;);</div><div class="line">    for (;;) &#123;</div><div class="line">        E e = it.next();</div><div class="line">        // 防止自包含时无限递归。</div><div class="line">        sb.append(e == this ? &quot;(this Collection)&quot; : e);</div><div class="line">        if (! it.hasNext())</div><div class="line">            return sb.append(&apos;]&apos;).toString();</div><div class="line">        sb.append(&apos;,&apos;).append(&apos; &apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述-15"><a href="#描述-15" class="headerlink" title="描述"></a>描述</h2><p>返回abstractCollection的字符串表述：[e1, e2, e3]，其中e1,e2,e3为abstractCollection按其迭代器顺序排列的元素。</p>
+<h2 id="自包含测试"><a href="#自包含测试" class="headerlink" title="自包含测试"></a>自包含测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">import java.util.Collection;</div><div class="line">import java.util.HashSet;</div><div class="line">import java.util.Set;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Set&lt;String&gt; set = new HashSet&lt;String&gt;();</div><div class="line">        set.add(&quot;reimu&quot;);</div><div class="line">        set.add(&quot;wang&quot;);</div><div class="line">        Collection&lt;Collection&gt; collection = new AbstractCollectionTest&lt;Collection&gt;();</div><div class="line">        collection.add(collection);</div><div class="line">        System.out.println(collection);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[(this Collection)]</div></pre></td></tr></table></figure>
+<h2 id="非自包含情况测试"><a href="#非自包含情况测试" class="headerlink" title="非自包含情况测试"></a>非自包含情况测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import java.util.Collection;</div><div class="line">import java.util.HashSet;</div><div class="line">import java.util.Set;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Set&lt;String&gt; set = new HashSet&lt;String&gt;();</div><div class="line">        set.add(&quot;reimu&quot;);</div><div class="line">        set.add(&quot;wang&quot;);</div><div class="line">        Collection&lt;String&gt; collection = new AbstractCollectionTest&lt;String&gt;(set);</div><div class="line">        System.out.println(collection);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[reimu, wang]</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/源码/" rel="tag"># 源码</a>
+          
+            <a href="/tags/Collection/" rel="tag"># Collection</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/19/java7源码-javautilAbstractListE/" rel="next" title="java7源码-java.util.AbstractList<E>">
+                <i class="fa fa-chevron-left"></i> java7源码-java.util.AbstractList<E>
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/16/java7源码-javautilQueueE/" rel="prev" title="java7源码-java.util.Queue<E>">
+                java7源码-java.util.Queue<E> <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ReimuWang" />
+          <p class="site-author-name" itemprop="name">ReimuWang</p>
+           
+              <p class="site-description motion-element" itemprop="description">Thou Shalt Comment</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层级关系"><span class="nav-number">2.</span> <span class="nav-text">层级关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本类直接实现的接口"><span class="nav-number">3.</span> <span class="nav-text">本类直接实现的接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#直接继承本类的抽象类"><span class="nav-number">4.</span> <span class="nav-text">直接继承本类的抽象类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">5.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试实现类"><span class="nav-number">6.</span> <span class="nav-text">测试实现类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#protected-AbstractCollection"><span class="nav-number">7.</span> <span class="nav-text">protected AbstractCollection()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-1"><span class="nav-number">7.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">7.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：public-abstract-Iterator-iterator"><span class="nav-number">8.</span> <span class="nav-text">查询操作：public abstract Iterator iterator();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-2"><span class="nav-number">8.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-1"><span class="nav-number">8.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：public-abstract-int-size"><span class="nav-number">9.</span> <span class="nav-text">查询操作：public abstract int size();</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-3"><span class="nav-number">9.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-2"><span class="nav-number">9.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：public-boolean-isEmpty"><span class="nav-number">10.</span> <span class="nav-text">查询操作：public boolean isEmpty()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-4"><span class="nav-number">10.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档"><span class="nav-number">10.2.</span> <span class="nav-text">继承的文档</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：public-boolean-contains-Object-o"><span class="nav-number">11.</span> <span class="nav-text">查询操作：public boolean contains(Object o)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-5"><span class="nav-number">11.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-1"><span class="nav-number">11.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-3"><span class="nav-number">11.3.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：public-Object-toArray"><span class="nav-number">12.</span> <span class="nav-text">查询操作：public Object[] toArray()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-6"><span class="nav-number">12.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-2"><span class="nav-number">12.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-4"><span class="nav-number">12.3.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询操作：public-T-toArray-T-a"><span class="nav-number">13.</span> <span class="nav-text">查询操作：public  T[] toArray(T[] a)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-7"><span class="nav-number">13.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-3"><span class="nav-number">13.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-5"><span class="nav-number">13.3.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用示例1："><span class="nav-number">13.4.</span> <span class="nav-text">调用示例1：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用示例2"><span class="nav-number">13.5.</span> <span class="nav-text">调用示例2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出结果："><span class="nav-number">13.6.</span> <span class="nav-text">输出结果：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-static-final-int-MAX-ARRAY-SIZE"><span class="nav-number">14.</span> <span class="nav-text">private static final int MAX_ARRAY_SIZE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-8"><span class="nav-number">14.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-6"><span class="nav-number">14.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-static-T-finishToArray-T-r-Iterator-lt-gt-it"><span class="nav-number">15.</span> <span class="nav-text">private static  T[] finishToArray(T[] r, Iterator<?> it)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-9"><span class="nav-number">15.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-7"><span class="nav-number">15.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-static-int-hugeCapacity-int-minCapacity"><span class="nav-number">16.</span> <span class="nav-text">private static int hugeCapacity(int minCapacity)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-10"><span class="nav-number">16.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-8"><span class="nav-number">16.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：public-boolean-add-E-e"><span class="nav-number">17.</span> <span class="nav-text">修改操作：public boolean add(E e)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-11"><span class="nav-number">17.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-4"><span class="nav-number">17.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-9"><span class="nav-number">17.3.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改操作：public-boolean-remove-Object-o"><span class="nav-number">18.</span> <span class="nav-text">修改操作：public boolean remove(Object o)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-12"><span class="nav-number">18.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-5"><span class="nav-number">18.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-10"><span class="nav-number">18.3.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：public-boolean-containsAll-Collection-lt-gt-c"><span class="nav-number">19.</span> <span class="nav-text">批量操作：public boolean containsAll(Collection<?> c)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-13"><span class="nav-number">19.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-6"><span class="nav-number">19.2.</span> <span class="nav-text">继承的文档</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：public-boolean-addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">20.</span> <span class="nav-text">批量操作：public boolean addAll(Collection<? extends E> c)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-14"><span class="nav-number">20.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-7"><span class="nav-number">20.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-11"><span class="nav-number">20.3.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：public-boolean-removeAll-Collection-lt-gt-c"><span class="nav-number">21.</span> <span class="nav-text">批量操作：public boolean removeAll(Collection<?> c)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-15"><span class="nav-number">21.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-8"><span class="nav-number">21.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-12"><span class="nav-number">21.3.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：public-boolean-retainAll-Collection-lt-gt-c"><span class="nav-number">22.</span> <span class="nav-text">批量操作：public boolean retainAll(Collection<?> c)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-16"><span class="nav-number">22.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-9"><span class="nav-number">22.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-13"><span class="nav-number">22.3.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量操作：public-void-clear"><span class="nav-number">23.</span> <span class="nav-text">批量操作：public void clear()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-17"><span class="nav-number">23.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的文档-10"><span class="nav-number">23.2.</span> <span class="nav-text">继承的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-14"><span class="nav-number">23.3.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串变换：public-String-toString"><span class="nav-number">24.</span> <span class="nav-text">字符串变换：public String toString()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-18"><span class="nav-number">24.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-15"><span class="nav-number">24.2.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自包含测试"><span class="nav-number">24.3.</span> <span class="nav-text">自包含测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非自包含情况测试"><span class="nav-number">24.4.</span> <span class="nav-text">非自包含情况测试</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+      <div id="music163player">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=468490579&auto=0&height=66"></iframe>
+      </div>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ReimuWang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "5fa5a9a1c1714e08bbe2b872a7420625",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8EnYI3lo055oPaUPw9q15PgA-gzGzoHsz", "tCqaCeEinbik59cVG6GWmixT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <a href="https://github.com/ReimuWang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+</body>
+</html>

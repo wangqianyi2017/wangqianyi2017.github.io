@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/23/java7源码-javautilCollectionE/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-05-31T08:48:09.136Z">
+<meta property="og:updated_time" content="2017-06-12T03:32:10.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java7源码-java.util.Collection<E>">
 <meta name="twitter:description" content="源码">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,087
+                  3,100
                 </span>
               
 
@@ -418,10 +418,10 @@
         <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">package java.util;</div><div class="line"></div><div class="line">public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    int size();</div><div class="line"></div><div class="line">    boolean isEmpty();</div><div class="line"></div><div class="line">    boolean contains(Object o);</div><div class="line"></div><div class="line">    Iterator&lt;E&gt; iterator();</div><div class="line"></div><div class="line">    Object[] toArray();</div><div class="line"></div><div class="line">    &lt;T&gt; T[] toArray(T[] a);</div><div class="line"></div><div class="line">    boolean add(E e);</div><div class="line"></div><div class="line">    boolean remove(Object o);</div><div class="line"></div><div class="line">    boolean containsAll(Collection&lt;?&gt; c);</div><div class="line"></div><div class="line">    boolean addAll(Collection&lt;? extends E&gt; c);</div><div class="line"></div><div class="line">    boolean removeAll(Collection&lt;?&gt; c);</div><div class="line"></div><div class="line">    boolean retainAll(Collection&lt;?&gt; c);</div><div class="line"></div><div class="line">    void clear();</div><div class="line"></div><div class="line">    boolean equals(Object o);</div><div class="line"></div><div class="line">    int hashCode();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="层级关系"><a href="#层级关系" class="headerlink" title="层级关系"></a>层级关系</h1><h2 id="直接超类接口："><a href="#直接超类接口：" class="headerlink" title="直接超类接口："></a>直接超类接口：</h2><ul>
-<li><a href="">java.lang.Iterable<t></t></a></li>
+<li><a href="http://reimuwang.org/2017/05/23/java7%E6%BA%90%E7%A0%81-javalangIterableT/" target="_blank" rel="external">java.lang.Iterable<t></t></a></li>
 </ul>
 <h2 id="直接子类接口："><a href="#直接子类接口：" class="headerlink" title="直接子类接口："></a>直接子类接口：</h2><ul>
-<li><a href="">java.util.List<e></e></a></li>
+<li><a href="http://reimuwang.org/2017/05/25/java7%E6%BA%90%E7%A0%81-javautilListE/" target="_blank" rel="external">java.util.List<e></e></a></li>
 <li><a href="">java.util.Queue<e></e></a></li>
 <li><a href="">java.util.Set<e></e></a></li>
 </ul>
@@ -435,13 +435,13 @@
 <li>void（无参数）的构造函数，它创建一个空的集合。</li>
 <li>带有一个集合类型的参数的构造函数，该构造函数依传入参数创建一个新的集合。</li>
 </ul>
-<p>实际上，带有参数的构造函数允许实现类以任何集合为基础生成新的集合，而非只能以实现类本身所实现的集合为基础。本接口无法从规则上限制这一点（因为接口不能包含构造函数）。但所有jdk提供的集合的实现均自觉遵守这一规范。</p>
-<p>本接口包含“破坏性”方法。这些方法可以改变其所属的集合。若某个具体的实现类不支持某个“破坏性”方法，则会抛出UnsupportedOperationException。有时，即便某集合不支持某“破坏性”方法，但只要该方法不产生真的破坏性的结果，也可以不抛出UnsupportedOperationException。例如：某不可变集合不支持addAll(Collection&lt;? extends E&gt; c)方法，理论上当调用该方法时应抛出UnsupportedOperationException。但是若null==c，则也可不抛出UnsupportedOperationException。</p>
+<p>实际上，带有参数的构造函数允许实现类以任何集合为基础生成新的集合，而非只能以实现类本身所实现的集合为基础。本接口无法从规则上限制这一点（因为接口不能包含构造函数）。但所有jdk提供的集合的实现均自觉遵守这一规范（即只能以实现类本身所实现的集合为基础）。</p>
+<p>本接口包含“破坏性”方法。这些方法可以改变其所属的集合。若某个具体的实现类不支持某个“破坏性”方法，则会抛出UnsupportedOperationException。有时，即便某集合不支持某“破坏性”方法，但只要该方法不产生真的破坏性的结果，也可以不抛出UnsupportedOperationException。例如：某不可变集合不支持addAll(Collection&lt;? extends E&gt; c)，理论上当调用该方法时应抛出UnsupportedOperationException。但是若null==c，则也可不抛出UnsupportedOperationException。</p>
 <p>某些本接口的实现可能会对其所包含的元素有所限制。例如，有些实现禁止插入空元素，有些实现则会限制元素类型。试图插入不合法的元素会抛出一个unchecked exception。通常为NullPointerException或ClassCastException。试图查询一个不合法的元素可能会抛出异常或者返回false。</p>
-<p>每个集合的实现类自行定义自身的同步策略。若实现类缺乏健壮的同步机制，则在并发环境下可能发生会有同步问题。</p>
-<p>本接口中的许多方法是按equals方法定义的。例如contains(Object o)方法的api中有如下描述：</p>
+<p>每个集合的实现类自行定义自身的同步策略。若实现类缺乏健壮的同步机制，则在并发环境下可能会有同步问题。</p>
+<p>本接口中的许多方法是按equals方法定义的。例如contains(Object o)的api中有如下描述：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当且仅当该集合包含至少一个元素e，满足(o==null ? e==null : o.equals(e))时，返回true。</div></pre></td></tr></table></figure>
-<p>这个描述不应被理解为具体的实现类在实现该方法时，只要传入的o不为null，就一定会遍历集合中的元素e，并进行o.equals(e)比较。只要能实现o.equals(e)的效果，实现类并不需要一定调用o.equals(e)方法，而是可选择更优的解决方案。例如，实现类可比较两元素的hash code。</p>
+<p>这个描述不应被理解为具体的实现类在实现该方法时，只要传入的o不为null，就一定会遍历集合中的元素e，并进行o.equals(e)比较。只要能实现o.equals(e)的效果，实现类并不需要一定调用o.equals(e)，而是可选择更优的解决方案。例如，实现类可比较两元素的hash code。</p>
 <p>本接口是java集合框架中的一员。</p>
 <h1 id="查询操作：int-size"><a href="#查询操作：int-size" class="headerlink" title="查询操作：int size();"></a>查询操作：int size();</h1><h2 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int size();</div></pre></td></tr></table></figure>
 <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>返回collection包含的元素个数。若collection包含的元素个数&gt;Integer.MAX_VALUE，则返回Integer.MAX_VALUE。</p>
@@ -461,12 +461,12 @@
 <p>返回的数组与collection之间不存在引用关系（即使collection是基于数组的），数组中的元素是collection中的元素的浅拷贝。</p>
 <p>本方法是连接集合与数组之间的桥梁。</p>
 <h1 id="查询操作：-T-toArray-T-a"><a href="#查询操作：-T-toArray-T-a" class="headerlink" title="查询操作： T[] toArray(T[] a);"></a>查询操作：<t> T[] toArray(T[] a);</t></h1><h2 id="源码-6"><a href="#源码-6" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt; T[] toArray(T[] a);</div></pre></td></tr></table></figure>
-<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回包含collection所有元素的数组。返回数组的类型即为a的类型。若a.length==collection.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被替换）。若a.length&gt;collection.size()，数组索引大于collection索引的第一个元素将被置为null（若collection不允许包含空元素，则本方法此时可用来计算collection的长度：返回的数组第一次出现null的前一个元素的索引即为collection的长度），数组中后续元素不变。若a.length&lt;collection.size()，则不修改a，而是以a的类型新建长度为collection.size()的数组并填入collection中的值，并返回新生成的数组。</p>
+<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回包含collection所有元素的数组。返回数组的类型即为a的类型。若a.length==collection.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被覆盖）。若a.length&gt;collection.size()，数组范围在[0,collection.size() -1]的索引将被collection对应位置的元素覆盖；数组索引=collection.size()的元素将被置为null（若collection不允许包含空元素，则本方法此时可用来计算collection的长度：返回的数组第一次出现null的索引即为collection的长度），数组中后续元素不变。若a.length&lt;collection.size()，则不修改a，而是以a的类型新建长度为collection.size()的数组并填入collection中的值，并返回新生成的数组。</p>
 <p>若collection是有序的（迭代器返回的结果有序），则返回的数组必须有同样的顺序。</p>
-<p>同toArray()方法，返回的数组与collection之间不存在引用关系（即使collection是基于数组的），数组中的元素是collection中的元素的浅拷贝。</p>
+<p>同toArray()，返回的数组与collection之间不存在引用关系（即使collection是基于数组的），数组中的元素是collection中的元素的浅拷贝。</p>
 <p>例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] y = x.toArray(new String[0]);</div></pre></td></tr></table></figure>
-<p>其中x为一个数据类型为String的集合，则以上语句会将该集合复制一份浅拷贝到数组y。</p>
+<p>其中x为一个数据类型为String的集合，则以上语句会将该集合中的元素复制一份浅拷贝到数组y。</p>
 <p><strong>注意：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray(new Object[0])</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">collection.toArray()</div></pre></td></tr></table></figure>
@@ -474,7 +474,7 @@
 <p>该方法会抛出如下异常：</p>
 <ul>
 <li>ArrayStoreException：a的类型collection不支持。</li>
-<li>NullPointerException：a==null</li>
+<li>NullPointerException：null==a。</li>
 </ul>
 <h1 id="修改操作：boolean-add-E-e"><a href="#修改操作：boolean-add-E-e" class="headerlink" title="修改操作：boolean add(E e);"></a>修改操作：boolean add(E e);</h1><h2 id="源码-7"><a href="#源码-7" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean add(E e);</div></pre></td></tr></table></figure>
 <h2 id="描述-6"><a href="#描述-6" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
@@ -505,7 +505,7 @@
 <p>该方法可能抛出如下异常：</p>
 <ul>
 <li>ClassCastException：c中至少有一个元素的类型与collection不相容（依实现可选）</li>
-<li>NullPointerException：c中包含至少一个空元素且该集合不允许空元素存在（依实现可选）；或c==null。</li>
+<li>NullPointerException：c中包含至少一个空元素且collection不允许空元素存在（依实现可选）；或c==null。</li>
 </ul>
 <h1 id="批量操作：boolean-addAll-Collection-lt-extends-E-gt-c"><a href="#批量操作：boolean-addAll-Collection-lt-extends-E-gt-c" class="headerlink" title="批量操作：boolean addAll(Collection&lt;? extends E&gt; c);"></a>批量操作：boolean addAll(Collection&lt;? extends E&gt; c);</h1><h2 id="源码-10"><a href="#源码-10" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean addAll(Collection&lt;? extends E&gt; c);</div></pre></td></tr></table></figure>
 <h2 id="描述-9"><a href="#描述-9" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
@@ -519,7 +519,7 @@
 <li>IllegalArgumentException：c中任意一个元素因其某些属性禁止被插入collection。</li>
 <li>IllegalStateException：因插入限制，此时并非c中所有元素都能被插入collection。</li>
 </ul>
-<p>该方法类似于add(E e);</p>
+<p>该方法类似于add(E e)。</p>
 <h1 id="批量操作：boolean-removeAll-Collection-lt-gt-c"><a href="#批量操作：boolean-removeAll-Collection-lt-gt-c" class="headerlink" title="批量操作：boolean removeAll(Collection&lt;?&gt; c);"></a>批量操作：boolean removeAll(Collection&lt;?&gt; c);</h1><h2 id="源码-11"><a href="#源码-11" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean removeAll(Collection&lt;?&gt; c);</div></pre></td></tr></table></figure>
 <h2 id="描述-10"><a href="#描述-10" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
 <p>从collection中移除所有与c的交集元素（求差集）。</p>
@@ -543,19 +543,19 @@
 </ul>
 <h1 id="批量操作：void-clear"><a href="#批量操作：void-clear" class="headerlink" title="批量操作：void clear();"></a>批量操作：void clear();</h1><h2 id="源码-13"><a href="#源码-13" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void clear();</div></pre></td></tr></table></figure>
 <h2 id="描述-12"><a href="#描述-12" class="headerlink" title="描述"></a>描述</h2><p>本方法可选，实现类可依自身情况决定是否真的需要实现。</p>
-<p>清空collection。。</p>
+<p>清空collection。</p>
 <p>该方法会抛出如下异常：</p>
 <ul>
 <li>UnsupportedOperationException：collection不支持本方法。</li>
 </ul>
 <h1 id="比较及哈希：boolean-equals-Object-o"><a href="#比较及哈希：boolean-equals-Object-o" class="headerlink" title="比较及哈希：boolean equals(Object o);"></a>比较及哈希：boolean equals(Object o);</h1><h2 id="源码-14"><a href="#源码-14" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">boolean equals(Object o);</div></pre></td></tr></table></figure>
-<h2 id="描述-13"><a href="#描述-13" class="headerlink" title="描述"></a>描述</h2><p>比较o与collection是否相等（若具体的实现类未做特殊的设置，该方法将调用Object类的equals(Object)方法，即以引用地址判断是否相等），若相等则返回true，反之返回false。</p>
-<p>jdk提供的直接继承本接口的子接口有3个：Queue，List，Set。其中List，Set均对equals方法有要求，它们要求其实现类的equals(Object o)方法不是继承自Object类，而是根据集合具体的特点，比较“值”是否相等。因此，当程序员使用Queue接口，或者是自己直接实现本接口时，一定要考虑好这个equals方法的设计，通常情况下，我们比较两个集合的相等性时，都不希望比较的是其引用地址是否相等，因为这通常是毫无意义的。</p>
+<h2 id="描述-13"><a href="#描述-13" class="headerlink" title="描述"></a>描述</h2><p>比较o与collection是否相等（若具体的实现类未做特殊的设置，该方法将调用Object类的equals(Object obj)，即以引用地址判断是否相等），若相等则返回true，反之返回false。</p>
+<p>jdk提供的直接继承本接口的子接口有3个：Queue，List，Set。其中List，Set均对equals方法有要求，它们要求其实现类的equals(Object o)不是继承自Object类，而是根据集合具体的特点，比较“值”是否相等。因此，当程序员使用Queue接口，或者是自己直接实现本接口时，一定要考虑好本方法的设计，通常情况下，我们比较两个集合的相等性时，都不希望比较的是其引用地址是否相等，因为这通常是毫无意义的。</p>
 <p>通常意义上，我们所认为的相等都是对称的，即若a.equals(b)，则必应有b.equals(a)。</p>
-<p>在jdk的集合类设计中，规定了大前提：list只能与list相等，set只能与set相等。因此，我们无法写出一个类同时实现Set及List接口，因为若这样的实现类可以存在，这意味着有一种集合既是List又是Set，与上文的逻辑相悖。</p>
+<p>在jdk的集合类设计中，规定了大前提：list只能与list相等，set只能与set相等。因此，我们无法写出一个类同时实现Set及List接口，因为若这样的实现类可以存在，这意味着有一种集合既是List又是Set，与大前提的逻辑相悖。</p>
 <h1 id="比较及哈希：int-hashCode"><a href="#比较及哈希：int-hashCode" class="headerlink" title="比较及哈希：int hashCode();"></a>比较及哈希：int hashCode();</h1><h2 id="源码-15"><a href="#源码-15" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int hashCode();</div></pre></td></tr></table></figure>
-<h2 id="描述-14"><a href="#描述-14" class="headerlink" title="描述"></a>描述</h2><p>返回collection的hash code值（若具体的实现类未做特殊的设置，该方法将调用Object类的hashCode()方法）。</p>
-<p>必须注意的是，任意想要重写Object类equals(Object)方法的类都必须重写Object类的hashCode()方法。具体来说，若c1.equals(c2)，则同样应有c1.hashCode()==c2.hashCode()。</p>
+<h2 id="描述-14"><a href="#描述-14" class="headerlink" title="描述"></a>描述</h2><p>返回collection的hash code值（若具体的实现类未做特殊的设置，该方法将调用Object类的hashCode()）。</p>
+<p>必须注意的是，任意想要重写Object类equals(Object obj)的类都必须重写Object类的hashCode()。具体来说，若c1.equals(c2)，则同样应有c1.hashCode()==c2.hashCode()。</p>
 
       
     </div>
@@ -688,7 +688,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

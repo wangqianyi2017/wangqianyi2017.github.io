@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/25/java7源码-javautilListE/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-05-31T08:48:30.547Z">
+<meta property="og:updated_time" content="2017-06-13T03:11:33.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java7源码-java.util.List<E>">
 <meta name="twitter:description" content="源码">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  4,245
+                  4,289
                 </span>
               
 
@@ -436,8 +436,8 @@
 <p>List接口提供了4个可用于基于位置（索引）访问元素的方法:get(int index)，set(int index, E element)，add(int index, E element)，remove(int index)。类似于java数组，List的索引以0开始。对某些实现（例如LinkedList）而言，这些操作获取结果的时间复杂度与索引值成比例（链表取到某个索引值的元素需要在链式结构中逐个向后查找）。因此在不确定List接口的具体实现时，比起使用这种基于索引的访问元素的方法，更推荐使用迭代器。</p>
 <p>List接口提供一个特殊的迭代器，名为：ListIterator。在通用Iterator所实现的功能的基础上，ListIterator还实现了：元素插入，元素替换，双向访问。List接口提供了一个方法获得这个ListIterator，同时该方法还可以指定ListIterator从一个特定的索引值开始。</p>
 <p>List接口提供了两个方法用于搜索特定的对象：indexOf(Object o)，lastIndexOf(Object o)。从性能的角度考虑，这两个方法应谨慎使用。在很多实现中，这两个方法采用代价昂贵的顺序查找（linear search）。</p>
-<p>List接口提供了两个方法用于在任意位置高效的插入或删除复数个元素。</p>
-<p>注意：当List允许包含自身以作为自身的元素时，这种List中的equals(Object o)及hashCode()方法往往难于定义。</p>
+<p>List接口提供了两个方法用于在任意位置高效的插入或删除复数个元素：addAll(int index, Collection&lt;? extends E&gt; c)，removeAll(Collection&lt;?&gt; c)。</p>
+<p>注意：当List允许包含自身以作为自身的元素时，这种list中的equals(Object o)及hashCode()往往难于定义。</p>
 <p>一些List的实现会对它们所能包含的元素有所限制。例如，一些实现禁止包含空元素，一些实现对其所能包含的元素的类型有限制。试图插入一个不合规的元素会抛出一个unchecked exception，例如NullPointerException，ClassCastException。依具体实现不同试图查询一个不合规的元素可能会抛出一个异常，或者仅仅只是返回false。</p>
 <p>本接口是java集合框架中的一员。</p>
 <h1 id="查询操作：int-size"><a href="#查询操作：int-size" class="headerlink" title="查询操作：int size();"></a>查询操作：int size();</h1><h2 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int size();</div></pre></td></tr></table></figure>
@@ -458,11 +458,11 @@
 <p>返回的数组与list之间不存在引用关系（即使list是基于数组的），数组中的元素是list中的元素的浅拷贝。</p>
 <p>本方法是连接集合与数组之间的桥梁。</p>
 <h1 id="查询操作：-T-toArray-T-a"><a href="#查询操作：-T-toArray-T-a" class="headerlink" title="查询操作： T[] toArray(T[] a);"></a>查询操作：<t> T[] toArray(T[] a);</t></h1><h2 id="源码-6"><a href="#源码-6" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt; T[] toArray(T[] a);</div></pre></td></tr></table></figure>
-<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回包含list所有元素的数组。该数组的顺序与list的固有顺序相同。返回数组的类型为a的类型。若a.length==list.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被替换）。若a.length&gt;list.size()，数组索引大于list索引的第一个元素将被置为null（若list不允许包含空元素，则本方法此时可用来计算list的长度：返回的数组第一次出现null的前一个元素的索引即为list的长度），数组中后续元素不变。若a.length&lt;list.size()，则不修改a，而是以a的类型新建长度为list.size()的数组并填入List中的值，并返回新生成的数组。</p>
+<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>返回包含list所有元素的数组。该数组的顺序与list的固有顺序相同。返回数组的类型为a的类型。若a.length==list.size()，则将返回的结果直接填入a后返回a（若a中已有值，则原值会被list对应位置元素覆盖）。若a.length&gt;list.size()，数组索引在[0,list.size()-1]之间的元素会被list对应位置元素覆盖；数组索引=list.size()的元素将被置为null（若list不允许包含空元素，则本方法此时可用来计算list的长度：返回的数组第一次出现null的前一个元素的索引即为list的长度），数组索引&gt;list.size()（如果有的话）的元素不变。若a.length&lt;list.size()，则不修改a，而是以a的类型新建长度为list.size()的数组并填入List中对应位置的元素，并返回新生成的数组。</p>
 <p>同toArray()方法，本方法是连接集合与数组之间的桥梁。且返回的数组与list之间不存在引用关系（即使list是基于数组的），数组中的元素是list中的元素的浅拷贝。</p>
 <p>例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] y = x.toArray(new String[0]);</div></pre></td></tr></table></figure>
-<p>其中x为一个数据类型为String的list，则以上语句会将该list复制一份浅拷贝到数组y。</p>
+<p>其中x为一个数据类型为String的list，则以上语句会将该list中的元素复制一份浅拷贝到数组y。</p>
 <p>注意：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.toArray(new Object[0])</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.toArray()</div></pre></td></tr></table></figure>
@@ -630,7 +630,7 @@
 <h1 id="List迭代器：ListIterator-listIterator"><a href="#List迭代器：ListIterator-listIterator" class="headerlink" title="List迭代器：ListIterator listIterator();"></a>List迭代器：ListIterator<e> listIterator();</e></h1><h2 id="源码-23"><a href="#源码-23" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ListIterator&lt;E&gt; listIterator();</div></pre></td></tr></table></figure>
 <h2 id="描述-22"><a href="#描述-22" class="headerlink" title="描述"></a>描述</h2><p>返回一个list按固有顺序迭代的listIterator。</p>
 <h1 id="List迭代器：ListIterator-listIterator-int-index"><a href="#List迭代器：ListIterator-listIterator-int-index" class="headerlink" title="List迭代器：ListIterator listIterator(int index);"></a>List迭代器：ListIterator<e> listIterator(int index);</e></h1><h2 id="源码-24"><a href="#源码-24" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ListIterator&lt;E&gt; listIterator(int index);</div></pre></td></tr></table></figure>
-<h2 id="描述-23"><a href="#描述-23" class="headerlink" title="描述"></a>描述</h2><p>返回一个list按固有顺序迭代的listIterator，迭代开始时游标位于索引[index-1,index]之间。即使用本方法得到listIterator后，若第一次调用的是listIterator.next()方法，返回的元素的索引不是0而是index；同理，若第一次调用的是listIterator.previous()方法，返回的是索引为index-1的元素。</p>
+<h2 id="描述-23"><a href="#描述-23" class="headerlink" title="描述"></a>描述</h2><p>返回一个list按固有顺序迭代的listIterator，迭代开始时游标位于索引[index-1,index]之间。即使用本方法得到listIterator后，若第一次调用的是listIterator.next()，返回的元素的索引是index；同理，若第一次调用的是listIterator.previous()，返回的是索引为index-1的元素。</p>
 <p>该方法会抛出如下异常：</p>
 <ul>
 <li>IndexOutOfBoundsException：索引越界(index &lt; 0 || index &gt; size)。</li>
@@ -781,7 +781,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
