@@ -91,15 +91,15 @@
 <meta name="keywords" content="java,jdbc,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="传智 springmvc+mybatis day1-2.mybatis架构">
-<meta property="og:url" content="http://yoursite.com/2017/05/19/传智springmvcMybatisDay1-2-mybatis架构/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/05/19/传智springmvcmybatisday1-2mybatis架构/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="mybatis简介mybatis因其较为灵活而流行。 mybatis的前身是apache的开源项目ibatis。2010年ibatis被apache software foundation迁移至google code，并改名为mybatis，mybatis是对ibatis的改进，目前mybatis托管于github上。 mybatis是一个持久层框架。使用mybatis时，程序员只需要关注sql本">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcMybatisDay1_2_1.jpg">
-<meta property="og:updated_time" content="2017-05-19T02:21:40.933Z">
+<meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/2mybatis架构/0.jpg">
+<meta property="og:updated_time" content="2017-07-01T05:02:10.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="传智 springmvc+mybatis day1-2.mybatis架构">
 <meta name="twitter:description" content="mybatis简介mybatis因其较为灵活而流行。 mybatis的前身是apache的开源项目ibatis。2010年ibatis被apache software foundation迁移至google code，并改名为mybatis，mybatis是对ibatis的改进，目前mybatis托管于github上。 mybatis是一个持久层框架。使用mybatis时，程序员只需要关注sql本">
-<meta name="twitter:image" content="http://yoursite.com/images/blog_pic/传智springmvcMybatisDay1_2_1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/2mybatis架构/0.jpg">
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/19/传智springmvcMybatisDay1-2-mybatis架构/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/19/传智springmvcmybatisday1-2mybatis架构/"/>
 
 
 
@@ -272,7 +272,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/传智springmvcMybatisDay1-2-mybatis架构/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/传智springmvcmybatisday1-2mybatis架构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ReimuWang">
@@ -349,7 +349,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/05/19/传智springmvcMybatisDay1-2-mybatis架构/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/05/19/传智springmvcmybatisday1-2mybatis架构/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -358,7 +358,7 @@
 
           
           
-             <span id="/2017/05/19/传智springmvcMybatisDay1-2-mybatis架构/" class="leancloud_visitors" data-flag-title="传智 springmvc+mybatis day1-2.mybatis架构">
+             <span id="/2017/05/19/传智springmvcmybatisday1-2mybatis架构/" class="leancloud_visitors" data-flag-title="传智 springmvc+mybatis day1-2.mybatis架构">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -422,10 +422,10 @@
 <p>mybatis是一个持久层框架。使用mybatis时，程序员只需要关注sql本身而不需要关注使用jdbc时需进行的繁琐设置，mybatis会将sql很好的维护起来。</p>
 <p>Mybatis通过xml或注解的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来，并通过java对象和statement中的sql进行映射生成最终执行的sql语句，最后由mybatis框架执行sql并将结果映射成java对象并返回。</p>
 <a id="more"></a>
-<h1 id="mybatis架构"><a href="#mybatis架构" class="headerlink" title="mybatis架构"></a>mybatis架构</h1><p><img src="/images/blog_pic/传智springmvcMybatisDay1_2_1.jpg" alt="传智springmvcMybatisDay1_2_1.jpg"></p>
+<h1 id="mybatis架构"><a href="#mybatis架构" class="headerlink" title="mybatis架构"></a>mybatis架构</h1><p><img src="/images/blog_pic/传智springmvcmybatisday1/2mybatis架构/0.jpg" alt="0.jpg"></p>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>mybatis有一个全局配置文件，其作用为加载mybatis运行环境。通常命名为sqlMapConfig.xml。实际使用时根据需要可改为其他名称。<br>mybatis运行环境包括：数据源，事务。<br>除此之外，还有复数个mapper.xml文件，其中配置sql语句。</p>
 <h2 id="SqlSessionFactory"><a href="#SqlSessionFactory" class="headerlink" title="SqlSessionFactory"></a>SqlSessionFactory</h2><p>即会话工厂。其作用为创建SqlSession。</p>
-<h2 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h2><p>SqlSession是面向用户的接口，接口中封转了数据库的操作方法-增删改查。其作用为操作数据库。</p>
+<h2 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h2><p>SqlSession是面向用户的接口，接口中封装了数据库的操作方法-增删改查。其作用为操作数据库。</p>
 <h2 id="Excutor"><a href="#Excutor" class="headerlink" title="Excutor"></a>Excutor</h2><p>即为数据库操作的执行器接口。SqlSession内部调用Excutor操作数据库。Excutor接口有两个实现：</p>
 <ul>
 <li>默认执行器。</li>
@@ -479,7 +479,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/19/传智springmvcMybatisDay1-3-mybatis工程结构/" rel="next" title="传智 springmvc+mybatis day1-3.mybatis工程结构">
+              <a href="/2017/05/19/传智springmvcmybatisday1-3mybatis工程结构/" rel="next" title="传智 springmvc+mybatis day1-3.mybatis工程结构">
                 <i class="fa fa-chevron-left"></i> 传智 springmvc+mybatis day1-3.mybatis工程结构
               </a>
             
