@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。  mapper.xml总结以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装">
+<meta name="description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。">
 <meta name="keywords" content="java,jdbc,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="传智 springmvc+mybatis day1-8.sqlSession使用范围">
 <meta property="og:url" content="http://yoursite.com/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
-<meta property="og:description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。  mapper.xml总结以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装">
+<meta property="og:description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/8sqlSession使用范围/0.jpg">
-<meta property="og:updated_time" content="2017-07-02T13:31:57.748Z">
+<meta property="og:updated_time" content="2017-07-02T13:38:40.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="传智 springmvc+mybatis day1-8.sqlSession使用范围">
-<meta name="twitter:description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。  mapper.xml总结以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装">
+<meta name="twitter:description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。">
 <meta name="twitter:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/8sqlSession使用范围/0.jpg">
 
 
@@ -422,6 +422,7 @@
 <li>配置数据源（引入spring后数据源将由spring管理）。</li>
 <li>管理mapper.xml，mapper.xml中配置核心的sql语句。</li>
 </ul>
+<a id="more"></a>
 <h1 id="mapper-xml总结"><a href="#mapper-xml总结" class="headerlink" title="mapper.xml总结"></a>mapper.xml总结</h1><p>以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装为mapper的statement对象）。statement中配置sql语句，输入参数类型parameterType（完成输入映射），输出结果类型resultType（完成输出映射）。</p>
 <p>除parameterType外，还提供parameterMap配置输入参数类型（已过时，不推荐使用）。</p>
 <p>除resultType外，还提供resultMap配置输出结果类型（未过时，仍推荐使用）完成复杂数据类型映射（例如一对多映射，多对多映射）。</p>
