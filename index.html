@@ -270,6 +270,429 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ReimuWang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ReimuWang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/" itemprop="url">
+                  传智 springmvc+mybatis day1-8.sqlSession使用范围
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-02T18:46:54+08:00">
+                2017-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/传智-springmvc-mybatis-day1/" itemprop="url" rel="index">
+                    <span itemprop="name">传智 springmvc+mybatis day1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/" class="leancloud_visitors" data-flag-title="传智 springmvc+mybatis day1-8.sqlSession使用范围">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  830
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SqlMapConfig-xml总结"><a href="#SqlMapConfig-xml总结" class="headerlink" title="SqlMapConfig.xml总结"></a>SqlMapConfig.xml总结</h1><p>mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：</p>
+<ul>
+<li>配置数据源（引入spring后数据源将由spring管理）。</li>
+<li>管理mapper.xml，mapper.xml中配置核心的sql语句。</li>
+</ul>
+<h1 id="mapper-xml总结"><a href="#mapper-xml总结" class="headerlink" title="mapper.xml总结"></a>mapper.xml总结</h1><p>以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装为mapper的statement对象）。statement中配置sql语句，输入参数类型parameterType（完成输入映射），输出结果类型resultType（完成输出映射）。</p>
+<p>除parameterType外，还提供parameterMap配置输入参数类型（已过时，不推荐使用）。</p>
+<p>除resultType外，还提供resultMap配置输出结果类型（未过时，仍推荐使用）完成复杂数据类型映射（例如一对多映射，多对多映射）。</p>
+<h1 id="selectOne"><a href="#selectOne" class="headerlink" title="selectOne"></a>selectOne</h1><p>SqlSession.selectOne(String statement, Object parameter)不能用于查询多条记录，会抛出异常。</p>
+<h1 id="mybatis开发dao的方法"><a href="#mybatis开发dao的方法" class="headerlink" title="mybatis开发dao的方法"></a>mybatis开发dao的方法</h1><ul>
+<li>原始dao开发方式：程序员需要写dao接口和dao实现类。</li>
+<li>mapper代理的方式：程序员只需要写dao接口。dao实现由mybatis自动生成代理对象。这么做不会降低程序的灵活性，因为：本身dao在三层架构中就是一个通用的接口（service不是通用接口）。</li>
+</ul>
+<h1 id="sqlSession的使用范围"><a href="#sqlSession的使用范围" class="headerlink" title="sqlSession的使用范围"></a>sqlSession的使用范围</h1><p>一段sqlSession的创建代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(&quot;mybatis/SqlMapConfig.xml&quot;));</div><div class="line">SqlSession sqlSession = sqlSessionFactory.openSession();</div></pre></td></tr></table></figure>
+<p>因此创建关系为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SqlSessionFactoryBuilder - SqlSessionFactory - SqlSession</div></pre></td></tr></table></figure>
+<h2 id="SqlSessionFactoryBuilder"><a href="#SqlSessionFactoryBuilder" class="headerlink" title="SqlSessionFactoryBuilder"></a>SqlSessionFactoryBuilder</h2><p>以工具类的方式使用（因SqlSessionFactory是单例的，因此创建完一次SqlSessionFactory后，即无需再管SqlSessionFactoryBuilder），用于创建SqlSessionFactory。</p>
+<h2 id="SqlSessionFactory"><a href="#SqlSessionFactory" class="headerlink" title="SqlSessionFactory"></a>SqlSessionFactory</h2><p>正常开发时，以单例方式管理SqlSessionFactory。整个系统运行过程中SqlSessionFactory只有一个实例。与spring整合后，由spring以单例的方式管理SqlSessionFactory。</p>
+<h2 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h2><h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>SqlSession是一个面向用户（即程序员）的接口。程序员调用SqlSession的接口方法操作数据库。它在mybatis架构中的层级为：</p>
+<p><img src="/images/blog_pic/传智springmvcmybatisday1/8sqlSession使用范围/0.jpg" alt="0.jpg"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public interface SqlSession extends Closeable</div></pre></td></tr></table></figure>
+<p>有两个实现类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class DefaultSqlSession implements SqlSession</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class SqlSessionManager implements SqlSessionFactory, SqlSession</div></pre></td></tr></table></figure>
+<p>其中DefaultSqlSession为默认的实现类，在该类中，有一个成员变量为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private Executor executor;</div></pre></td></tr></table></figure>
+<p>即为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public interface Executor</div></pre></td></tr></table></figure>
+<p>该接口即为数据库操作的执行器接口。SqlSession内部调用Excutor操作数据库。Excutor接口有两个实现：</p>
+<p>默认执行器，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public abstract class BaseExecutor implements Executor</div></pre></td></tr></table></figure>
+<p>缓存执行器，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class CachingExecutor implements Executor</div></pre></td></tr></table></figure>
+<p>以默认执行器的某个子类（批量操作执行器）为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class BatchExecutor extends BaseExecutor</div></pre></td></tr></table></figure>
+<p>BatchExecutor有如下成员变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private String currentSql;    // 封装sql语句</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private MappedStatement currentStatement;    // 用于封装sql的对象。其中有statement中定义的所有内容。</div></pre></td></tr></table></figure>
+<p>MappedStatement类成员变量举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">private String resource;</div><div class="line">private Configuration configuration;</div><div class="line">private String id;</div><div class="line">private Integer fetchSize;</div><div class="line">private Integer timeout;</div><div class="line">private StatementType statementType;</div><div class="line">private ResultSetType resultSetType;</div><div class="line">private SqlSource sqlSource;</div><div class="line">private Cache cache;</div><div class="line">private ParameterMap parameterMap;</div><div class="line">private List&lt;ResultMap&gt; resultMaps;</div><div class="line">private boolean flushCacheRequired;</div><div class="line">private boolean useCache;</div><div class="line">private boolean resultOrdered;</div><div class="line">private SqlCommandType sqlCommandType;</div><div class="line">private KeyGenerator keyGenerator;</div><div class="line">private String[] keyProperties;</div><div class="line">private String[] keyColumns;</div><div class="line">private boolean hasNestedResultMaps;</div><div class="line">private String databaseId;</div><div class="line">private Log statementLog;</div><div class="line">private LanguageDriver lang;</div><div class="line">private String[] resultSets;</div></pre></td></tr></table></figure>
+<h3 id="SqlSession是线程不安全的"><a href="#SqlSession是线程不安全的" class="headerlink" title="SqlSession是线程不安全的"></a>SqlSession是线程不安全的</h3><p>在多线程环境下，SqlSession不能使用单例，因为SqlSession中的Executor的成员变量中有currentSql这样的数据字段，换句话说，SqlSession是线程不安全的。因此SqlSession的最佳应用范围在方法体内，即在方法体内定义局部变量来使用SqlSession。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/02/传智springmvcmybatisday1-7mybatis和hibernate的适用场景/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ReimuWang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ReimuWang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/02/传智springmvcmybatisday1-7mybatis和hibernate的适用场景/" itemprop="url">
+                  传智 springmvc+mybatis day1-7.mybatis和hibernate的适用场景
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-02T18:15:54+08:00">
+                2017-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/传智-springmvc-mybatis-day1/" itemprop="url" rel="index">
+                    <span itemprop="name">传智 springmvc+mybatis day1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/02/传智springmvcmybatisday1-7mybatis和hibernate的适用场景/" class="leancloud_visitors" data-flag-title="传智 springmvc+mybatis day1-7.mybatis和hibernate的适用场景">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  316
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="mybatis与hibernate的区别"><a href="#mybatis与hibernate的区别" class="headerlink" title="mybatis与hibernate的区别"></a>mybatis与hibernate的区别</h1><p>区别主要用于项目技术选型。进行技术选型时，主要考虑以下两点：</p>
+<ul>
+<li>降低开发成本。</li>
+<li>提高系统稳定性。</li>
+</ul>
+<h2 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h2><ul>
+<li>入门简单。程序容易上手开发，节省开发成本。</li>
+<li>需要程序员自己编写sql语句，是一个不完全的ORM框架（Object Relational Mapping，对象关系映射），易于进行sql的修改及优化。</li>
+<li>适合开发需求变更频繁的项目。例如：互联网电商网站等互联网项目（讲究敏捷开发，高效）。</li>
+</ul>
+<h2 id="hibernate"><a href="#hibernate" class="headerlink" title="hibernate"></a>hibernate</h2><ul>
+<li>入门门槛较高。难以写出性能较高的程序（需要用到缓存技术，而且这些缓存技术已过时，现在讲究的是分布式缓存）。</li>
+<li>无需写sql语句，提倡面向对象，采用完全的标准ORM框架（Object Relational Mapping，对象关系映射），无法优化sql语句。若想优化sql语句，则必须使用hibernate写原生态sql的方法，此时hibernate的优势将不复存在，换句话说，此时已没有使用hibernate的必要，可直接使用jdbc。</li>
+<li>适合开发需求变更不大，对象数据模型稳定，中小型的项目。例如：企业OA（办公自动化，Office Automation）</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/22/java7源码-javautilRandomAccess/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1846,382 +2269,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/24/java7源码-javautilIteratorE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ReimuWang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ReimuWang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/24/java7源码-javautilIteratorE/" itemprop="url">
-                  java7源码-java.util.Iterator<E>
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T00:01:33+08:00">
-                2017-05-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java7源码/" itemprop="url" rel="index">
-                    <span itemprop="name">java7源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/05/24/java7源码-javautilIteratorE/" class="leancloud_visitors" data-flag-title="java7源码-java.util.Iterator<E>">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  503
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/24/java7源码-javautilIteratorE/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/23/java7源码-javalangIterableT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ReimuWang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ReimuWang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/23/java7源码-javalangIterableT/" itemprop="url">
-                  java7源码-java.lang.Iterable<T>
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T23:58:36+08:00">
-                2017-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java7源码/" itemprop="url" rel="index">
-                    <span itemprop="name">java7源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/05/23/java7源码-javalangIterableT/" class="leancloud_visitors" data-flag-title="java7源码-java.lang.Iterable<T>">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  87
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/23/java7源码-javalangIterableT/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2271,7 +2318,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

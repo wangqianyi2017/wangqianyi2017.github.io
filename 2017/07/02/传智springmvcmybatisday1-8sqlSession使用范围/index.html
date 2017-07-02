@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,leetcode,algorithms,python," />
+  <meta name="keywords" content="java,jdbc,mybatis," />
 
 
 
@@ -87,19 +87,19 @@
 
 
 
-<meta name="description" content="问题地址Palindrome Number | LeetCode OJ 问题描述">
-<meta name="keywords" content="java,leetcode,algorithms,python">
+<meta name="description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。  mapper.xml总结以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装">
+<meta name="keywords" content="java,jdbc,mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode algorithms-9.Palindrome Number">
-<meta property="og:url" content="http://yoursite.com/2017/05/12/leetcodealgorithms-9PalindromeNumber/index.html">
+<meta property="og:title" content="传智 springmvc+mybatis day1-8.sqlSession使用范围">
+<meta property="og:url" content="http://yoursite.com/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
-<meta property="og:description" content="问题地址Palindrome Number | LeetCode OJ 问题描述">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/leetcodealgorithms/9PalindromeNumber/0.jpg">
-<meta property="og:updated_time" content="2017-06-27T12:42:09.242Z">
+<meta property="og:description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。  mapper.xml总结以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装">
+<meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/8sqlSession使用范围/0.jpg">
+<meta property="og:updated_time" content="2017-07-02T13:31:57.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode algorithms-9.Palindrome Number">
-<meta name="twitter:description" content="问题地址Palindrome Number | LeetCode OJ 问题描述">
-<meta name="twitter:image" content="http://yoursite.com/images/blog_pic/leetcodealgorithms/9PalindromeNumber/0.jpg">
+<meta name="twitter:title" content="传智 springmvc+mybatis day1-8.sqlSession使用范围">
+<meta name="twitter:description" content="SqlMapConfig.xml总结mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：  配置数据源（引入spring后数据源将由spring管理）。 管理mapper.xml，mapper.xml中配置核心的sql语句。  mapper.xml总结以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装">
+<meta name="twitter:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/8sqlSession使用范围/0.jpg">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/12/leetcodealgorithms-9PalindromeNumber/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/"/>
 
 
 
 
 
-  <title> leetcode algorithms-9.Palindrome Number | ReimuWang's Blog </title>
+  <title> 传智 springmvc+mybatis day1-8.sqlSession使用范围 | ReimuWang's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -272,7 +272,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/12/leetcodealgorithms-9PalindromeNumber/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ReimuWang">
@@ -293,7 +293,7 @@
             
             
               
-                leetcode algorithms-9.Palindrome Number
+                传智 springmvc+mybatis day1-8.sqlSession使用范围
               
             
           </h1>
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T00:41:39+08:00">
-                2017-05-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-02T18:46:54+08:00">
+                2017-07-02
               </time>
             
 
@@ -331,8 +331,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode-algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode algorithms</span>
+                  <a href="/categories/传智-springmvc-mybatis-day1/" itemprop="url" rel="index">
+                    <span itemprop="name">传智 springmvc+mybatis day1</span>
                   </a>
                 </span>
 
@@ -349,7 +349,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/05/12/leetcodealgorithms-9PalindromeNumber/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -358,7 +358,7 @@
 
           
           
-             <span id="/2017/05/12/leetcodealgorithms-9PalindromeNumber/" class="leancloud_visitors" data-flag-title="leetcode algorithms-9.Palindrome Number">
+             <span id="/2017/07/02/传智springmvcmybatisday1-8sqlSession使用范围/" class="leancloud_visitors" data-flag-title="传智 springmvc+mybatis day1-8.sqlSession使用范围">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  257
+                  830
                 </span>
               
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -417,32 +417,49 @@
       
 
       
-        <h1 id="问题地址"><a href="#问题地址" class="headerlink" title="问题地址"></a>问题地址</h1><p><a href="https://leetcode.com/problems/palindrome-number/#/description" target="_blank" rel="external">Palindrome Number | LeetCode OJ</a></p>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p><img src="/images/blog_pic/leetcodealgorithms/9PalindromeNumber/0.jpg" alt="0.jpg"></p>
-<a id="more"></a>
-<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>将原始数字翻转后与原始数字比较，若相等即为回文数。</p>
-<p>原始数据除到个位数时即停止计算，此时翻转后的数字比原数少一位，因此必然不会越界。</p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
-<li>不使用额外空间是不可能的，题意应该是指空间复杂度应为O(1)。</li>
-<li>负数不是回文数。</li>
-<li>python不存在越界问题，但为了满足题意，依然要做预防越界的措施。</li>
-</ol>
-<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p><strong>java</strong></p>
-<p>代码路径：</p>
+        <h1 id="SqlMapConfig-xml总结"><a href="#SqlMapConfig-xml总结" class="headerlink" title="SqlMapConfig.xml总结"></a>SqlMapConfig.xml总结</h1><p>mybatis全局配置文件，只有一个。名称不固定。其中主要包含以下两项：</p>
 <ul>
-<li>仓库：leetCodeJava</li>
-<li>项目：leetCodeJava</li>
-<li>路径：com.leetCodeJava.algorithms.index_9_Palindrome_Number.Solution.java</li>
+<li>配置数据源（引入spring后数据源将由spring管理）。</li>
+<li>管理mapper.xml，mapper.xml中配置核心的sql语句。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">int</span> originalReduce = x;</div><div class="line">        <span class="keyword">int</span> reverseIncrease = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> measure = <span class="number">10</span>;</div><div class="line">        <span class="keyword">while</span> (originalReduce &gt;= measure) &#123;</div><div class="line">            reverseIncrease = reverseIncrease * measure + originalReduce % measure;</div><div class="line">            originalReduce /= measure;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> reverseIncrease == x / measure &amp;&amp; originalReduce == x % measure;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<p><strong>pyhon</strong></p>
-<ul>
-<li>仓库：leetCodePython</li>
-<li>项目：leetCodePython</li>
-<li>路径：leet_code_python/algorithms/index_9_Palindrome_Number/solution.py</li>
+<h1 id="mapper-xml总结"><a href="#mapper-xml总结" class="headerlink" title="mapper.xml总结"></a>mapper.xml总结</h1><p>以statement为单位进行配置（把一个sql称为一个statement，之所以这么说，是因为mybatis最后会把sql封装为mapper的statement对象）。statement中配置sql语句，输入参数类型parameterType（完成输入映射），输出结果类型resultType（完成输出映射）。</p>
+<p>除parameterType外，还提供parameterMap配置输入参数类型（已过时，不推荐使用）。</p>
+<p>除resultType外，还提供resultMap配置输出结果类型（未过时，仍推荐使用）完成复杂数据类型映射（例如一对多映射，多对多映射）。</p>
+<h1 id="selectOne"><a href="#selectOne" class="headerlink" title="selectOne"></a>selectOne</h1><p>SqlSession.selectOne(String statement, Object parameter)不能用于查询多条记录，会抛出异常。</p>
+<h1 id="mybatis开发dao的方法"><a href="#mybatis开发dao的方法" class="headerlink" title="mybatis开发dao的方法"></a>mybatis开发dao的方法</h1><ul>
+<li>原始dao开发方式：程序员需要写dao接口和dao实现类。</li>
+<li>mapper代理的方式：程序员只需要写dao接口。dao实现由mybatis自动生成代理对象。这么做不会降低程序的灵活性，因为：本身dao在三层架构中就是一个通用的接口（service不是通用接口）。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, x)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type x: int</div><div class="line">    :rtype: bool</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span>:</div><div class="line">      <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">    original_reduce = x</div><div class="line">    reverse_increase = <span class="number">0</span></div><div class="line">    measure = <span class="number">10</span></div><div class="line">    <span class="keyword">while</span> original_reduce &gt;= measure:</div><div class="line">      reverse_increase = reverse_increase * measure + original_reduce % measure</div><div class="line">      original_reduce /= measure</div><div class="line">    <span class="keyword">return</span> reverse_increase == x / measure <span class="keyword">and</span> original_reduce == x % measure</div></pre></td></tr></table></figure>
+<h1 id="sqlSession的使用范围"><a href="#sqlSession的使用范围" class="headerlink" title="sqlSession的使用范围"></a>sqlSession的使用范围</h1><p>一段sqlSession的创建代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(&quot;mybatis/SqlMapConfig.xml&quot;));</div><div class="line">SqlSession sqlSession = sqlSessionFactory.openSession();</div></pre></td></tr></table></figure>
+<p>因此创建关系为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SqlSessionFactoryBuilder - SqlSessionFactory - SqlSession</div></pre></td></tr></table></figure>
+<h2 id="SqlSessionFactoryBuilder"><a href="#SqlSessionFactoryBuilder" class="headerlink" title="SqlSessionFactoryBuilder"></a>SqlSessionFactoryBuilder</h2><p>以工具类的方式使用（因SqlSessionFactory是单例的，因此创建完一次SqlSessionFactory后，即无需再管SqlSessionFactoryBuilder），用于创建SqlSessionFactory。</p>
+<h2 id="SqlSessionFactory"><a href="#SqlSessionFactory" class="headerlink" title="SqlSessionFactory"></a>SqlSessionFactory</h2><p>正常开发时，以单例方式管理SqlSessionFactory。整个系统运行过程中SqlSessionFactory只有一个实例。与spring整合后，由spring以单例的方式管理SqlSessionFactory。</p>
+<h2 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h2><h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>SqlSession是一个面向用户（即程序员）的接口。程序员调用SqlSession的接口方法操作数据库。它在mybatis架构中的层级为：</p>
+<p><img src="/images/blog_pic/传智springmvcmybatisday1/8sqlSession使用范围/0.jpg" alt="0.jpg"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public interface SqlSession extends Closeable</div></pre></td></tr></table></figure>
+<p>有两个实现类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class DefaultSqlSession implements SqlSession</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class SqlSessionManager implements SqlSessionFactory, SqlSession</div></pre></td></tr></table></figure>
+<p>其中DefaultSqlSession为默认的实现类，在该类中，有一个成员变量为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private Executor executor;</div></pre></td></tr></table></figure>
+<p>即为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public interface Executor</div></pre></td></tr></table></figure>
+<p>该接口即为数据库操作的执行器接口。SqlSession内部调用Excutor操作数据库。Excutor接口有两个实现：</p>
+<p>默认执行器，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public abstract class BaseExecutor implements Executor</div></pre></td></tr></table></figure>
+<p>缓存执行器，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class CachingExecutor implements Executor</div></pre></td></tr></table></figure>
+<p>以默认执行器的某个子类（批量操作执行器）为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class BatchExecutor extends BaseExecutor</div></pre></td></tr></table></figure>
+<p>BatchExecutor有如下成员变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private String currentSql;    // 封装sql语句</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private MappedStatement currentStatement;    // 用于封装sql的对象。其中有statement中定义的所有内容。</div></pre></td></tr></table></figure>
+<p>MappedStatement类成员变量举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">private String resource;</div><div class="line">private Configuration configuration;</div><div class="line">private String id;</div><div class="line">private Integer fetchSize;</div><div class="line">private Integer timeout;</div><div class="line">private StatementType statementType;</div><div class="line">private ResultSetType resultSetType;</div><div class="line">private SqlSource sqlSource;</div><div class="line">private Cache cache;</div><div class="line">private ParameterMap parameterMap;</div><div class="line">private List&lt;ResultMap&gt; resultMaps;</div><div class="line">private boolean flushCacheRequired;</div><div class="line">private boolean useCache;</div><div class="line">private boolean resultOrdered;</div><div class="line">private SqlCommandType sqlCommandType;</div><div class="line">private KeyGenerator keyGenerator;</div><div class="line">private String[] keyProperties;</div><div class="line">private String[] keyColumns;</div><div class="line">private boolean hasNestedResultMaps;</div><div class="line">private String databaseId;</div><div class="line">private Log statementLog;</div><div class="line">private LanguageDriver lang;</div><div class="line">private String[] resultSets;</div></pre></td></tr></table></figure>
+<h3 id="SqlSession是线程不安全的"><a href="#SqlSession是线程不安全的" class="headerlink" title="SqlSession是线程不安全的"></a>SqlSession是线程不安全的</h3><p>在多线程环境下，SqlSession不能使用单例，因为SqlSession中的Executor的成员变量中有currentSql这样的数据字段，换句话说，SqlSession是线程不安全的。因此SqlSession的最佳应用范围在方法体内，即在方法体内定义局部变量来使用SqlSession。</p>
+
       
     </div>
 
@@ -473,11 +490,9 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+            <a href="/tags/jdbc/" rel="tag"># jdbc</a>
           
-            <a href="/tags/algorithms/" rel="tag"># algorithms</a>
-          
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
           
         </div>
       
@@ -490,18 +505,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/18/传智springmvcmybatisday1-1原生态jdbc编程中的问题总结/" rel="next" title="传智 springmvc+mybatis day1-1.原生态jdbc编程中的问题总结">
-                <i class="fa fa-chevron-left"></i> 传智 springmvc+mybatis day1-1.原生态jdbc编程中的问题总结
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/11/linux-window仿linux命令界面ConEmu安装/" rel="prev" title="linux-window仿linux命令界面:ConEmu安装">
-                linux-window仿linux命令界面:ConEmu安装 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/02/传智springmvcmybatisday1-7mybatis和hibernate的适用场景/" rel="prev" title="传智 springmvc+mybatis day1-7.mybatis和hibernate的适用场景">
+                传智 springmvc+mybatis day1-7.mybatis和hibernate的适用场景 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -633,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题地址"><span class="nav-number">1.</span> <span class="nav-text">问题地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解法"><span class="nav-number">3.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.2.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">3.3.</span> <span class="nav-text">code</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SqlMapConfig-xml总结"><span class="nav-number">1.</span> <span class="nav-text">SqlMapConfig.xml总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mapper-xml总结"><span class="nav-number">2.</span> <span class="nav-text">mapper.xml总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#selectOne"><span class="nav-number">3.</span> <span class="nav-text">selectOne</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis开发dao的方法"><span class="nav-number">4.</span> <span class="nav-text">mybatis开发dao的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlSession的使用范围"><span class="nav-number">5.</span> <span class="nav-text">sqlSession的使用范围</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SqlSessionFactoryBuilder"><span class="nav-number">5.1.</span> <span class="nav-text">SqlSessionFactoryBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SqlSessionFactory"><span class="nav-number">5.2.</span> <span class="nav-text">SqlSessionFactory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SqlSession"><span class="nav-number">5.3.</span> <span class="nav-text">SqlSession</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概览"><span class="nav-number">5.3.1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlSession是线程不安全的"><span class="nav-number">5.3.2.</span> <span class="nav-text">SqlSession是线程不安全的</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
