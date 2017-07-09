@@ -1,0 +1,950 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,源码,Collection," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="源码">
+<meta name="keywords" content="java,源码,Collection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java7源码-java.util.ArrayList<E>">
+<meta property="og:url" content="http://yoursite.com/2017/07/06/java7源码-javautilArrayListE/index.html">
+<meta property="og:site_name" content="ReimuWang's Blog">
+<meta property="og:description" content="源码">
+<meta property="og:updated_time" content="2017-07-07T03:37:22.024Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java7源码-java.util.ArrayList<E>">
+<meta name="twitter:description" content="源码">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/06/java7源码-javautilArrayListE/"/>
+
+
+
+
+
+  <title> java7源码-java.util.ArrayList<E> | ReimuWang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ReimuWang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/06/java7源码-javautilArrayListE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ReimuWang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ReimuWang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                java7源码-java.util.ArrayList<E>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T15:48:14+08:00">
+                2017-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java7源码/" itemprop="url" rel="index">
+                    <span itemprop="name">java7源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/07/06/java7源码-javautilArrayListE/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/07/06/java7源码-javautilArrayListE/" class="leancloud_visitors" data-flag-title="java7源码-java.util.ArrayList<E>">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,782
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  19
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div><div class="line">533</div><div class="line">534</div><div class="line">535</div><div class="line">536</div><div class="line">537</div><div class="line">538</div><div class="line">539</div><div class="line">540</div><div class="line">541</div><div class="line">542</div><div class="line">543</div><div class="line">544</div><div class="line">545</div><div class="line">546</div><div class="line">547</div><div class="line">548</div><div class="line">549</div><div class="line">550</div><div class="line">551</div><div class="line">552</div><div class="line">553</div><div class="line">554</div><div class="line">555</div><div class="line">556</div><div class="line">557</div><div class="line">558</div><div class="line">559</div><div class="line">560</div><div class="line">561</div><div class="line">562</div><div class="line">563</div><div class="line">564</div><div class="line">565</div><div class="line">566</div><div class="line">567</div><div class="line">568</div><div class="line">569</div><div class="line">570</div><div class="line">571</div><div class="line">572</div><div class="line">573</div><div class="line">574</div><div class="line">575</div><div class="line">576</div><div class="line">577</div><div class="line">578</div><div class="line">579</div><div class="line">580</div><div class="line">581</div><div class="line">582</div><div class="line">583</div><div class="line">584</div><div class="line">585</div><div class="line">586</div><div class="line">587</div><div class="line">588</div><div class="line">589</div><div class="line">590</div><div class="line">591</div><div class="line">592</div><div class="line">593</div><div class="line">594</div><div class="line">595</div><div class="line">596</div><div class="line">597</div><div class="line">598</div><div class="line">599</div><div class="line">600</div><div class="line">601</div><div class="line">602</div><div class="line">603</div><div class="line">604</div><div class="line">605</div><div class="line">606</div><div class="line">607</div><div class="line">608</div><div class="line">609</div><div class="line">610</div><div class="line">611</div><div class="line">612</div><div class="line">613</div><div class="line">614</div><div class="line">615</div><div class="line">616</div><div class="line">617</div><div class="line">618</div><div class="line">619</div><div class="line">620</div><div class="line">621</div><div class="line">622</div><div class="line">623</div><div class="line">624</div><div class="line">625</div><div class="line">626</div><div class="line">627</div><div class="line">628</div><div class="line">629</div><div class="line">630</div><div class="line">631</div><div class="line">632</div><div class="line">633</div><div class="line">634</div><div class="line">635</div><div class="line">636</div><div class="line">637</div><div class="line">638</div><div class="line">639</div><div class="line">640</div><div class="line">641</div><div class="line">642</div><div class="line">643</div><div class="line">644</div><div class="line">645</div><div class="line">646</div><div class="line">647</div><div class="line">648</div><div class="line">649</div><div class="line">650</div><div class="line">651</div><div class="line">652</div><div class="line">653</div><div class="line">654</div><div class="line">655</div><div class="line">656</div><div class="line">657</div><div class="line">658</div><div class="line">659</div><div class="line">660</div><div class="line">661</div><div class="line">662</div><div class="line">663</div><div class="line">664</div><div class="line">665</div><div class="line">666</div><div class="line">667</div><div class="line">668</div><div class="line">669</div><div class="line">670</div><div class="line">671</div><div class="line">672</div><div class="line">673</div><div class="line">674</div><div class="line">675</div><div class="line">676</div><div class="line">677</div><div class="line">678</div><div class="line">679</div><div class="line">680</div><div class="line">681</div><div class="line">682</div><div class="line">683</div><div class="line">684</div><div class="line">685</div><div class="line">686</div><div class="line">687</div><div class="line">688</div><div class="line">689</div><div class="line">690</div><div class="line">691</div><div class="line">692</div><div class="line">693</div></pre></td><td class="code"><pre><div class="line">package java.util;</div><div class="line"></div><div class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</div><div class="line">        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</div><div class="line">&#123;</div><div class="line">    private static final long serialVersionUID = 8683452581122892189L;</div><div class="line"></div><div class="line">    private static final int DEFAULT_CAPACITY = 10;</div><div class="line"></div><div class="line">    private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</div><div class="line"></div><div class="line">    private transient Object[] elementData;</div><div class="line"></div><div class="line">    private int size;</div><div class="line"></div><div class="line">    public ArrayList(int initialCapacity) &#123;</div><div class="line">        super();</div><div class="line">        if (initialCapacity &lt; 0)</div><div class="line">            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</div><div class="line">                                               initialCapacity);</div><div class="line">        this.elementData = new Object[initialCapacity];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public ArrayList() &#123;</div><div class="line">        super();</div><div class="line">        this.elementData = EMPTY_ELEMENTDATA;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public ArrayList(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">        elementData = c.toArray();</div><div class="line">        size = elementData.length;</div><div class="line">        if (elementData.getClass() != Object[].class)</div><div class="line">            elementData = Arrays.copyOf(elementData, size, Object[].class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void trimToSize() &#123;</div><div class="line">        modCount++;</div><div class="line">        if (size &lt; elementData.length) &#123;</div><div class="line">            elementData = Arrays.copyOf(elementData, size);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void ensureCapacity(int minCapacity) &#123;</div><div class="line">        int minExpand = (elementData != EMPTY_ELEMENTDATA)</div><div class="line">            ? 0</div><div class="line">            : DEFAULT_CAPACITY;</div><div class="line"></div><div class="line">        if (minCapacity &gt; minExpand) &#123;</div><div class="line">            ensureExplicitCapacity(minCapacity);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void ensureCapacityInternal(int minCapacity) &#123;</div><div class="line">        if (elementData == EMPTY_ELEMENTDATA) &#123;</div><div class="line">            minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ensureExplicitCapacity(minCapacity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void ensureExplicitCapacity(int minCapacity) &#123;</div><div class="line">        modCount++;</div><div class="line"></div><div class="line">        if (minCapacity - elementData.length &gt; 0)</div><div class="line">            grow(minCapacity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;</div><div class="line"></div><div class="line">    private void grow(int minCapacity) &#123;</div><div class="line">        int oldCapacity = elementData.length;</div><div class="line">        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</div><div class="line">        if (newCapacity - minCapacity &lt; 0)</div><div class="line">            newCapacity = minCapacity;</div><div class="line">        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</div><div class="line">            newCapacity = hugeCapacity(minCapacity);</div><div class="line">        elementData = Arrays.copyOf(elementData, newCapacity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static int hugeCapacity(int minCapacity) &#123;</div><div class="line">        if (minCapacity &lt; 0)</div><div class="line">            throw new OutOfMemoryError();</div><div class="line">        return (minCapacity &gt; MAX_ARRAY_SIZE) ?</div><div class="line">            Integer.MAX_VALUE :</div><div class="line">            MAX_ARRAY_SIZE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int size() &#123;</div><div class="line">        return size;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean isEmpty() &#123;</div><div class="line">        return size == 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean contains(Object o) &#123;</div><div class="line">        return indexOf(o) &gt;= 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int indexOf(Object o) &#123;</div><div class="line">        if (o == null) &#123;</div><div class="line">            for (int i = 0; i &lt; size; i++)</div><div class="line">                if (elementData[i]==null)</div><div class="line">                    return i;</div><div class="line">        &#125; else &#123;</div><div class="line">            for (int i = 0; i &lt; size; i++)</div><div class="line">                if (o.equals(elementData[i]))</div><div class="line">                    return i;</div><div class="line">        &#125;</div><div class="line">        return -1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int lastIndexOf(Object o) &#123;</div><div class="line">        if (o == null) &#123;</div><div class="line">            for (int i = size-1; i &gt;= 0; i--)</div><div class="line">                if (elementData[i]==null)</div><div class="line">                    return i;</div><div class="line">        &#125; else &#123;</div><div class="line">            for (int i = size-1; i &gt;= 0; i--)</div><div class="line">                if (o.equals(elementData[i]))</div><div class="line">                    return i;</div><div class="line">        &#125;</div><div class="line">        return -1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Object clone() &#123;</div><div class="line">        try &#123;</div><div class="line">            @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">                ArrayList&lt;E&gt; v = (ArrayList&lt;E&gt;) super.clone();</div><div class="line">            v.elementData = Arrays.copyOf(elementData, size);</div><div class="line">            v.modCount = 0;</div><div class="line">            return v;</div><div class="line">        &#125; catch (CloneNotSupportedException e) &#123;</div><div class="line">            throw new InternalError();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Object[] toArray() &#123;</div><div class="line">        return Arrays.copyOf(elementData, size);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">    public &lt;T&gt; T[] toArray(T[] a) &#123;</div><div class="line">        if (a.length &lt; size)</div><div class="line">            return (T[]) Arrays.copyOf(elementData, size, a.getClass());</div><div class="line">        System.arraycopy(elementData, 0, a, 0, size);</div><div class="line">        if (a.length &gt; size)</div><div class="line">            a[size] = null;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">    E elementData(int index) &#123;</div><div class="line">        return (E) elementData[index];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public E get(int index) &#123;</div><div class="line">        rangeCheck(index);</div><div class="line"></div><div class="line">        return elementData(index);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public E set(int index, E element) &#123;</div><div class="line">        rangeCheck(index);</div><div class="line"></div><div class="line">        E oldValue = elementData(index);</div><div class="line">        elementData[index] = element;</div><div class="line">        return oldValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean add(E e) &#123;</div><div class="line">        ensureCapacityInternal(size + 1);</div><div class="line">        elementData[size++] = e;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void add(int index, E element) &#123;</div><div class="line">        rangeCheckForAdd(index);</div><div class="line"></div><div class="line">        ensureCapacityInternal(size + 1);</div><div class="line">        System.arraycopy(elementData, index, elementData, index + 1,</div><div class="line">                         size - index);</div><div class="line">        elementData[index] = element;</div><div class="line">        size++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public E remove(int index) &#123;</div><div class="line">        rangeCheck(index);</div><div class="line"></div><div class="line">        modCount++;</div><div class="line">        E oldValue = elementData(index);</div><div class="line"></div><div class="line">        int numMoved = size - index - 1;</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">            System.arraycopy(elementData, index+1, elementData, index,</div><div class="line">                             numMoved);</div><div class="line">        elementData[--size] = null;</div><div class="line"></div><div class="line">        return oldValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean remove(Object o) &#123;</div><div class="line">        if (o == null) &#123;</div><div class="line">            for (int index = 0; index &lt; size; index++)</div><div class="line">                if (elementData[index] == null) &#123;</div><div class="line">                    fastRemove(index);</div><div class="line">                    return true;</div><div class="line">                &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            for (int index = 0; index &lt; size; index++)</div><div class="line">                if (o.equals(elementData[index])) &#123;</div><div class="line">                    fastRemove(index);</div><div class="line">                    return true;</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void fastRemove(int index) &#123;</div><div class="line">        modCount++;</div><div class="line">        int numMoved = size - index - 1;</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">            System.arraycopy(elementData, index+1, elementData, index,</div><div class="line">                             numMoved);</div><div class="line">        elementData[--size] = null; // clear to let GC do its work</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void clear() &#123;</div><div class="line">        modCount++;</div><div class="line"></div><div class="line">        for (int i = 0; i &lt; size; i++)</div><div class="line">            elementData[i] = null;</div><div class="line"></div><div class="line">        size = 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">        Object[] a = c.toArray();</div><div class="line">        int numNew = a.length;</div><div class="line">        ensureCapacityInternal(size + numNew);</div><div class="line">        System.arraycopy(a, 0, elementData, size, numNew);</div><div class="line">        size += numNew;</div><div class="line">        return numNew != 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</div><div class="line">        rangeCheckForAdd(index);</div><div class="line"></div><div class="line">        Object[] a = c.toArray();</div><div class="line">        int numNew = a.length;</div><div class="line">        ensureCapacityInternal(size + numNew);</div><div class="line"></div><div class="line">        int numMoved = size - index;</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">            System.arraycopy(elementData, index, elementData, index + numNew,</div><div class="line">                             numMoved);</div><div class="line"></div><div class="line">        System.arraycopy(a, 0, elementData, index, numNew);</div><div class="line">        size += numNew;</div><div class="line">        return numNew != 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    protected void removeRange(int fromIndex, int toIndex) &#123;</div><div class="line">        modCount++;</div><div class="line">        int numMoved = size - toIndex;</div><div class="line">        System.arraycopy(elementData, toIndex, elementData, fromIndex,</div><div class="line">                         numMoved);</div><div class="line"></div><div class="line">        int newSize = size - (toIndex-fromIndex);</div><div class="line">        for (int i = newSize; i &lt; size; i++) &#123;</div><div class="line">            elementData[i] = null;</div><div class="line">        &#125;</div><div class="line">        size = newSize;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void rangeCheck(int index) &#123;</div><div class="line">        if (index &gt;= size)</div><div class="line">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void rangeCheckForAdd(int index) &#123;</div><div class="line">        if (index &gt; size || index &lt; 0)</div><div class="line">            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private String outOfBoundsMsg(int index) &#123;</div><div class="line">        return &quot;Index: &quot;+index+&quot;, Size: &quot;+size;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean removeAll(Collection&lt;?&gt; c) &#123;</div><div class="line">        return batchRemove(c, false);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean retainAll(Collection&lt;?&gt; c) &#123;</div><div class="line">        return batchRemove(c, true);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) &#123;</div><div class="line">        final Object[] elementData = this.elementData;</div><div class="line">        int r = 0, w = 0;</div><div class="line">        boolean modified = false;</div><div class="line">        try &#123;</div><div class="line">            for (; r &lt; size; r++)</div><div class="line">                if (c.contains(elementData[r]) == complement)</div><div class="line">                    elementData[w++] = elementData[r];</div><div class="line">        &#125; finally &#123;</div><div class="line">            if (r != size) &#123;</div><div class="line">                System.arraycopy(elementData, r,</div><div class="line">                                 elementData, w,</div><div class="line">                                 size - r);</div><div class="line">                w += size - r;</div><div class="line">            &#125;</div><div class="line">            if (w != size) &#123;</div><div class="line">                for (int i = w; i &lt; size; i++)</div><div class="line">                    elementData[i] = null;</div><div class="line">                modCount += size - w;</div><div class="line">                size = w;</div><div class="line">                modified = true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return modified;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void writeObject(java.io.ObjectOutputStream s)</div><div class="line">        throws java.io.IOException&#123;</div><div class="line">        int expectedModCount = modCount;</div><div class="line">        s.defaultWriteObject();</div><div class="line"></div><div class="line">        s.writeInt(size);</div><div class="line"></div><div class="line">        for (int i=0; i&lt;size; i++) &#123;</div><div class="line">            s.writeObject(elementData[i]);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (modCount != expectedModCount) &#123;</div><div class="line">            throw new ConcurrentModificationException();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void readObject(java.io.ObjectInputStream s)</div><div class="line">        throws java.io.IOException, ClassNotFoundException &#123;</div><div class="line">        elementData = EMPTY_ELEMENTDATA;</div><div class="line"></div><div class="line">        s.defaultReadObject();</div><div class="line"></div><div class="line">        s.readInt();</div><div class="line"></div><div class="line">        if (size &gt; 0) &#123;</div><div class="line">            ensureCapacityInternal(size);</div><div class="line"></div><div class="line">            Object[] a = elementData;</div><div class="line">            for (int i=0; i&lt;size; i++) &#123;</div><div class="line">                a[i] = s.readObject();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public ListIterator&lt;E&gt; listIterator(int index) &#123;</div><div class="line">        if (index &lt; 0 || index &gt; size)</div><div class="line">            throw new IndexOutOfBoundsException(&quot;Index: &quot;+index);</div><div class="line">        return new ListItr(index);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public ListIterator&lt;E&gt; listIterator() &#123;</div><div class="line">        return new ListItr(0);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Iterator&lt;E&gt; iterator() &#123;</div><div class="line">        return new Itr();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private class Itr implements Iterator&lt;E&gt; &#123;</div><div class="line">        int cursor;</div><div class="line">        int lastRet = -1;</div><div class="line">        int expectedModCount = modCount;</div><div class="line"></div><div class="line">        public boolean hasNext() &#123;</div><div class="line">            return cursor != size;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">        public E next() &#123;</div><div class="line">            checkForComodification();</div><div class="line">            int i = cursor;</div><div class="line">            if (i &gt;= size)</div><div class="line">                throw new NoSuchElementException();</div><div class="line">            Object[] elementData = ArrayList.this.elementData;</div><div class="line">            if (i &gt;= elementData.length)</div><div class="line">                throw new ConcurrentModificationException();</div><div class="line">            cursor = i + 1;</div><div class="line">            return (E) elementData[lastRet = i];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void remove() &#123;</div><div class="line">            if (lastRet &lt; 0)</div><div class="line">                throw new IllegalStateException();</div><div class="line">            checkForComodification();</div><div class="line"></div><div class="line">            try &#123;</div><div class="line">                ArrayList.this.remove(lastRet);</div><div class="line">                cursor = lastRet;</div><div class="line">                lastRet = -1;</div><div class="line">                expectedModCount = modCount;</div><div class="line">            &#125; catch (IndexOutOfBoundsException ex) &#123;</div><div class="line">                throw new ConcurrentModificationException();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        final void checkForComodification() &#123;</div><div class="line">            if (modCount != expectedModCount)</div><div class="line">                throw new ConcurrentModificationException();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private class ListItr extends Itr implements ListIterator&lt;E&gt; &#123;</div><div class="line">        ListItr(int index) &#123;</div><div class="line">            super();</div><div class="line">            cursor = index;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public boolean hasPrevious() &#123;</div><div class="line">            return cursor != 0;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public int nextIndex() &#123;</div><div class="line">            return cursor;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public int previousIndex() &#123;</div><div class="line">            return cursor - 1;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">        public E previous() &#123;</div><div class="line">            checkForComodification();</div><div class="line">            int i = cursor - 1;</div><div class="line">            if (i &lt; 0)</div><div class="line">                throw new NoSuchElementException();</div><div class="line">            Object[] elementData = ArrayList.this.elementData;</div><div class="line">            if (i &gt;= elementData.length)</div><div class="line">                throw new ConcurrentModificationException();</div><div class="line">            cursor = i;</div><div class="line">            return (E) elementData[lastRet = i];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void set(E e) &#123;</div><div class="line">            if (lastRet &lt; 0)</div><div class="line">                throw new IllegalStateException();</div><div class="line">            checkForComodification();</div><div class="line"></div><div class="line">            try &#123;</div><div class="line">                ArrayList.this.set(lastRet, e);</div><div class="line">            &#125; catch (IndexOutOfBoundsException ex) &#123;</div><div class="line">                throw new ConcurrentModificationException();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void add(E e) &#123;</div><div class="line">            checkForComodification();</div><div class="line"></div><div class="line">            try &#123;</div><div class="line">                int i = cursor;</div><div class="line">                ArrayList.this.add(i, e);</div><div class="line">                cursor = i + 1;</div><div class="line">                lastRet = -1;</div><div class="line">                expectedModCount = modCount;</div><div class="line">            &#125; catch (IndexOutOfBoundsException ex) &#123;</div><div class="line">                throw new ConcurrentModificationException();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public List&lt;E&gt; subList(int fromIndex, int toIndex) &#123;</div><div class="line">        subListRangeCheck(fromIndex, toIndex, size);</div><div class="line">        return new SubList(this, 0, fromIndex, toIndex);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static void subListRangeCheck(int fromIndex, int toIndex, int size) &#123;</div><div class="line">        if (fromIndex &lt; 0)</div><div class="line">            throw new IndexOutOfBoundsException(&quot;fromIndex = &quot; + fromIndex);</div><div class="line">        if (toIndex &gt; size)</div><div class="line">            throw new IndexOutOfBoundsException(&quot;toIndex = &quot; + toIndex);</div><div class="line">        if (fromIndex &gt; toIndex)</div><div class="line">            throw new IllegalArgumentException(&quot;fromIndex(&quot; + fromIndex +</div><div class="line">                                               &quot;) &gt; toIndex(&quot; + toIndex + &quot;)&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private class SubList extends AbstractList&lt;E&gt; implements RandomAccess &#123;</div><div class="line">        private final AbstractList&lt;E&gt; parent;</div><div class="line">        private final int parentOffset;</div><div class="line">        private final int offset;</div><div class="line">        int size;</div><div class="line"></div><div class="line">        SubList(AbstractList&lt;E&gt; parent,</div><div class="line">                int offset, int fromIndex, int toIndex) &#123;</div><div class="line">            this.parent = parent;</div><div class="line">            this.parentOffset = fromIndex;</div><div class="line">            this.offset = offset + fromIndex;</div><div class="line">            this.size = toIndex - fromIndex;</div><div class="line">            this.modCount = ArrayList.this.modCount;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public E set(int index, E e) &#123;</div><div class="line">            rangeCheck(index);</div><div class="line">            checkForComodification();</div><div class="line">            E oldValue = ArrayList.this.elementData(offset + index);</div><div class="line">            ArrayList.this.elementData[offset + index] = e;</div><div class="line">            return oldValue;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public E get(int index) &#123;</div><div class="line">            rangeCheck(index);</div><div class="line">            checkForComodification();</div><div class="line">            return ArrayList.this.elementData(offset + index);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public int size() &#123;</div><div class="line">            checkForComodification();</div><div class="line">            return this.size;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void add(int index, E e) &#123;</div><div class="line">            rangeCheckForAdd(index);</div><div class="line">            checkForComodification();</div><div class="line">            parent.add(parentOffset + index, e);</div><div class="line">            this.modCount = parent.modCount;</div><div class="line">            this.size++;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public E remove(int index) &#123;</div><div class="line">            rangeCheck(index);</div><div class="line">            checkForComodification();</div><div class="line">            E result = parent.remove(parentOffset + index);</div><div class="line">            this.modCount = parent.modCount;</div><div class="line">            this.size--;</div><div class="line">            return result;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        protected void removeRange(int fromIndex, int toIndex) &#123;</div><div class="line">            checkForComodification();</div><div class="line">            parent.removeRange(parentOffset + fromIndex,</div><div class="line">                               parentOffset + toIndex);</div><div class="line">            this.modCount = parent.modCount;</div><div class="line">            this.size -= toIndex - fromIndex;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">            return addAll(this.size, c);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</div><div class="line">            rangeCheckForAdd(index);</div><div class="line">            int cSize = c.size();</div><div class="line">            if (cSize==0)</div><div class="line">                return false;</div><div class="line"></div><div class="line">            checkForComodification();</div><div class="line">            parent.addAll(parentOffset + index, c);</div><div class="line">            this.modCount = parent.modCount;</div><div class="line">            this.size += cSize;</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public Iterator&lt;E&gt; iterator() &#123;</div><div class="line">            return listIterator();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public ListIterator&lt;E&gt; listIterator(final int index) &#123;</div><div class="line">            checkForComodification();</div><div class="line">            rangeCheckForAdd(index);</div><div class="line">            final int offset = this.offset;</div><div class="line"></div><div class="line">            return new ListIterator&lt;E&gt;() &#123;</div><div class="line">                int cursor = index;</div><div class="line">                int lastRet = -1;</div><div class="line">                int expectedModCount = ArrayList.this.modCount;</div><div class="line"></div><div class="line">                public boolean hasNext() &#123;</div><div class="line">                    return cursor != SubList.this.size;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">                public E next() &#123;</div><div class="line">                    checkForComodification();</div><div class="line">                    int i = cursor;</div><div class="line">                    if (i &gt;= SubList.this.size)</div><div class="line">                        throw new NoSuchElementException();</div><div class="line">                    Object[] elementData = ArrayList.this.elementData;</div><div class="line">                    if (offset + i &gt;= elementData.length)</div><div class="line">                        throw new ConcurrentModificationException();</div><div class="line">                    cursor = i + 1;</div><div class="line">                    return (E) elementData[offset + (lastRet = i)];</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                public boolean hasPrevious() &#123;</div><div class="line">                    return cursor != 0;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">                public E previous() &#123;</div><div class="line">                    checkForComodification();</div><div class="line">                    int i = cursor - 1;</div><div class="line">                    if (i &lt; 0)</div><div class="line">                        throw new NoSuchElementException();</div><div class="line">                    Object[] elementData = ArrayList.this.elementData;</div><div class="line">                    if (offset + i &gt;= elementData.length)</div><div class="line">                        throw new ConcurrentModificationException();</div><div class="line">                    cursor = i;</div><div class="line">                    return (E) elementData[offset + (lastRet = i)];</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                public int nextIndex() &#123;</div><div class="line">                    return cursor;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                public int previousIndex() &#123;</div><div class="line">                    return cursor - 1;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                public void remove() &#123;</div><div class="line">                    if (lastRet &lt; 0)</div><div class="line">                        throw new IllegalStateException();</div><div class="line">                    checkForComodification();</div><div class="line"></div><div class="line">                    try &#123;</div><div class="line">                        SubList.this.remove(lastRet);</div><div class="line">                        cursor = lastRet;</div><div class="line">                        lastRet = -1;</div><div class="line">                        expectedModCount = ArrayList.this.modCount;</div><div class="line">                    &#125; catch (IndexOutOfBoundsException ex) &#123;</div><div class="line">                        throw new ConcurrentModificationException();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                public void set(E e) &#123;</div><div class="line">                    if (lastRet &lt; 0)</div><div class="line">                        throw new IllegalStateException();</div><div class="line">                    checkForComodification();</div><div class="line"></div><div class="line">                    try &#123;</div><div class="line">                        ArrayList.this.set(offset + lastRet, e);</div><div class="line">                    &#125; catch (IndexOutOfBoundsException ex) &#123;</div><div class="line">                        throw new ConcurrentModificationException();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                public void add(E e) &#123;</div><div class="line">                    checkForComodification();</div><div class="line"></div><div class="line">                    try &#123;</div><div class="line">                        int i = cursor;</div><div class="line">                        SubList.this.add(i, e);</div><div class="line">                        cursor = i + 1;</div><div class="line">                        lastRet = -1;</div><div class="line">                        expectedModCount = ArrayList.this.modCount;</div><div class="line">                    &#125; catch (IndexOutOfBoundsException ex) &#123;</div><div class="line">                        throw new ConcurrentModificationException();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                final void checkForComodification() &#123;</div><div class="line">                    if (expectedModCount != ArrayList.this.modCount)</div><div class="line">                        throw new ConcurrentModificationException();</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public List&lt;E&gt; subList(int fromIndex, int toIndex) &#123;</div><div class="line">            subListRangeCheck(fromIndex, toIndex, size);</div><div class="line">            return new SubList(this, offset, fromIndex, toIndex);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        private void rangeCheck(int index) &#123;</div><div class="line">            if (index &lt; 0 || index &gt;= this.size)</div><div class="line">                throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        private void rangeCheckForAdd(int index) &#123;</div><div class="line">            if (index &lt; 0 || index &gt; this.size)</div><div class="line">                throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        private String outOfBoundsMsg(int index) &#123;</div><div class="line">            return &quot;Index: &quot;+index+&quot;, Size: &quot;+this.size;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        private void checkForComodification() &#123;</div><div class="line">            if (ArrayList.this.modCount != this.modCount)</div><div class="line">                throw new ConcurrentModificationException();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="层级关系"><a href="#层级关系" class="headerlink" title="层级关系"></a>层级关系</h1><h2 id="本类直接继承的抽象类"><a href="#本类直接继承的抽象类" class="headerlink" title="本类直接继承的抽象类"></a>本类直接继承的抽象类</h2><ul>
+<li><a href="http://reimuwang.org/2017/06/19/java7%E6%BA%90%E7%A0%81-javautilAbstractListE/" target="_blank" rel="external">java.util.AbstractList<e></e></a></li>
+</ul>
+<h2 id="本类直接实现的接口"><a href="#本类直接实现的接口" class="headerlink" title="本类直接实现的接口"></a>本类直接实现的接口</h2><ul>
+<li><a href="http://reimuwang.org/2017/05/25/java7%E6%BA%90%E7%A0%81-javautilListE/" target="_blank" rel="external">java.util.List<e></e></a></li>
+<li><a href="">java.util.RandomAccess</a></li>
+<li><a href="">java.lang.Cloneable</a></li>
+<li><a href="">java.io.Serializable</a></li>
+</ul>
+<h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本类以可变大小的数组实现List接口。本类实现了所有可选的list操作，允许包含所有元素，包括空。除了实现List接口外，本类提供调整本类内部用于存储list的数组的长度的方法（除了Vector不具备序列化能力外，粗略的讲，可以认为本类与Vector等价）。</p>
+<p>size()，isEmpty()，get(int index)，set(int index, E element)，iterator()，listIterator()时间复杂度为O(1)。add(E e)的时间复杂度为常数恒定分摊时间（添加一个元素为O(1)，若需扩容则需大于O(1)的时间）。即：添加n个元素需要O(n)的时间。所有其他的操作花费线性阶的时间（粗略的讲）。总体来说，时间复杂度较之LinkedList要低。</p>
+<h2 id="capacity"><a href="#capacity" class="headerlink" title="capacity"></a>capacity</h2><p>每一个本类的实例都有一个容量，容量是指被用于存储list中的元素的数组的长度。它的长度总是至少等于list的长度。随着元素被插入arrayList，该数组的长度会自动增长。只要满足添加一个元素的时间复杂度为常数恒定分摊时间即可，对于扩容策略的细节并未有强制规定。</p>
+<p>应用可以在向arrayList中添加大量元素前使用ensureCapacity(int minCapacity)对arrayList进行扩容。这样可以减少重新分配增量空间的次数。</p>
+<h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><p>注意，本实现是线程不安全的。如果复数个线程同时访问一个arrayList实例，并且至少一个线程对arrayList做出了结构性修改，则必须要在调用外部保证线程安全（结构性操作是指任何添加或删除一个或一个以上元素的操作，或者更确切的说，改变了内部数组的大小。仅仅只是设置一个元素的值不是结构性变化）。这通常是依靠天然封装list的对象实现线程安全。若不存在这样的对象，则list应该被</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Collections.synchronizedList(List&lt;T&gt; list)</div></pre></td></tr></table></figure>
+<p>所封装。即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List list = Collections.synchronizedList(new ArrayList(...));</div></pre></td></tr></table></figure>
+<p>该操作最好在声明arrayList时即进行，以避免意外情况下会有线程不安全的访问请求list。</p>
+<h2 id="fail-fast"><a href="#fail-fast" class="headerlink" title="fail-fast"></a>fail-fast</h2><p>本类iterator()及listIterator()返回的迭代器采用快速失败模式：在迭代器创建后，若list在任何时候以任何方式发生了结构性变化，除非原因是因为迭代器本身触发（具体来说：ListIterator.remove()及ListIterator.add(E e)），否则迭代器会抛出ConcurrentModificationException。因此，在面对并发性修改时，迭代器会简单明了的失败，而非依据实际的改变情况，在未来采取不确定的行为。</p>
+<p>通常来说，事实上fail-fast模式并不能完全根除线程不安全的并发修改。fail-fast模式只是尽力而为，若实在力有不逮则迭代器会抛出ConcurrentModificationException。因此在程序中完全依靠fail-fast避免线程安全问题是错误的：fail-fast模式应该只被用于检测bug。</p>
+<h2 id="所属"><a href="#所属" class="headerlink" title="所属"></a>所属</h2><p>本类是java集合框架中的一员。</p>
+<h1 id="private-static-final-long-serialVersionUID"><a href="#private-static-final-long-serialVersionUID" class="headerlink" title="private static final long serialVersionUID"></a>private static final long serialVersionUID</h1><h2 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private static final long serialVersionUID = 8683452581122892189L;</div></pre></td></tr></table></figure>
+<h1 id="private-static-final-int-DEFAULT-CAPACITY"><a href="#private-static-final-int-DEFAULT-CAPACITY" class="headerlink" title="private static final int DEFAULT_CAPACITY"></a>private static final int DEFAULT_CAPACITY</h1><h2 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private static final int DEFAULT_CAPACITY = 10;</div></pre></td></tr></table></figure>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>默认初始化容量。</p>
+<h1 id="private-static-final-Object-EMPTY-ELEMENTDATA"><a href="#private-static-final-Object-EMPTY-ELEMENTDATA" class="headerlink" title="private static final Object[] EMPTY_ELEMENTDATA"></a>private static final Object[] EMPTY_ELEMENTDATA</h1><h2 id="源码-3"><a href="#源码-3" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</div></pre></td></tr></table></figure>
+<h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><p>供本类空实例使用的空数组。</p>
+<h1 id="private-transient-Object-elementData"><a href="#private-transient-Object-elementData" class="headerlink" title="private transient Object[] elementData"></a>private transient Object[] elementData</h1><h2 id="源码-4"><a href="#源码-4" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private transient Object[] elementData;</div></pre></td></tr></table></figure>
+<h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>用于存储arrayList中的元素的数组。arrayList的容量即为本数组的长度。任意有elementData == EMPTY_ELEMENTDATA的空arrayList在插入第一个元素时都会被扩展为DEFAULT_CAPACITY。</p>
+<h1 id="private-int-size"><a href="#private-int-size" class="headerlink" title="private int size"></a>private int size</h1><h2 id="源码-5"><a href="#源码-5" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private int size;</div></pre></td></tr></table></figure>
+<h2 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h2><p>arrayList的长度（arrayList包含的元素个数）。</p>
+<h1 id="public-ArrayList-int-initialCapacity"><a href="#public-ArrayList-int-initialCapacity" class="headerlink" title="public ArrayList(int initialCapacity)"></a>public ArrayList(int initialCapacity)</h1><h2 id="源码-6"><a href="#源码-6" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public ArrayList(int initialCapacity) &#123;</div><div class="line">    super();</div><div class="line">    if (initialCapacity &lt; 0)</div><div class="line">        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</div><div class="line">                                           initialCapacity);</div><div class="line">    this.elementData = new Object[initialCapacity];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h2><p>以initialCapacity为初始化容量构建一个空arrayList。</p>
+<p>该方法会抛出如下异常：</p>
+<ul>
+<li>IllegalArgumentException：initialCapacity &lt; 0。</li>
+</ul>
+<h1 id="public-ArrayList"><a href="#public-ArrayList" class="headerlink" title="public ArrayList()"></a>public ArrayList()</h1><h2 id="源码-7"><a href="#源码-7" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public ArrayList() &#123;</div><div class="line">    super();</div><div class="line">    this.elementData = EMPTY_ELEMENTDATA;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h2><p>以默认容量10构造一个空arrayList（刚构造完成时数组依然是EMPTY_ELEMENTDATA，即空数组。需要第一个元素插入进来后才会自动扩展为长度为10的数组）。</p>
+<h1 id="public-ArrayList-Collection-lt-extends-E-gt-c"><a href="#public-ArrayList-Collection-lt-extends-E-gt-c" class="headerlink" title="public ArrayList(Collection&lt;? extends E&gt; c)"></a>public ArrayList(Collection&lt;? extends E&gt; c)</h1><h2 id="源码-8"><a href="#源码-8" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public ArrayList(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">    elementData = c.toArray();</div><div class="line">    size = elementData.length;</div><div class="line">    // c.toArray()可能不返回Object[]（见6260652）</div><div class="line">    if (elementData.getClass() != Object[].class)</div><div class="line">        elementData = Arrays.copyOf(elementData, size, Object[].class);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述-6"><a href="#描述-6" class="headerlink" title="描述"></a>描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">copyOf(U[] r, int i, Class&lt;? extends T[]&gt; newType)</div><div class="line"></div><div class="line">说明：以r为基础返回一个长度为i的数组，返回数组的类型为newType，若i&lt;r.length则r发生截断，实际返回的数组为r中索引[0,i-1]的元素；若i=r.length，则返回的数组与r相等；若i&gt;r.length，返回的数组中索引为[0, r.length-1]的元素为r中对应位置的元素，返回的数组中索引为[r.length, i-1]的元素以null填充。无论如何，返回的数组都是新生成的，与r不存在引用关系。返回的数组中的元素是r中元素的浅拷贝。</div></pre></td></tr></table></figure>
+<p>c.toArray()可能不返回Object[]（见6260652）说明：因为c可以是任意的Collection实现，而Collection对toArray()的返回值仅仅是要求Object[]，即实际的返回可以是任意Object的子类。</p>
+<h1 id="public-void-trimToSize"><a href="#public-void-trimToSize" class="headerlink" title="public void trimToSize()"></a>public void trimToSize()</h1><h2 id="源码-9"><a href="#源码-9" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public void trimToSize() &#123;</div><div class="line">    modCount++;</div><div class="line">    if (size &lt; elementData.length) &#123;</div><div class="line">        elementData = Arrays.copyOf(elementData, size);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述-7"><a href="#描述-7" class="headerlink" title="描述"></a>描述</h2><p>裁剪arrayList的容量为list当前的实际长度。应用可以使用本方法达到arrayList的存储空间占用最小化。</p>
+<p>modCount说明，取自超类AbstractList：</p>
+<p>abstractList发生结构性变化的次数。结构性变化是指改变abstractList的长度，或是其他会使迭代器结果混乱的变化。</p>
+<p>本字段将被iterator()返回的iterator及listIterator()返回的listIterator使用。若本字段发生了 iterator/listIterator 所没有预期到的变化，则在调用 iterator/listIterator 的next()，remove()，previous()，set(E e)，add(E e)出现fail-fast时抛出ConcurrentModificationException。</p>
+<p>在迭代过程中，若检测到并发性变化，则直接判定为失败并抛出异常（fail-fast），而不会去进一步检测所发生的并发性变化是否真的会对迭代造成影响（non-deterministic）。</p>
+<p>子类可自行选择是否使用本字段。若子类决定继承本类的fail-fast判定，则只需要在会引发结构性变化的方法中增加本字段的值。本类中已实现的引发结构性变化的方法有add(int index, E element)及remove(int index)。调用一次add(int index, E element)或remove(int index)只需将本字段自增1，表示发生了一次结构性变化，否则 iterator/listIterator 会抛出错误的ConcurrentModificationException。</p>
+<p>若子类不想遵循fail-fast，忽略本字段即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Arrays.copyOf(r, i)</div><div class="line">说明：以r为基础返回一个长度为i的数组，若i&lt;r.length则r发生截断，实际返回的数组为r中索引[0,i-1]的元素；若i=r.length，则返回的数组与r相等；若i&gt;r.length，返回的数组中索引为[0, r.length-1]的元素为r中对应位置的元素，返回的数组中索引为[r.length, i-1]的元素以null填充。无论如何，返回的数组都是新生成的，与r不存在引用关系。返回的数组中的元素是r中元素的浅拷贝。</div></pre></td></tr></table></figure>
+<h1 id="public-void-ensureCapacity-int-minCapacity"><a href="#public-void-ensureCapacity-int-minCapacity" class="headerlink" title="public void ensureCapacity(int minCapacity)"></a>public void ensureCapacity(int minCapacity)</h1><h2 id="源码-10"><a href="#源码-10" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public void ensureCapacity(int minCapacity) &#123;</div><div class="line">    int minExpand = (elementData != EMPTY_ELEMENTDATA)</div><div class="line">        // 当前数组已不是空，不需再申请空间</div><div class="line">        ? 0</div><div class="line">        // 当前数组仍为空（初始化状态），申请默认大小</div><div class="line">        : DEFAULT_CAPACITY;</div><div class="line"></div><div class="line">    if (minCapacity &gt; minExpand) &#123;    // 默认大小不需要在此显式申请</div><div class="line">        ensureExplicitCapacity(minCapacity);    // 申请满足minCapacity的空间</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="描述-8"><a href="#描述-8" class="headerlink" title="描述"></a>描述</h2><p>若有必要，增加arrayList的容量，以确保arrayList至少可容纳minCapacity个元素。</p>
+<p>本方法只在arrayList仍为空时有效，一旦arrayList中已有数据，本方法失效。</p>
+<h1 id="private-void-ensureCapacityInternal-int-minCapacity"><a href="#private-void-ensureCapacityInternal-int-minCapacity" class="headerlink" title="private void ensureCapacityInternal(int minCapacity)"></a>private void ensureCapacityInternal(int minCapacity)</h1><h2 id="源码-11"><a href="#源码-11" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">private void ensureCapacityInternal(int minCapacity) &#123;</div><div class="line">    if (elementData == EMPTY_ELEMENTDATA) &#123;</div><div class="line">        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ensureExplicitCapacity(minCapacity);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="private-void-ensureExplicitCapacity-int-minCapacity"><a href="#private-void-ensureExplicitCapacity-int-minCapacity" class="headerlink" title="private void ensureExplicitCapacity(int minCapacity)"></a>private void ensureExplicitCapacity(int minCapacity)</h1><h2 id="源码-12"><a href="#源码-12" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">private void ensureExplicitCapacity(int minCapacity) &#123;</div><div class="line">    modCount++;</div><div class="line"></div><div class="line">    // 内存溢出保护代码</div><div class="line">    if (minCapacity - elementData.length &gt; 0)</div><div class="line">        grow(minCapacity);    // 申请满足minCapacity的空间</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/源码/" rel="tag"># 源码</a>
+          
+            <a href="/tags/Collection/" rel="tag"># Collection</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/04/java7源码-javaioSerializable/" rel="prev" title="java7源码-java.io.Serializable">
+                java7源码-java.io.Serializable <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ReimuWang" />
+          <p class="site-author-name" itemprop="name">ReimuWang</p>
+           
+              <p class="site-description motion-element" itemprop="description">Thou Shalt Comment</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层级关系"><span class="nav-number">2.</span> <span class="nav-text">层级关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本类直接继承的抽象类"><span class="nav-number">2.1.</span> <span class="nav-text">本类直接继承的抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本类直接实现的接口"><span class="nav-number">2.2.</span> <span class="nav-text">本类直接实现的接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">3.</span> <span class="nav-text">综述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#capacity"><span class="nav-number">3.1.</span> <span class="nav-text">capacity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized"><span class="nav-number">3.2.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fail-fast"><span class="nav-number">3.3.</span> <span class="nav-text">fail-fast</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所属"><span class="nav-number">3.4.</span> <span class="nav-text">所属</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-static-final-long-serialVersionUID"><span class="nav-number">4.</span> <span class="nav-text">private static final long serialVersionUID</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-1"><span class="nav-number">4.1.</span> <span class="nav-text">源码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-static-final-int-DEFAULT-CAPACITY"><span class="nav-number">5.</span> <span class="nav-text">private static final int DEFAULT_CAPACITY</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-2"><span class="nav-number">5.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">5.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-static-final-Object-EMPTY-ELEMENTDATA"><span class="nav-number">6.</span> <span class="nav-text">private static final Object[] EMPTY_ELEMENTDATA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-3"><span class="nav-number">6.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-1"><span class="nav-number">6.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-transient-Object-elementData"><span class="nav-number">7.</span> <span class="nav-text">private transient Object[] elementData</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-4"><span class="nav-number">7.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-2"><span class="nav-number">7.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-int-size"><span class="nav-number">8.</span> <span class="nav-text">private int size</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-5"><span class="nav-number">8.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-3"><span class="nav-number">8.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#public-ArrayList-int-initialCapacity"><span class="nav-number">9.</span> <span class="nav-text">public ArrayList(int initialCapacity)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-6"><span class="nav-number">9.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-4"><span class="nav-number">9.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#public-ArrayList"><span class="nav-number">10.</span> <span class="nav-text">public ArrayList()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-7"><span class="nav-number">10.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-5"><span class="nav-number">10.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#public-ArrayList-Collection-lt-extends-E-gt-c"><span class="nav-number">11.</span> <span class="nav-text">public ArrayList(Collection<? extends E> c)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-8"><span class="nav-number">11.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-6"><span class="nav-number">11.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#public-void-trimToSize"><span class="nav-number">12.</span> <span class="nav-text">public void trimToSize()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-9"><span class="nav-number">12.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-7"><span class="nav-number">12.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#public-void-ensureCapacity-int-minCapacity"><span class="nav-number">13.</span> <span class="nav-text">public void ensureCapacity(int minCapacity)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-10"><span class="nav-number">13.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-8"><span class="nav-number">13.2.</span> <span class="nav-text">描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-void-ensureCapacityInternal-int-minCapacity"><span class="nav-number">14.</span> <span class="nav-text">private void ensureCapacityInternal(int minCapacity)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-11"><span class="nav-number">14.1.</span> <span class="nav-text">源码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#private-void-ensureExplicitCapacity-int-minCapacity"><span class="nav-number">15.</span> <span class="nav-text">private void ensureExplicitCapacity(int minCapacity)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码-12"><span class="nav-number">15.1.</span> <span class="nav-text">源码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+      <div id="music163player">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=468490579&auto=0&height=66"></iframe>
+      </div>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ReimuWang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "5fa5a9a1c1714e08bbe2b872a7420625",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8EnYI3lo055oPaUPw9q15PgA-gzGzoHsz", "tCqaCeEinbik59cVG6GWmixT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <a href="https://github.com/ReimuWang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+</body>
+</html>

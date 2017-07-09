@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/22/java7源码-javautilRandomAccess/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
 <meta property="og:description" content="源码">
-<meta property="og:updated_time" content="2017-06-22T10:46:53.288Z">
+<meta property="og:updated_time" content="2017-07-04T09:02:01.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java7源码-java.util.RandomAccess">
 <meta name="twitter:description" content="源码">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  358
+                  640
                 </span>
               
 
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -426,7 +426,12 @@
 <p>循环2：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for (Iterator i=list.iterator(); i.hasNext(); )</div><div class="line">    i.next();</div></pre></td></tr></table></figure>
 <p>本接口是java集合框架中的一员。</p>
-
+<p>换句话说，在欲迭代一个list之前，最好先判断其是否已实现了本接口。然后采取不同的调用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">if (list instance of RandomAccess) &#123;</div><div class="line">    for(int i = 0; i &lt; list.size(); i++)&#123;</div><div class="line">        // TODO</div><div class="line">    &#125;</div><div class="line">&#125;else&#123;</div><div class="line">    Iterator iterator = list.iterator();</div><div class="line">    while(iterator.hasNext())&#123;</div><div class="line">        // TODO</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以下类是对性能的测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.Iterator;</div><div class="line">import java.util.LinkedList;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import org.junit.Test;</div><div class="line"></div><div class="line">public class TestRandomAccess &#123;</div><div class="line"></div><div class="line">    private final static int LIST_SIZE = 1000;</div><div class="line"></div><div class="line">    private final static int TEST_COUNT = 1000; </div><div class="line"></div><div class="line">    @Test</div><div class="line">    public void testRandomAccess() &#123;</div><div class="line">      List&lt;Integer&gt; arraylist = new ArrayList&lt;Integer&gt;();</div><div class="line">      for (int i = 0; i &lt; TestRandomAccess.LIST_SIZE; i++)  arraylist.add(i);</div><div class="line">      List&lt;Integer&gt; linkedList = new LinkedList&lt;Integer&gt;();</div><div class="line">      for (int i = 0; i &lt; TestRandomAccess.LIST_SIZE; i++)  linkedList.add(i);</div><div class="line"></div><div class="line">      System.out.println(&quot;size=&quot; + TestRandomAccess.LIST_SIZE + &quot;,test count=&quot; + TestRandomAccess.TEST_COUNT + &quot;\n&quot;);</div><div class="line">      System.out.println(&quot;ArrayList for time=&quot; + this.forTime(arraylist));</div><div class="line">      System.out.println(&quot;ArrayList iterator time=&quot; + this.iteratorTime(arraylist));</div><div class="line">      System.out.println(&quot;LinkedList for time=&quot; + this.forTime(linkedList));</div><div class="line">      System.out.println(&quot;LinkedList iterator time=&quot; + this.iteratorTime(linkedList));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private long forTime(List&lt;Integer&gt; list) &#123;</div><div class="line">        long beginTime = System.currentTimeMillis();</div><div class="line">        for (int count = 0; count &lt; TestRandomAccess.TEST_COUNT; count++) &#123;</div><div class="line">            for (int i = 0; i &lt; list.size(); i++) list.get(i);</div><div class="line">        &#125;</div><div class="line">        return System.currentTimeMillis() - beginTime;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private long iteratorTime(List&lt;Integer&gt; list) &#123;</div><div class="line">        long beginTime = System.currentTimeMillis();</div><div class="line">        for (int count = 0; count &lt; TestRandomAccess.TEST_COUNT; count++) &#123;</div><div class="line">            Iterator&lt;Integer&gt; iterator = list.iterator();</div><div class="line">            while(iterator.hasNext()) iterator.next();</div><div class="line">        &#125;</div><div class="line">        return System.currentTimeMillis() - beginTime;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">size=1000,test count=1000</div><div class="line"></div><div class="line">ArrayList for time=7</div><div class="line">ArrayList iterator time=12</div><div class="line">LinkedList for time=466</div><div class="line">LinkedList iterator time=15</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -472,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/02/传智springmvcmybatisday1-7mybatis和hibernate的适用场景/" rel="next" title="传智 springmvc+mybatis day1-7.mybatis和hibernate的适用场景">
-                <i class="fa fa-chevron-left"></i> 传智 springmvc+mybatis day1-7.mybatis和hibernate的适用场景
+              <a href="/2017/06/28/java7源码-javautilAbstractSetE/" rel="next" title="java7源码-java.util.AbstractSet<E>">
+                <i class="fa fa-chevron-left"></i> java7源码-java.util.AbstractSet<E>
               </a>
             
           </div>
@@ -558,7 +563,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
