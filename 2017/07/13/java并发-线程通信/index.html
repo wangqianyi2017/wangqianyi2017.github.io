@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。 例如，线程B可以等待线程A的一个信号，这个信号会通知线程B数据已经准备好了。本文将讲解以下几个JAVA线程间通信的主题：  通过共享对象通信 忙等待 wait(),notify()和notifyAll() 丢失的信号  通过共享对象通信线程间发送信号的一个简单方式是在共享对象的变量里设置信号值。线程A在一">
+<meta name="description" content="线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。 例如，线程B可以等待线程A的一个信号，这个信号会通知线程B数据已经准备好了。本文将讲解以下几个JAVA线程间通信的主题：  通过共享对象通信 忙等待 wait(),notify()和notifyAll() 丢失的信号">
 <meta name="keywords" content="java,并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java并发-线程通信">
 <meta property="og:url" content="http://yoursite.com/2017/07/13/java并发-线程通信/index.html">
 <meta property="og:site_name" content="ReimuWang's Blog">
-<meta property="og:description" content="线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。 例如，线程B可以等待线程A的一个信号，这个信号会通知线程B数据已经准备好了。本文将讲解以下几个JAVA线程间通信的主题：  通过共享对象通信 忙等待 wait(),notify()和notifyAll() 丢失的信号  通过共享对象通信线程间发送信号的一个简单方式是在共享对象的变量里设置信号值。线程A在一">
-<meta property="og:updated_time" content="2017-07-16T15:35:15.798Z">
+<meta property="og:description" content="线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。 例如，线程B可以等待线程A的一个信号，这个信号会通知线程B数据已经准备好了。本文将讲解以下几个JAVA线程间通信的主题：  通过共享对象通信 忙等待 wait(),notify()和notifyAll() 丢失的信号">
+<meta property="og:updated_time" content="2017-08-10T05:33:10.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java并发-线程通信">
-<meta name="twitter:description" content="线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。 例如，线程B可以等待线程A的一个信号，这个信号会通知线程B数据已经准备好了。本文将讲解以下几个JAVA线程间通信的主题：  通过共享对象通信 忙等待 wait(),notify()和notifyAll() 丢失的信号  通过共享对象通信线程间发送信号的一个简单方式是在共享对象的变量里设置信号值。线程A在一">
+<meta name="twitter:description" content="线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。 例如，线程B可以等待线程A的一个信号，这个信号会通知线程B数据已经准备好了。本文将讲解以下几个JAVA线程间通信的主题：  通过共享对象通信 忙等待 wait(),notify()和notifyAll() 丢失的信号">
 
 
 
@@ -415,8 +415,7 @@
       
 
       
-        <a id="more"></a>
-<p>线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。</p>
+        <p>线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。</p>
 <p>例如，线程B可以等待线程A的一个信号，这个信号会通知线程B数据已经准备好了。本文将讲解以下几个JAVA线程间通信的主题：</p>
 <ol>
 <li>通过共享对象通信</li>
@@ -424,6 +423,7 @@
 <li>wait(),notify()和notifyAll()</li>
 <li>丢失的信号</li>
 </ol>
+<a id="more"></a>
 <h1 id="通过共享对象通信"><a href="#通过共享对象通信" class="headerlink" title="通过共享对象通信"></a>通过共享对象通信</h1><p>线程间发送信号的一个简单方式是在共享对象的变量里设置信号值。线程A在一个同步块里设置boolean型成员变量hasDataToProcess为true，线程B也在同步块里读取hasDataToProcess这个成员变量。这个简单的例子使用了一个持有信号的对象，并提供了set和check方法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class MySignal &#123;</div><div class="line"></div><div class="line">  protected boolean hasDataToProcess = false;</div><div class="line"></div><div class="line">  public synchronized boolean hasDataToProcess() &#123;</div><div class="line">    return this.hasDataToProcess;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public synchronized void setHasDataToProcess(boolean hasData) &#123;</div><div class="line">    this.hasDataToProcess = hasData;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>线程A和B必须获得指向一个MySignal共享实例的引用，以便进行通信。如果它们持有的引用指向不同的MySingal实例，那么彼此将不能检测到对方的信号。需要处理的数据可以存放在一个共享缓存区里，它和MySignal实例是分开存放的。</p>
