@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="mybatis jar包下载：Releases · mybatis/mybatis-3">
+<meta name="description" content="mybatis3 jar包下载：Releases · mybatis/mybatis-3">
 <meta name="keywords" content="java,jdbc,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="传智 springmvc+mybatis day1-3.mybatis工程结构">
 <meta property="og:url" content="http://yoursite.com/2017/05/19/传智springmvcmybatisday1-3mybatis工程结构/index.html">
 <meta property="og:site_name" content="王艺凯的博客">
-<meta property="og:description" content="mybatis jar包下载：Releases · mybatis/mybatis-3">
+<meta property="og:description" content="mybatis3 jar包下载：Releases · mybatis/mybatis-3">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/3mybatis工程结构/0.jpg">
-<meta property="og:updated_time" content="2017-07-01T05:08:37.410Z">
+<meta property="og:updated_time" content="2017-08-10T14:57:22.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="传智 springmvc+mybatis day1-3.mybatis工程结构">
-<meta name="twitter:description" content="mybatis jar包下载：Releases · mybatis/mybatis-3">
+<meta name="twitter:description" content="mybatis3 jar包下载：Releases · mybatis/mybatis-3">
 <meta name="twitter:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/3mybatis工程结构/0.jpg">
 
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,038
+                  976
                 </span>
               
 
@@ -407,7 +407,7 @@
       
 
       
-        <p>mybatis jar包下载：<a href="https://github.com/mybatis/mybatis-3/releases" target="_blank" rel="external">Releases · mybatis/mybatis-3</a></p>
+        <p>mybatis3 jar包下载：<a href="https://github.com/mybatis/mybatis-3/releases" target="_blank" rel="external">Releases · mybatis/mybatis-3</a></p>
 <a id="more"></a>
 <h1 id="mybaitis-demo程序架构搭建"><a href="#mybaitis-demo程序架构搭建" class="headerlink" title="mybaitis demo程序架构搭建"></a>mybaitis demo程序架构搭建</h1><p>项目路径：</p>
 <ul>
@@ -416,33 +416,15 @@
 </ul>
 <p>项目架构：</p>
 <p><img src="/images/blog_pic/传智springmvcmybatisday1/3mybatis工程结构/0.jpg" alt="0.jpg"></p>
-<h2 id="pom-xml配置"><a href="#pom-xml配置" class="headerlink" title="pom.xml配置"></a>pom.xml配置</h2><p>引入mybatis核心包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.4.4&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>引入mybatis依赖包：commons-logging。</p>
-<p>作用：common-logging是apache提供的一个通用的日志接口。用户可以自由选择第三方的日志组件作为具体实现，像log4j，或者jdk自带的logging， common-logging会通过动态查找的机制，在程序运行时自动找出真正使用的日志库。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;commons-logging&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;commons-logging&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;1.2&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>引入依赖包：slf4j</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;1.7.25&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;1.7.25&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>引入依赖包：mysql-connector-java（mysql驱动）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;mysql&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;5.1.42&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>引入依赖包：asm</p>
-<p>作用：ASM是一个java字节码操纵框架，它能被用来动态生成类或者增强既有类的功能。ASM 可以直接产生二进制 class 文件，也可以在类被加载入 Java 虚拟机之前动态改变类行为。Java class 被存储在严格格式定义的 .class文件里，这些类文件拥有足够的元数据来解析类中的所有元素：类名称、方法、属性以及 Java 字节码（指令）。ASM从类文件中读入信息后，能够改变类行为，分析类信息，甚至能够根据用户要求生成新类。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;asm&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;asm&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.3.1&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>引入依赖包：cglib</p>
-<p>作用：CGlib是一个强大的，高性能，高质量的Code生成类库。它可以在运行期扩展Java类与实现Java接口。其底层是通过小而快的字节码处理框架ASM来转换字节码并生成新的类。大部分功能实际上是asm所提供的，CGlib只是封装了asm，简化了asm的操作，实现了在运行期动态生成新的class。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;cglib&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;cglib&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.2.5&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>引入依赖包：javassist</p>
-<p>作用：</p>
-<p>我们常用到的动态特性主要是反射，在运行时查找对象属性、方法，修改作用域，通过方法名称调用方法等。在线的应用不会频繁使用反射，因为反射的性能开销较大。其实还有一种和反射一样强大的特性，但是开销却很低，它就是Javassit。</p>
-<p>Javassit其实就是一个二方包，提供了运行时操作Java字节码的方法。大家都知道，Java代码编译完会生成.class文件，就是一堆字节码。JVM(准确说是JIT)会解释执行这些字节码(转换为机器码并执行)，由于字节码的解释执行是在运行时进行的，那我们能否手工编写字节码，再由JVM执行呢？答案是肯定的，而Javassist就提供了一些方便的方法，让我们通过这些方法生成字节码。</p>
-<p>类似字节码操作方法还有ASM。几种动态编程方法相比较，在性能上Javassist高于反射，但低于ASM，因为Javassist增加了一层抽象。在实现成本上Javassist和反射都很低，而ASM由于直接操作字节码，相比Javassist源码级别的api实现成本高很多。几个方法有自己的应用场景，比如Kryo使用的是ASM，追求性能的最大化。而NBeanCopyUtil采用的是Javassist，在对象拷贝的性能上也已经明显高于其他的库，并保持高易用性。实际项目中推荐先用Javassist实现原型，若在性能测试中发现Javassist成为了性能瓶颈，再考虑使用其他字节码操作方法做优化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.javassist&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;javassist&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.21.0-GA&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h2 id="pom-xml配置"><a href="#pom-xml配置" class="headerlink" title="pom.xml配置"></a>pom.xml配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line"></div><div class="line">其中：</div><div class="line"></div><div class="line">引入mybatis核心包：</div></pre></td></tr></table></figure>
+<p><dependency><br>  <groupid>org.mybatis</groupid><br>  <artifactid>mybatis</artifactid><br>  <version>3.4.4</version><br></dependency><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">引入mybatis依赖包：commons-logging。</div><div class="line"></div><div class="line">作用：common-logging是apache提供的一个通用的日志接口。用户可以自由选择第三方的日志组件作为具体实现，像log4j，或者jdk自带的logging， common-logging会通过动态查找的机制，在程序运行时自动找出真正使用的日志库。</div></pre></td></tr></table></figure></p>
+<p><dependency><br>  <groupid>commons-logging</groupid><br>  <artifactid>commons-logging</artifactid><br>  <version>1.2</version><br></dependency><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">引入依赖包：slf4j</div></pre></td></tr></table></figure></p>
+<p><dependency><br>  <groupid>org.slf4j</groupid><br>  <artifactid>slf4j-api</artifactid><br>  <version>1.7.25</version><br></dependency></p>
+<p><dependency><br>  <groupid>org.slf4j</groupid><br>  <artifactid>slf4j-log4j12</artifactid><br>  <version>1.7.25</version><br></dependency><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">引入依赖包：mysql-connector-java（mysql驱动）</div></pre></td></tr></table></figure></p>
+<p><dependency><br>  <groupid>mysql</groupid><br>  <artifactid>mysql-connector-java</artifactid><br>  <version>5.1.42</version><br></dependency><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">引入依赖包：asm</div><div class="line"></div><div class="line">作用：ASM是一个java字节码操纵框架，它能被用来动态生成类或者增强既有类的功能。ASM 可以直接产生二进制 class 文件，也可以在类被加载入 Java 虚拟机之前动态改变类行为。Java class 被存储在严格格式定义的 .class文件里，这些类文件拥有足够的元数据来解析类中的所有元素：类名称、方法、属性以及 Java 字节码（指令）。ASM从类文件中读入信息后，能够改变类行为，分析类信息，甚至能够根据用户要求生成新类。</div></pre></td></tr></table></figure></p>
+<p><dependency><br>  <groupid>asm</groupid><br>  <artifactid>asm</artifactid><br>  <version>3.3.1</version><br></dependency><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">引入依赖包：cglib</div><div class="line"></div><div class="line">作用：CGlib是一个强大的，高性能，高质量的Code生成类库。它可以在运行期扩展Java类与实现Java接口。其底层是通过小而快的字节码处理框架ASM来转换字节码并生成新的类。大部分功能实际上是asm所提供的，CGlib只是封装了asm，简化了asm的操作，实现了在运行期动态生成新的class。</div></pre></td></tr></table></figure></p>
+<p><dependency><br>  <groupid>cglib</groupid><br>  <artifactid>cglib</artifactid><br>  <version>3.2.5</version><br></dependency><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">引入依赖包：javassist</div><div class="line"></div><div class="line">作用：</div><div class="line"></div><div class="line">我们常用到的动态特性主要是反射，在运行时查找对象属性、方法，修改作用域，通过方法名称调用方法等。在线的应用不会频繁使用反射，因为反射的性能开销较大。其实还有一种和反射一样强大的特性，但是开销却很低，它就是Javassit。</div><div class="line"></div><div class="line">Javassit其实就是一个二方包，提供了运行时操作Java字节码的方法。大家都知道，Java代码编译完会生成.class文件，就是一堆字节码。JVM(准确说是JIT)会解释执行这些字节码(转换为机器码并执行)，由于字节码的解释执行是在运行时进行的，那我们能否手工编写字节码，再由JVM执行呢？答案是肯定的，而Javassist就提供了一些方便的方法，让我们通过这些方法生成字节码。</div><div class="line"></div><div class="line">类似字节码操作方法还有ASM。几种动态编程方法相比较，在性能上Javassist高于反射，但低于ASM，因为Javassist增加了一层抽象。在实现成本上Javassist和反射都很低，而ASM由于直接操作字节码，相比Javassist源码级别的api实现成本高很多。几个方法有自己的应用场景，比如Kryo使用的是ASM，追求性能的最大化。而NBeanCopyUtil采用的是Javassist，在对象拷贝的性能上也已经明显高于其他的库，并保持高易用性。实际项目中推荐先用Javassist实现原型，若在性能测试中发现Javassist成为了性能瓶颈，再考虑使用其他字节码操作方法做优化。</div></pre></td></tr></table></figure></p>
+<p><dependency><br>  <groupid>org.javassist</groupid><br>  <artifactid>javassist</artifactid><br>  <version>3.21.0-GA</version><br></dependency><br>```</p>
 <h2 id="mapper文件命名"><a href="#mapper文件命名" class="headerlink" title="mapper文件命名"></a>mapper文件命名</h2><p>最初，ibatis命名规则为：表名.xml。mybatis不会限定命名，但建议命名为：表名+mapper.xml。</p>
 <p>为体现循序渐进的演变过程，本demo程序使用ibatis的命名规范。</p>
 
