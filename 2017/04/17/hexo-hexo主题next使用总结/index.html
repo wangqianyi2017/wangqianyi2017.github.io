@@ -101,15 +101,13 @@
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/4.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/5.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/6.jpg">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/7.jpg">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/8.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/9.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/10.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/11.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/12.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/13.jpg">
 <meta property="og:image" content="http://yoursite.com/images/blog_pic/hexo/hexo主题next使用总结/14.jpg">
-<meta property="og:updated_time" content="2017-05-30T07:41:20.306Z">
+<meta property="og:updated_time" content="2017-08-10T05:44:49.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo-hexo主题next使用总结">
 <meta name="twitter:description" content="next安装打开git bash，进入hexo根目录，执行： 1git clone https://github.com/iissnan/hexo-theme-next themes/next/">
@@ -358,16 +356,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a class="cloud-tie-join-count" href="/2017/04/17/hexo-hexo主题next使用总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -396,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,108
+                  1,053
                 </span>
               
 
@@ -476,7 +464,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page &quot;categories&quot;</div></pre></td></tr></table></figure>
 <p>此时hexo/source/中将生成目录categories，打开该目录下的index.md文件，修改type字段：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type: &quot;categories&quot;</div></pre></td></tr></table></figure>
-<p>若启用网易云评论等评论插件，menu页面默认也会开启该功能，若要在某menu中取消该功能，以categories为例，在hexo/source/categories/index.md中添加：</p>
+<p>若启用了评论插件，menu页面默认也会开启该功能，若要在某menu中取消该功能，以categories为例，在hexo/source/categories/index.md中添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">comments: false</div></pre></td></tr></table></figure>
 <h1 id="侧边栏显示时机"><a href="#侧边栏显示时机" class="headerlink" title="侧边栏显示时机"></a>侧边栏显示时机</h1><p>侧边栏如下图所示：</p>
 <p><img src="/images/blog_pic/hexo/hexo主题next使用总结/1.jpg" alt="1.jpg"></p>
@@ -532,13 +520,6 @@
 <p><img src="/images/blog_pic/hexo/hexo主题next使用总结/6.jpg" alt="6.jpg"></p>
 <p>在hexo/themes/next/layout/_macro/sidebar.swig中的 <strong>div class=”sidebar-toggle”</strong> 中新建div，添加刚才复制的代码，例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;music163player&quot;&gt;</div><div class="line">  &lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=691506&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<h1 id="网易云跟帖"><a href="#网易云跟帖" class="headerlink" title="网易云跟帖"></a>网易云跟帖</h1><p>展示示例</p>
-<p><img src="/images/blog_pic/hexo/hexo主题next使用总结/7.jpg" alt="7.jpg"></p>
-<p>访问<a href="https://gentie.163.com/" target="_blank" rel="external">网易云跟贴</a>，注册并提交必要的站点信息后，获得productKey：</p>
-<p><img src="/images/blog_pic/hexo/hexo主题next使用总结/8.jpg" alt="8.jpg"></p>
-<p>修改next配置文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gentie_productKey: xxx</div></pre></td></tr></table></figure>
-<p>xxx为上文中得到的productKey。</p>
 <h1 id="添加Fork-me-on-GitHub"><a href="#添加Fork-me-on-GitHub" class="headerlink" title="添加Fork me on GitHub"></a>添加Fork me on GitHub</h1><p>展示示例</p>
 <p><img src="/images/blog_pic/hexo/hexo主题next使用总结/9.jpg" alt="9.jpg"></p>
 <p>访问<a href="https://github.com/blog/273-github-ribbons" target="_blank" rel="external">GitHub Ribbons</a>，挑选某个样式：</p>
@@ -643,8 +624,6 @@
           
   <div class="comments" id="comments">
     
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
   </div>
 
 
@@ -748,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#next安装"><span class="nav-number">1.</span> <span class="nav-text">next安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo配置文件路径"><span class="nav-number">2.</span> <span class="nav-text">hexo配置文件路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启用next"><span class="nav-number">3.</span> <span class="nav-text">启用next</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#next主题设定"><span class="nav-number">4.</span> <span class="nav-text">next主题设定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文章中添加图片"><span class="nav-number">5.</span> <span class="nav-text">文章中添加图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#菜单"><span class="nav-number">6.</span> <span class="nav-text">菜单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#侧边栏显示时机"><span class="nav-number">7.</span> <span class="nav-text">侧边栏显示时机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置头像"><span class="nav-number">8.</span> <span class="nav-text">设置头像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置logo"><span class="nav-number">9.</span> <span class="nav-text">设置logo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加404公益页面"><span class="nav-number">10.</span> <span class="nav-text">添加404公益页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加网易云音乐"><span class="nav-number">11.</span> <span class="nav-text">添加网易云音乐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网易云跟帖"><span class="nav-number">12.</span> <span class="nav-text">网易云跟帖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加Fork-me-on-GitHub"><span class="nav-number">13.</span> <span class="nav-text">添加Fork me on GitHub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字数统计功能"><span class="nav-number">14.</span> <span class="nav-text">字数统计功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#leancloud阅读次数统计"><span class="nav-number">15.</span> <span class="nav-text">leancloud阅读次数统计</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#next安装"><span class="nav-number">1.</span> <span class="nav-text">next安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo配置文件路径"><span class="nav-number">2.</span> <span class="nav-text">hexo配置文件路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启用next"><span class="nav-number">3.</span> <span class="nav-text">启用next</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#next主题设定"><span class="nav-number">4.</span> <span class="nav-text">next主题设定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文章中添加图片"><span class="nav-number">5.</span> <span class="nav-text">文章中添加图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#菜单"><span class="nav-number">6.</span> <span class="nav-text">菜单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#侧边栏显示时机"><span class="nav-number">7.</span> <span class="nav-text">侧边栏显示时机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置头像"><span class="nav-number">8.</span> <span class="nav-text">设置头像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置logo"><span class="nav-number">9.</span> <span class="nav-text">设置logo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加404公益页面"><span class="nav-number">10.</span> <span class="nav-text">添加404公益页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加网易云音乐"><span class="nav-number">11.</span> <span class="nav-text">添加网易云音乐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加Fork-me-on-GitHub"><span class="nav-number">12.</span> <span class="nav-text">添加Fork me on GitHub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字数统计功能"><span class="nav-number">13.</span> <span class="nav-text">字数统计功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#leancloud阅读次数统计"><span class="nav-number">14.</span> <span class="nav-text">leancloud阅读次数统计</span></a></li></ol></div>
             
 
           </div>
@@ -892,21 +871,18 @@
 
 
   
-    
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "5fa5a9a1c1714e08bbe2b872a7420625",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
   
 
 
 
 
+
+  
 
 
 
