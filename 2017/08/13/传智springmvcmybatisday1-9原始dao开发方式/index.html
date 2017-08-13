@@ -87,20 +87,19 @@
 
 
 
-<meta name="description" content="java使用jdbc操作关系型数据库。mybatis是对jdbc的封装。  mybatis开发dao（持久层）的两种方式：  原始：dao接口及dao实现均需程序员自己编写。 mapper代理：程序员只需要写dao接口。   jdbc操作数据库的效率比框架高。">
+<meta name="description" content="原始dao的开发方式程序员需要写dao接口及dao的接口实现。 项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_7">
 <meta name="keywords" content="java,jdbc,mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="传智 springmvc+mybatis day1-1.原生态jdbc编程中的问题总结">
-<meta property="og:url" content="http://yoursite.com/2017/05/18/传智springmvcmybatisday1-1原生态jdbc编程中的问题总结/index.html">
+<meta property="og:title" content="传智 springmvc+mybatis day1-9.原始dao开发方式">
+<meta property="og:url" content="http://yoursite.com/2017/08/13/传智springmvcmybatisday1-9原始dao开发方式/index.html">
 <meta property="og:site_name" content="王艺凯的博客">
-<meta property="og:description" content="java使用jdbc操作关系型数据库。mybatis是对jdbc的封装。  mybatis开发dao（持久层）的两种方式：  原始：dao接口及dao实现均需程序员自己编写。 mapper代理：程序员只需要写dao接口。   jdbc操作数据库的效率比框架高。">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/1原生态jdbc编程中的问题总结/0.jpg">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/1原生态jdbc编程中的问题总结/1.jpg">
-<meta property="og:updated_time" content="2017-08-10T16:21:58.800Z">
+<meta property="og:description" content="原始dao的开发方式程序员需要写dao接口及dao的接口实现。 项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_7">
+<meta property="og:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/9原始dao开发方式/0.jpg">
+<meta property="og:updated_time" content="2017-08-13T07:44:18.171Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="传智 springmvc+mybatis day1-1.原生态jdbc编程中的问题总结">
-<meta name="twitter:description" content="java使用jdbc操作关系型数据库。mybatis是对jdbc的封装。  mybatis开发dao（持久层）的两种方式：  原始：dao接口及dao实现均需程序员自己编写。 mapper代理：程序员只需要写dao接口。   jdbc操作数据库的效率比框架高。">
-<meta name="twitter:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/1原生态jdbc编程中的问题总结/0.jpg">
+<meta name="twitter:title" content="传智 springmvc+mybatis day1-9.原始dao开发方式">
+<meta name="twitter:description" content="原始dao的开发方式程序员需要写dao接口及dao的接口实现。 项目路径：  仓库：chuanzhi_springmvc_mybatis 项目：day1_7">
+<meta name="twitter:image" content="http://yoursite.com/images/blog_pic/传智springmvcmybatisday1/9原始dao开发方式/0.jpg">
 
 
 
@@ -128,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/18/传智springmvcmybatisday1-1原生态jdbc编程中的问题总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/13/传智springmvcmybatisday1-9原始dao开发方式/"/>
 
 
 
 
 
-  <title> 传智 springmvc+mybatis day1-1.原生态jdbc编程中的问题总结 | 王艺凯的博客 </title>
+  <title> 传智 springmvc+mybatis day1-9.原始dao开发方式 | 王艺凯的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -273,7 +272,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/18/传智springmvcmybatisday1-1原生态jdbc编程中的问题总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/13/传智springmvcmybatisday1-9原始dao开发方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王艺凯">
@@ -294,7 +293,7 @@
             
             
               
-                传智 springmvc+mybatis day1-1.原生态jdbc编程中的问题总结
+                传智 springmvc+mybatis day1-9.原始dao开发方式
               
             
           </h1>
@@ -309,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-18T22:44:59+08:00">
-                2017-05-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-13T14:35:54+08:00">
+                2017-08-13
               </time>
             
 
@@ -349,7 +348,7 @@
 
           
           
-             <span id="/2017/05/18/传智springmvcmybatisday1-1原生态jdbc编程中的问题总结/" class="leancloud_visitors" data-flag-title="传智 springmvc+mybatis day1-1.原生态jdbc编程中的问题总结">
+             <span id="/2017/08/13/传智springmvcmybatisday1-9原始dao开发方式/" class="leancloud_visitors" data-flag-title="传智 springmvc+mybatis day1-9.原始dao开发方式">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,7 +372,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  772
+                  775
                 </span>
               
 
@@ -389,7 +388,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -408,62 +407,25 @@
       
 
       
-        <p>java使用jdbc操作关系型数据库。mybatis是对jdbc的封装。</p>
-<hr>
-<p>mybatis开发dao（持久层）的两种方式：</p>
-<ol>
-<li>原始：dao接口及dao实现均需程序员自己编写。</li>
-<li>mapper代理：程序员只需要写dao接口。</li>
-</ol>
-<hr>
-<p>jdbc操作数据库的效率比框架高。</p>
-<hr>
-<a id="more"></a>
-<h1 id="jdbc-demo程序"><a href="#jdbc-demo程序" class="headerlink" title="jdbc demo程序"></a>jdbc demo程序</h1><p>项目路径：</p>
+        <p>原始dao的开发方式程序员需要写dao接口及dao的接口实现。</p>
+<p>项目路径：</p>
 <ul>
 <li>仓库：chuanzhi_springmvc_mybatis</li>
-<li>项目：day1_1</li>
+<li>项目：day1_7</li>
 </ul>
-<hr>
+<a id="more"></a>
 <p>项目架构：</p>
-<p><img src="/images/blog_pic/传智springmvcmybatisday1/1原生态jdbc编程中的问题总结/0.jpg" alt="0.jpg"></p>
-<h2 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</div><div class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0</div><div class="line">                             http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</div><div class="line">  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</div><div class="line">  &lt;groupId&gt;com&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;day1_1&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</div><div class="line">  &lt;packaging&gt;jar&lt;/packaging&gt;</div><div class="line"></div><div class="line">  &lt;properties&gt;</div><div class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</div><div class="line">    &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</div><div class="line">    &lt;maven.compiler.encoding&gt;UTF-8&lt;/maven.compiler.encoding&gt;</div><div class="line">  &lt;/properties&gt;</div><div class="line"></div><div class="line">  &lt;dependencies&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;mysql&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</div><div class="line">      &lt;version&gt;5.1.43&lt;/version&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;junit&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;junit&lt;/artifactId&gt;</div><div class="line">      &lt;version&gt;4.12&lt;/version&gt;</div><div class="line">      &lt;scope&gt;test&lt;/scope&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line">  &lt;/dependencies&gt;</div><div class="line">&lt;/project&gt;</div></pre></td></tr></table></figure>
-<p>jar包引用依赖关系如下：</p>
-<p><img src="/images/blog_pic/传智springmvcmybatisday1/1原生态jdbc编程中的问题总结/1.jpg" alt="1.jpg"></p>
-<p>其中</p>
-<p>mysql-connector-java导入了mysql-jdbc驱动。</p>
-<p>junit为单元测试包。</p>
-<p>junit隐式依赖了hamcrest。hamcrest是一个断言工具包，junit的底层使用了hamcrest作为匹配工具。</p>
-<hr>
-<h2 id="com-day1-1-main-Main-java"><a href="#com-day1-1-main-Main-java" class="headerlink" title="com.day1_1.main.Main.java"></a>com.day1_1.main.Main.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">package com.day1_1.main;</div><div class="line"></div><div class="line">import java.sql.Connection;</div><div class="line">import java.sql.DriverManager;</div><div class="line">import java.sql.PreparedStatement;</div><div class="line">import java.sql.ResultSet;</div><div class="line">import java.sql.SQLException;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Connection connection = null;</div><div class="line">        PreparedStatement preparedStatement = null;</div><div class="line">        ResultSet resultSet = null;</div><div class="line">        try &#123;</div><div class="line">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</div><div class="line">            connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8&quot;, &quot;root&quot;, &quot;&quot;);</div><div class="line">            preparedStatement = connection.prepareStatement(&quot;select * from user where name=?&quot;);</div><div class="line">            preparedStatement.setString(1, &quot;博丽灵梦&quot;);</div><div class="line">            resultSet = preparedStatement.executeQuery();</div><div class="line">            while (resultSet.next()) System.out.println(resultSet.getString(&quot;id&quot;) + &quot;    &quot; + resultSet.getString(&quot;name&quot;));</div><div class="line">        &#125; catch(Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; finally &#123;</div><div class="line">            if (null != resultSet) &#123;</div><div class="line">                try &#123;</div><div class="line">                    resultSet.close();</div><div class="line">                &#125; catch (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            if (null != preparedStatement) &#123;</div><div class="line">                try &#123;</div><div class="line">                    preparedStatement.close();</div><div class="line">                &#125; catch (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            if (null != connection) &#123;</div><div class="line">                try &#123;</div><div class="line">                    connection.close();</div><div class="line">                &#125; catch (SQLException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该类在import时，有以下冲突，应导入接口（因为jdbc是一套接口）：</p>
-<ul>
-<li>com.mysql.cj.jdbc.PreparedStatement（C）</li>
-<li>java.sql.PreparedStatement（I，导入）</li>
-</ul>
-<hr>
-<p>PreparedStatement是预编译的Statement。</p>
-<p>Statement的作用：通过Statement进行数据库的操作。</p>
-<p>为何使用PreparedStatement：</p>
-<p>1.防止sql注入。</p>
-<p>2.效率高，原因：当使用Statement时，数据库接收到sql语句后会找寻最优执行途径即进行编译，编译的结果会记录到缓存中，下次再遇到相同的sql则会直接读取缓存中已有的方案而跳过编译的步骤。但是在使用Statement时sql1:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from user where id=1</div></pre></td></tr></table></figure>
-<p>与sql2:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from user where id=2</div></pre></td></tr></table></figure>
-<p>是两条不同的sql，因此即便数据库缓存中已有sql1的处理结果，当其接到sql2的请求时仍需重新编译，即便这两个sql执行的最优途径实际上是相同的。PreparedStatement使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from user where id=?</div></pre></td></tr></table></figure>
-<p>规避了这个问题。</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</div></pre></td></tr></table></figure>
-<p>该行代码作用为加载mysql驱动。””中的字符串即为mysql驱动包中驱动类的全路径。</p>
-<hr>
-<p>使用原生jdbc时，若设计不当，则数据库的连接可能会频繁的创建和关闭，浪费数据库资源，影响效率。解决方案：使用数据库连接池。</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">preparedStatement = connection.prepareStatement(&quot;select * from user where name=?&quot;);</div></pre></td></tr></table></figure>
-<p>?表示占位符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">preparedStatement.setString(1, &quot;博丽灵梦&quot;);</div></pre></td></tr></table></figure>
-<p>设置占位符的下标从1开始。</p>
-
+<p><img src="/images/blog_pic/传智springmvcmybatisday1/9原始dao开发方式/0.jpg" alt="0.jpg"></p>
+<h1 id="mybatis-sqlmap-user-xml"><a href="#mybatis-sqlmap-user-xml" class="headerlink" title="mybatis/sqlmap/user.xml"></a>mybatis/sqlmap/user.xml</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</div><div class="line">&lt;mapper namespace=&quot;com.day1_7.user.pojo.UserPojo&quot;&gt;</div><div class="line">  &lt;select id=&quot;selectById&quot; parameterType=&quot;int&quot; resultType=&quot;com.day1_7.user.pojo.UserPojo&quot;&gt;</div><div class="line">    select * from user where id= #&#123;id&#125;</div><div class="line">  &lt;/select&gt;</div><div class="line">  &lt;select id=&quot;selectByName&quot; parameterType=&quot;String&quot; resultType=&quot;com.day1_7.user.pojo.UserPojo&quot;&gt;</div><div class="line">    select * from user where name like &apos;$&#123;value&#125;%&apos;</div><div class="line">  &lt;/select&gt;</div><div class="line">  &lt;insert id=&quot;insert&quot; parameterType=&quot;com.day1_7.user.pojo.UserPojo&quot;&gt;</div><div class="line">    &lt;selectKey keyProperty=&quot;id&quot; order=&quot;AFTER&quot; resultType=&quot;int&quot;&gt;</div><div class="line">      select last_insert_id()</div><div class="line">    &lt;/selectKey&gt;</div><div class="line">    insert into user(name,create_time) values(#&#123;name&#125;,#&#123;create_time&#125;)</div><div class="line">  &lt;/insert&gt;</div><div class="line">&lt;/mapper&gt;</div></pre></td></tr></table></figure>
+<h1 id="com-day1-7-user-dao-UserDao-java"><a href="#com-day1-7-user-dao-UserDao-java" class="headerlink" title="com.day1_7.user.dao.UserDao.java"></a>com.day1_7.user.dao.UserDao.java</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">package com.day1_7.user.dao;</div><div class="line"></div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import com.day1_7.user.pojo.UserPojo;</div><div class="line"></div><div class="line">public interface UserDao &#123;</div><div class="line"></div><div class="line">    public UserPojo selectById(int id) throws Exception;</div><div class="line"></div><div class="line">    public List&lt;UserPojo&gt; selectByName(String name) throws Exception;</div><div class="line"></div><div class="line">    public void insert(UserPojo userPojo) throws Exception;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通常dao接口都会抛出异常，以便于service层处理。</p>
+<h1 id="com-day1-7-user-dao-UserDaoImpl-java"><a href="#com-day1-7-user-dao-UserDaoImpl-java" class="headerlink" title="com.day1_7.user.dao.UserDaoImpl.java"></a>com.day1_7.user.dao.UserDaoImpl.java</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">package com.day1_7.user.dao;</div><div class="line"></div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import org.apache.ibatis.session.SqlSession;</div><div class="line">import org.apache.ibatis.session.SqlSessionFactory;</div><div class="line"></div><div class="line">import com.day1_7.user.pojo.UserPojo;</div><div class="line"></div><div class="line">public class UserDaoImpl implements UserDao &#123;</div><div class="line"></div><div class="line">    private SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    public UserDaoImpl(SqlSessionFactory sqlSessionFactory) &#123;</div><div class="line">        this.sqlSessionFactory = sqlSessionFactory;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public UserPojo selectById(int id) &#123;</div><div class="line">        SqlSession sqlSession = null;</div><div class="line">        UserPojo userPojo = null;</div><div class="line">        try &#123;</div><div class="line">            sqlSession = this.sqlSessionFactory.openSession();</div><div class="line">            userPojo = sqlSession.selectOne(&quot;com.day1_7.user.pojo.UserPojo.selectById&quot;, id);</div><div class="line">        &#125; finally &#123;</div><div class="line">            if (null != sqlSession) sqlSession.close(); </div><div class="line">        &#125;</div><div class="line">        return userPojo;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public List&lt;UserPojo&gt; selectByName(String name) &#123;</div><div class="line">        SqlSession sqlSession = null;</div><div class="line">        List&lt;UserPojo&gt; userPojoList = null;</div><div class="line">        try &#123;</div><div class="line">            sqlSession = this.sqlSessionFactory.openSession();</div><div class="line">            userPojoList = sqlSession.selectList(&quot;com.day1_7.user.pojo.UserPojo.selectByName&quot;, name);</div><div class="line">        &#125; finally &#123;</div><div class="line">            if (null != sqlSession) sqlSession.close(); </div><div class="line">        &#125;</div><div class="line">        return userPojoList;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void insert(UserPojo userPojo) &#123;</div><div class="line">        SqlSession sqlSession = null;</div><div class="line">        try &#123;</div><div class="line">            sqlSession = this.sqlSessionFactory.openSession();</div><div class="line">            sqlSession.insert(&quot;com.day1_7.user.pojo.UserPojo.insert&quot;, userPojo);</div><div class="line">            sqlSession.commit();</div><div class="line">        &#125; finally &#123;</div><div class="line">            if (null != sqlSession) sqlSession.close(); </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>SqlSessionFactory是单例的，因此应以某种方式注入。本demo以构造函数注入。</p>
+<h1 id="测试：com-UserDaoImplTest-java"><a href="#测试：com-UserDaoImplTest-java" class="headerlink" title="测试：com.UserDaoImplTest.java"></a>测试：com.UserDaoImplTest.java</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">package com;</div><div class="line"></div><div class="line">import org.apache.ibatis.io.Resources;</div><div class="line">import org.apache.ibatis.session.SqlSessionFactory;</div><div class="line">import org.apache.ibatis.session.SqlSessionFactoryBuilder;</div><div class="line">import org.junit.Before;</div><div class="line">import org.junit.Test;</div><div class="line"></div><div class="line">import com.alibaba.fastjson.JSON;</div><div class="line">import com.day1_7.user.dao.UserDaoImpl;</div><div class="line"></div><div class="line">public class UserDaoImplTest &#123;</div><div class="line"></div><div class="line">    private SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    @Before</div><div class="line">    public void setUp() throws Exception &#123;</div><div class="line">        this.sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(&quot;mybatis/SqlMapConfig.xml&quot;));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Test</div><div class="line">    public void testSelectById() &#123;</div><div class="line">        System.out.println(JSON.toJSONString(new UserDaoImpl(this.sqlSessionFactory).selectById(1)));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="运行该测试类"><a href="#运行该测试类" class="headerlink" title="运行该测试类"></a>运行该测试类</h2><p>得到结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;create_time&quot;:1496411217000,&quot;id&quot;:1,&quot;name&quot;:&quot;博丽灵梦&quot;&#125;</div></pre></td></tr></table></figure>
+<p>打印的dubug日志信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">2017-08-13 15:17:26 org.apache.ibatis.logging.LogFactory:135 [DEBUG] - Logging initialized using &apos;class org.apache.ibatis.logging.slf4j.Slf4jImpl&apos; adapter.</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.datasource.pooled.PooledDataSource:316 [DEBUG] - PooledDataSource forcefully closed/removed all connections.</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.datasource.pooled.PooledDataSource:316 [DEBUG] - PooledDataSource forcefully closed/removed all connections.</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.datasource.pooled.PooledDataSource:316 [DEBUG] - PooledDataSource forcefully closed/removed all connections.</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.datasource.pooled.PooledDataSource:316 [DEBUG] - PooledDataSource forcefully closed/removed all connections.</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.transaction.jdbc.JdbcTransaction:136 [DEBUG] - Opening JDBC Connection</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.datasource.pooled.PooledDataSource:387 [DEBUG] - Created connection 1430361668.</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.transaction.jdbc.JdbcTransaction:100 [DEBUG] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@55419644]</div><div class="line">2017-08-13 15:17:26 com.day1_7.user.pojo.UserPojo.selectById:159 [DEBUG] - ==&gt;  Preparing: select * from user where id= ? </div><div class="line">2017-08-13 15:17:26 com.day1_7.user.pojo.UserPojo.selectById:159 [DEBUG] - ==&gt; Parameters: 1(Integer)</div><div class="line">2017-08-13 15:17:26 com.day1_7.user.pojo.UserPojo.selectById:159 [DEBUG] - &lt;==      Total: 1</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.transaction.jdbc.JdbcTransaction:122 [DEBUG] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@55419644]</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.transaction.jdbc.JdbcTransaction:90 [DEBUG] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@55419644]</div><div class="line">2017-08-13 15:17:26 org.apache.ibatis.datasource.pooled.PooledDataSource:344 [DEBUG] - Returned connection 1430361668 to pool.</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -509,18 +471,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/19/传智springmvcmybatisday1-2mybatis架构/" rel="next" title="传智 springmvc+mybatis day1-2.mybatis架构">
-                <i class="fa fa-chevron-left"></i> 传智 springmvc+mybatis day1-2.mybatis架构
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/18/传智springmvcmybatisday1-0视频资料/" rel="prev" title="传智 springmvc+mybatis day1-0.视频资料">
-                传智 springmvc+mybatis day1-0.视频资料 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/13/java并发-线程通信/" rel="prev" title="java并发-线程通信">
+                java并发-线程通信 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -650,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jdbc-demo程序"><span class="nav-number">1.</span> <span class="nav-text">jdbc demo程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pom-xml"><span class="nav-number">1.1.</span> <span class="nav-text">pom.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#com-day1-1-main-Main-java"><span class="nav-number">1.2.</span> <span class="nav-text">com.day1_1.main.Main.java</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis-sqlmap-user-xml"><span class="nav-number">1.</span> <span class="nav-text">mybatis/sqlmap/user.xml</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#com-day1-7-user-dao-UserDao-java"><span class="nav-number">2.</span> <span class="nav-text">com.day1_7.user.dao.UserDao.java</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#com-day1-7-user-dao-UserDaoImpl-java"><span class="nav-number">3.</span> <span class="nav-text">com.day1_7.user.dao.UserDaoImpl.java</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试：com-UserDaoImplTest-java"><span class="nav-number">4.</span> <span class="nav-text">测试：com.UserDaoImplTest.java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行该测试类"><span class="nav-number">4.1.</span> <span class="nav-text">运行该测试类</span></a></li></ol></li></ol></div>
             
 
           </div>
