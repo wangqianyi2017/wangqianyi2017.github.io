@@ -1,0 +1,930 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JVM，面试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言2019年11月份的面试总结，想提高面试成功率，一定要了解公司的业务，去分析公司对应业务的站点，了解他们使用的技术栈，进而去准备相关的知识。二面/三面更侧重于对Java知识的深度和广度来进行考察，不再局限于基础知识，更多的是底层源码、项目实战等方面。很多面试问题摘抄于网络中，如有侵权，请告知～">
+<meta name="keywords" content="JVM，面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM-JVM面试题">
+<meta property="og:url" content="http://yoursite.com/2019/12/03/JVM-JVM面试题/index.html">
+<meta property="og:site_name" content="翎祎児㤾的博客">
+<meta property="og:description" content="前言2019年11月份的面试总结，想提高面试成功率，一定要了解公司的业务，去分析公司对应业务的站点，了解他们使用的技术栈，进而去准备相关的知识。二面/三面更侧重于对Java知识的深度和广度来进行考察，不再局限于基础知识，更多的是底层源码、项目实战等方面。很多面试问题摘抄于网络中，如有侵权，请告知～">
+<meta property="og:updated_time" content="2019-12-03T15:14:29.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM-JVM面试题">
+<meta name="twitter:description" content="前言2019年11月份的面试总结，想提高面试成功率，一定要了解公司的业务，去分析公司对应业务的站点，了解他们使用的技术栈，进而去准备相关的知识。二面/三面更侧重于对Java知识的深度和广度来进行考察，不再局限于基础知识，更多的是底层源码、项目实战等方面。很多面试问题摘抄于网络中，如有侵权，请告知～">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/03/JVM-JVM面试题/"/>
+
+
+
+
+
+  <title> JVM-JVM面试题 | 翎祎児㤾的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">翎祎児㤾的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/03/JVM-JVM面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="翎祎児㤾">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="翎祎児㤾的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JVM-JVM面试题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-03T22:47:39+08:00">
+                2019-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/12/03/JVM-JVM面试题/" class="leancloud_visitors" data-flag-title="JVM-JVM面试题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  5,083
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2019年11月份的面试总结，想提高面试成功率，一定要了解公司的业务，去分析公司对应业务的站点，了解他们使用的技术栈，进而去准备相关的知识。二面/三面更侧重于对Java知识的深度和广度来进行考察，不再局限于基础知识，更多的是底层源码、项目实战等方面。<br>很多面试问题摘抄于网络中，如有侵权，请告知～</p>
+<a id="more"></a>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="描述一下-JVM-加载-Class-文件的原理机制"><a href="#描述一下-JVM-加载-Class-文件的原理机制" class="headerlink" title="描述一下 JVM 加载 Class 文件的原理机制?"></a>描述一下 JVM 加载 Class 文件的原理机制?</h2><p>Java 语言是一种具有动态性的解释型语言，类（Class）只有被加载到 JVM 后才能运行。当运行指定程序时，JVM 会将编译生成的 .class 文件按照需求和一定的规则加载到内存中，并组织成为一个完整的 Java 应用程序。这个加载过程是由类加载器完成，具体来说，就是由 ClassLoader 和它的子类来实现的。类加载器本身也是一个类，其实质是把类文件从硬盘读取到内存中。</p>
+<p>类的加载方式分为隐式加载和显示加载。隐式加载指的是程序在使用 new 等方式创建对象时，会隐式地调用类的加载器把对应的类加载到 JVM 中。显示加载指的是通过直接调用 class.forName()方法来把所需的类加载到 JVM 中。</p>
+<p>任何一个工程项目都是由许多类组成的，当程序启动时，只把需要的类加载到 JVM 中，其他类只有被使用到的时候才会被加载，采用这种方法一方面可以加快加载速度，另一方面可以节约程序运行时对内存的开销。此外，在 Java 语言中，每个类或接口都对应一个 .class 文件，这些文件可以被看成是一个个可以被动态加载的单元，因此当只有部分类被修改时，只需要重新编译变化的类即可，而不需要重新编译所有文件，因此加快了编译速度。<br>在 Java 语言中，类的加载是动态的，它并不会一次性将所有类全部加载后再运行，而是保证程序运行的基础类（例如基类）完全加载到 JVM 中，至于其他类，则在需要的时候才加载。</p>
+<p>类加载的主要步骤：</p>
+<ul>
+<li>装载，根据查找路径找到相应的 class 文件，然后导入。</li>
+<li>链接，链接又可分为 3 个小步：</li>
+<li>检查，检查待加载的 class 文件的正确性。</li>
+<li>准备，给类中的静态变量分配存储空间。</li>
+<li>解析，将符号引用转换为直接引用（这一步可选）</li>
+<li>初始化。对静态变量和静态代码块执行初始化工作。</li>
+</ul>
+<h2 id="Java内存分配"><a href="#Java内存分配" class="headerlink" title="Java内存分配"></a>Java内存分配</h2><p>•  寄存器：我们无法控制。<br>•  静态域：static 定义的静态成员。<br>•  常量池：编译时被确定并保存在 .class 文件中的（final）常量值和一些文本修饰的符号引用（类和接口的全限定名，字段的名称和描述符，方法和名称和描述符）。<br>•  非 RAM 存储：硬盘等永久存储空间。<br>•  堆内存：new 创建的对象和数组，由 Java 虚拟机自动垃圾回收器管理,存取速度慢。<br>•  栈内存：基本类型的变量和对象的引用变量（堆内存空间的访问地址），速度快，可以共享，但是大小与生存期必须确定，缺乏灵活性。</p>
+<h2 id="Java-堆的结构是什么样子的？什么是堆中的永久代（Perm-Genspace）"><a href="#Java-堆的结构是什么样子的？什么是堆中的永久代（Perm-Genspace）" class="headerlink" title="Java 堆的结构是什么样子的？什么是堆中的永久代（Perm Genspace）?"></a>Java 堆的结构是什么样子的？什么是堆中的永久代（Perm Genspace）?</h2><p>JVM 的堆是运行时数据区，所有类的实例和数组都是在堆上分配内存。它在 JVM 启动的时候被创建。对象所占的堆内存是由自动内存管理系统也就是垃圾收集器回收。<br>堆内存是由存活和死亡的对象组成的。存活的对象是应用可以访问的，不会被垃圾回收。死亡的对象是应用不可访问尚且还没有被垃圾收集器回收掉的对象。一直到垃圾收集器把这些 对象回收掉之前，他们会一直占据堆内存空间。</p>
+<h2 id="GC-是什么-为什么要有-GC？"><a href="#GC-是什么-为什么要有-GC？" class="headerlink" title="GC 是什么? 为什么要有 GC？"></a>GC 是什么? 为什么要有 GC？</h2><p>GC 是垃圾收集的意思（GabageCollection），内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java 提供的 GC 功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java 语言没有提供释放已分配内存的显示操作方法。</p>
+<h2 id="简述-Java-垃圾回收机制"><a href="#简述-Java-垃圾回收机制" class="headerlink" title="简述 Java 垃圾回收机制"></a>简述 Java 垃圾回收机制</h2><p>在 Java 中，程序员是不需要显示的去释放一个对象的内存的，而是由虚拟机自行执行。在 JVM 中，有一个垃圾回收线程，它是低优先级的，在正常情况下是不会执行的，只有在虚拟机空闲或者当前堆内存不足时，才会触发执行，扫面那些没有被任何引用的对象，并将它们添加到要回收的集合中，进行回收。</p>
+<h2 id="如何判断一个对象是否存活？（或者-GC-对象的判定方法）"><a href="#如何判断一个对象是否存活？（或者-GC-对象的判定方法）" class="headerlink" title="如何判断一个对象是否存活？（或者 GC 对象的判定方法）"></a>如何判断一个对象是否存活？（或者 GC 对象的判定方法）</h2><p>判断一个对象是否存活有两种方法：</p>
+<ol>
+<li><p>引用计数法<br>所谓引用计数法就是给每一个对象设置一个引用计数器，每当有一个地方引用这个对象时，就将计数器加一，引用失效时，计数器就减一。当一个对象的引用计数器为零时，说明此对象没有被引用，也就是“死对象”,将会被垃圾回收。<br>引用计数法有一个缺陷就是无法解决循环引用问题，也就是说当对象 A 引用对象 B，对象 B 又引用者对象 A，那么此时 A、B 对象的引用计数器都不为零，也就造成无法完成垃圾回收，所以主流的虚拟机都没有采用这种算法。</p>
+</li>
+<li><p>可达性算法（引用链法）<br>该算法的思想是：从一个被称为 GC Roots 的对象开始向下搜索，如果一个对象到 GC Roots 没有任何引用链相连时，则说明此对象不可用。<br>在 Java 中可以作为 GC Roots 的对象有以下几种：</p>
+</li>
+</ol>
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法区类静态属性引用的对象</li>
+<li>方法区常量池引用的对象</li>
+<li>本地方法栈 JNI 引用的对象<br>虽然这些算法可以判定一个对象是否能被回收，但是当满足上述条件时，一个对象比不一定会被回收。当一个对象不可达 GC Root时，这个对象并不会立马被回收，而是出于一个死缓的阶段，若要被真正的回收需要经历两次标记。</li>
+</ul>
+<p>如果对象在可达性分析中没有与 GC Root 的引用链，那么此时就会被第一次标记并且进行一次筛选，筛选的条件是是否有必要执行finalize() 方法。当对象没有覆盖 finalize() 方法或者已被虚拟机调用过，那么就认为是没必要的。如果该对象有必要执行finalize() 方法，那么这个对象将会放在一个称为 F-Queue 的对队列中，虚拟机会触发一个 Finalize() 线程去执行，此线程是低优先级的，并且虚拟机不会承诺一直等待它运行完，这是因为如果finalize() 执行缓慢或者发生了死锁，那么就会造成 F-Queue 对列一直等待，造成了内存回收系统的崩溃。GC 对处于 F-Queue中的对象进行第二次被标记，这时，该对象将被移除” 即将回收”集合，等待回收。</p>
+<h2 id="垃圾回收的优点和原理。并考虑-2-种回收机制"><a href="#垃圾回收的优点和原理。并考虑-2-种回收机制" class="headerlink" title="垃圾回收的优点和原理。并考虑 2 种回收机制"></a>垃圾回收的优点和原理。并考虑 2 种回收机制</h2><p>Java 语言中一个显著的特点就是引入了垃圾回收机制，使 C++程序员最头疼的内存管理的问题迎刃而解，它使得 Java 程序员在编写程序的时候不再需要考虑内存管理。由于有个垃圾回收机制，Java 中的对象不再有“作用域”的概念，只有对象的引用才有”作用域”。垃圾回收可以有效的防止内存泄露，有效的使用可以使用的内存。垃圾回收器通常是作为一个单独的低级别的线程运行，不可预知的情况下对内存堆中已经死亡的或者长时间没有使用的对象进行清楚和回收，程序员不能实时的调用垃圾回收器对某个对象或所有对象进行垃圾回收。<br>回收机制有分代复制垃圾回收和标记垃圾回收，增量垃圾回收。</p>
+<h2 id="垃圾回收器的基本原理是什么？垃圾回收器可以马上回收内存吗？有什么办法主动通知虚拟机进行垃圾回收？"><a href="#垃圾回收器的基本原理是什么？垃圾回收器可以马上回收内存吗？有什么办法主动通知虚拟机进行垃圾回收？" class="headerlink" title="垃圾回收器的基本原理是什么？垃圾回收器可以马上回收内存吗？有什么办法主动通知虚拟机进行垃圾回收？"></a>垃圾回收器的基本原理是什么？垃圾回收器可以马上回收内存吗？有什么办法主动通知虚拟机进行垃圾回收？</h2><p>对于 GC 来说，当程序员创建对象时，GC 就开始监控这个对象的地址、大小以及使用情况。通常，GC 采用有向图的方式记录和管理堆（heap）中的所有对象。通过这种方式确定哪些对象是”可达的”，哪些对象是”不可达的”。当 GC 确定一些对象为“不可达”时，GC 就有责任回收这些内存空间。可以。程序员可以手动执行 System.gc()，通知 GC 运行，但是 Java 语言规范并不保证 GC 一定会执行。</p>
+<h2 id="Java-中会存在内存泄漏吗，请简单描述。"><a href="#Java-中会存在内存泄漏吗，请简单描述。" class="headerlink" title="Java 中会存在内存泄漏吗，请简单描述。"></a>Java 中会存在内存泄漏吗，请简单描述。</h2><p>所谓内存泄露就是指一个不再被程序使用的对象或变量一直被占据在内存中。Java 中有垃圾回收机制，它可以保证一对象不再被引用的时候，即对象变成了孤儿的时候，对象将自动被垃圾回收器从内存中清除掉。由于 Java 使用有向图的方式进行垃圾回收管理，可以消除引用循环的问题，例如有两个对象，相互引用，只要它们和根进程不可达的，那么 GC 也是可以回收它们的。</p>
+<p>Java 中的内存泄露的情况：长生命周期的对象持有短生命周期对象的引用就很可能发生内存泄露，尽管短生命周期对象已经不再需要，但是因为长生命周期对象持有它的引用而导致不能被回收，这就是 Java 中内存泄露的发生场景，通俗地说，就是程序员可能创建了一个对象，以后一直不再使用这个对象，这个对象却一直被引用，即这个对象无用但是却无法被垃圾回收器回收的，这就是 java中可能出现内存泄露的情况，例如，缓存系统，我们加载了一个对象放在缓存中 (例如放在一个全局 map 对象中)，然后一直不再使用它，这个对象一直被缓存引用，但却不再被使用。</p>
+<p>检查 Java 中的内存泄露，一定要让程序将各种分支情况都完整执行到程序结束，然后看某个对象是否被使用过，如果没有，则才能判定这个对象属于内存泄露。</p>
+<p>如果一个外部类的实例对象的方法返回了一个内部类的实例对象，这个内部类对象被长期引用了，即使那个外部类实例对象不再被使用，但由于内部类持久外部类的实例对象，这个外部类对象将不会被垃圾回收，这也会造成内存泄露。</p>
+<p>内存泄露的另外一种情况：当一个对象被存储进 HashSet 集合中以后，就不能修改这个对象中的那些参与计算哈希值的字段了，否则，对象修改后的哈希值与最初存储进 HashSet 集合中时的哈希值就不同了，在这种情况下，即使在 contains 方法使用该对象的当前引用作为的参数去 HashSet 集合中检索对象，也将返回找不到对象的结果，这也会导致无法从 HashSet 集合中单独删除当前对象，造成内存泄露。</p>
+<h2 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h2><p>简单来讲就是复制、克隆。<br>Person p=new Person(“张三”);<br>浅拷贝就是对对象中的数据成员进行简单赋值，如果存在动态成员或者指针就会报错。<br>深拷贝就是对对象中存在的动态成员或指针重新开辟内存空间。</p>
+<h2 id="System-gc-和-Runtime-gc-会做什么事情？"><a href="#System-gc-和-Runtime-gc-会做什么事情？" class="headerlink" title="System.gc() 和 Runtime.gc() 会做什么事情？"></a>System.gc() 和 Runtime.gc() 会做什么事情？</h2><p>这两个方法用来提示 JVM 要进行垃圾回收。但是，立即开始还是延迟进行垃圾回收是取决于 JVM 的。</p>
+<h2 id="finalize-方法什么时候被调用？析构函数-finalization-的目的是什么？"><a href="#finalize-方法什么时候被调用？析构函数-finalization-的目的是什么？" class="headerlink" title="finalize() 方法什么时候被调用？析构函数 (finalization) 的目的是什么？"></a>finalize() 方法什么时候被调用？析构函数 (finalization) 的目的是什么？</h2><p>垃圾回收器（garbage colector）决定回收某对象时，就会运行该对象的 finalize() 方法 但是在 Java 中很不幸，如果内存总是充足的，那么垃圾回收可能永远不会进行，也就是说 filalize() 可能永远不被执行，显然指望它做收尾工作是靠不住的。那么finalize() 究竟是做什么的呢？它最主要的用途是回收特殊渠道申请的内存。Java 程序有垃圾回收器，所以一般情况下内存问题不用程序员操心。但有一种 JNI（Java Native Interface）调用non-Java 程序（C 或 C++）， finalize() 的工作就是回收这部分的内存。</p>
+<h2 id="如果对象的引用被置为-null，垃圾收集器是否会立即释放对象占用的内存？"><a href="#如果对象的引用被置为-null，垃圾收集器是否会立即释放对象占用的内存？" class="headerlink" title="如果对象的引用被置为 null，垃圾收集器是否会立即释放对象占用的内存？"></a>如果对象的引用被置为 null，垃圾收集器是否会立即释放对象占用的内存？</h2><p>不会，在下一个垃圾回收周期中，这个对象将是可被回收的。</p>
+<h2 id="什么是分布式垃圾回收（DGC）？它是如何工作的？"><a href="#什么是分布式垃圾回收（DGC）？它是如何工作的？" class="headerlink" title="什么是分布式垃圾回收（DGC）？它是如何工作的？"></a>什么是分布式垃圾回收（DGC）？它是如何工作的？</h2><p>DGC 叫做分布式垃圾回收。RMI 使用 DGC 来做自动垃圾回收。因为 RMI 包含了跨虚拟机的远程对象的引用，垃圾回收是很困难的。DGC 使用引用计数算法来给远程对象提供自动内存管理。</p>
+<h2 id="串行（serial）收集器和吞吐量（throughput）收集器的区别是什么？"><a href="#串行（serial）收集器和吞吐量（throughput）收集器的区别是什么？" class="headerlink" title="串行（serial）收集器和吞吐量（throughput）收集器的区别是什么？"></a>串行（serial）收集器和吞吐量（throughput）收集器的区别是什么？</h2><p>吞吐量收集器使用并行版本的新生代垃圾收集器，它用于中等规模和大规模数据的应用程序。而串行收集器对大多数的小应用（在现代处理器上需要大概 100M 左右的内存）就足够了。</p>
+<h2 id="在-Java-中，对象什么时候可以被垃圾回收？"><a href="#在-Java-中，对象什么时候可以被垃圾回收？" class="headerlink" title="在 Java 中，对象什么时候可以被垃圾回收？"></a>在 Java 中，对象什么时候可以被垃圾回收？</h2><p>当对象对当前使用这个对象的应用程序变得不可触及的时候，这个对象就可以被回收了。</p>
+<h2 id="简述-Java-内存分配与回收策率以及-Minor-GC-和-MajorGC"><a href="#简述-Java-内存分配与回收策率以及-Minor-GC-和-MajorGC" class="headerlink" title="简述 Java 内存分配与回收策率以及 Minor GC 和 MajorGC"></a>简述 Java 内存分配与回收策率以及 Minor GC 和 MajorGC</h2><p>•  对象优先在堆的 Eden 区分配<br>•  大对象直接进入老年代<br>•  长期存活的对象将直接进入老年代<br>当 Eden 区没有足够的空间进行分配时，虚拟机会执行一次Minor GC。Minor GC 通常发生在新生代的 Eden 区，在这个区的对象生存期短，往往发生 Gc 的频率较高，回收速度比较快；<br>Full GC/Major GC 发生在老年代，一般情况下，触发老年代 GC的时候不会触发 Minor GC，但是通过配置，可以在 Full GC 之前进行一次 Minor GC 这样可以加快老年代的回收速度。</p>
+<h2 id="JVM-的永久代中会发生垃圾回收么？"><a href="#JVM-的永久代中会发生垃圾回收么？" class="headerlink" title="JVM 的永久代中会发生垃圾回收么？"></a>JVM 的永久代中会发生垃圾回收么？</h2><p>圾回收不会发生在永久代，如果永久代满了或者是超过了临界值，会触发完全垃圾回收（Full GC）。<br>注：Java 8 中已经移除了永久代，新加了一个叫做元数据区的native 内存区。</p>
+<h2 id="Java-中垃圾收集的方法有哪些？"><a href="#Java-中垃圾收集的方法有哪些？" class="headerlink" title="Java 中垃圾收集的方法有哪些？"></a>Java 中垃圾收集的方法有哪些？</h2><p>标记 - 清除：这是垃圾收集算法中最基础的，根据名字就可以知道，它的思想就是标记哪些要被回收的对象，然后统一回收。这种方法很简单，但是会有两个主要问题：</p>
+<ol>
+<li>效率不高，标记和清除的效率都很低；</li>
+<li>会产生大量不连续的内存碎片，导致以后程序在分配较大的对象时，由于没有充足的连续内存而提前触发一次 GC 动作。<br>复制算法：为了解决效率问题，复制算法将可用内存按容量划分为相等的两部分，然后每次只使用其中的一块，当一块内存用完时，就将还存活的对象复制到第二块内存上，然后一次性清楚完第一块内存，再将第二块上的对象复制到第一块。但是这种方式，内存的代价太高，每次基本上都要浪费一般的内存。<br>于是将该算法进行了改进，内存区域不再是按照 1:1 去划分，而是将内存划分为 8:1:1 三部分，较大那份内存交 Eden 区，其余是两块较小的内存区叫 Survior 区。每次都会优先使用 Eden 区，若 Eden 区满，就将对象复制到第二块内存区上，然后清除 Eden区，如果此时存活的对象太多，以至于 Survivor 不够时，会将这些对象通过分配担保机制复制到老年代中。（java 堆又分为新生代和老年代）<br>标记 - 整理：该算法主要是为了解决标记 - 清除，产生大量内存碎片的问题；当对象存活率较高时，也解决了复制算法的效率问题。它的不同之处就是在清除对象的时候现将可回收对象移动到一端，然后清除掉端边界以外的对象，这样就不会产生内存碎片了。<br>分代收集：现在的虚拟机垃圾收集大多采用这种方式，它根据对象的生存周期，将堆分为新生代和老年代。在新生代中，由于对象生存期短，每次回收都会有大量对象死去，那么这时就采用复制算法。<br>老年代里的对象存活率较高，没有额外的空间进行分配担保。</li>
+</ol>
+<h2 id="什么是类加载器，类加载器有哪些？"><a href="#什么是类加载器，类加载器有哪些？" class="headerlink" title="什么是类加载器，类加载器有哪些？"></a>什么是类加载器，类加载器有哪些？</h2><p>实现通过类的权限定名获取该类的二进制字节流的代码块叫做类加载器。<br>主要有一下四种类加载器：<br>•  启动类加载器（Bootstrap ClassLoader）用来加载 Java 核心类库，无法被 Java 程序直接引用。<br>•  扩展类加载器（extensions class loader）：它用来加载 Java的扩展库。Java 虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载 Java 类。<br>•  系统类加载器（system class loader）：它根据 Java 应用的类路径（CLASSPATH）来加载 Java 类。一般来说，Java应用的类都是由它来完成加载的。可以通过ClassLoader.getSystemClassLoader() 来获取它。<br>•  用户自定义类加载器，通过继承 java.lang.ClassLoader 类的方式实现。</p>
+<h2 id="类加载器双亲委派模型机制？"><a href="#类加载器双亲委派模型机制？" class="headerlink" title="类加载器双亲委派模型机制？"></a>类加载器双亲委派模型机制？</h2><p>当一个类收到了类加载请求时，不会自己先去加载这个类，而是将其委派给父类，由父类去加载，如果此时父类不能加载，反馈给子类，由子类去完成类的加载。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>所有的面试题目都不是一成不变的，特别是像一线大厂，上面的面试真题只是给大家一个借鉴作用，最主要的是给自己增加知识的储备，有备无患。<br>一句话共勉：<strong><em>困难之所以是困难，那是因为我们还不够强大。</em></strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM，面试/" rel="tag"># JVM，面试</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/03/杂项-Markdown语法/" rel="prev" title="杂项-Markdown语法">
+                杂项-Markdown语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="翎祎児㤾" />
+          <p class="site-author-name" itemprop="name">翎祎児㤾</p>
+           
+              <p class="site-description motion-element" itemprop="description">Thou Shalt Comment</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述一下-JVM-加载-Class-文件的原理机制"><span class="nav-number">2.1.</span> <span class="nav-text">描述一下 JVM 加载 Class 文件的原理机制?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内存分配"><span class="nav-number">2.2.</span> <span class="nav-text">Java内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-堆的结构是什么样子的？什么是堆中的永久代（Perm-Genspace）"><span class="nav-number">2.3.</span> <span class="nav-text">Java 堆的结构是什么样子的？什么是堆中的永久代（Perm Genspace）?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC-是什么-为什么要有-GC？"><span class="nav-number">2.4.</span> <span class="nav-text">GC 是什么? 为什么要有 GC？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简述-Java-垃圾回收机制"><span class="nav-number">2.5.</span> <span class="nav-text">简述 Java 垃圾回收机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何判断一个对象是否存活？（或者-GC-对象的判定方法）"><span class="nav-number">2.6.</span> <span class="nav-text">如何判断一个对象是否存活？（或者 GC 对象的判定方法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收的优点和原理。并考虑-2-种回收机制"><span class="nav-number">2.7.</span> <span class="nav-text">垃圾回收的优点和原理。并考虑 2 种回收机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收器的基本原理是什么？垃圾回收器可以马上回收内存吗？有什么办法主动通知虚拟机进行垃圾回收？"><span class="nav-number">2.8.</span> <span class="nav-text">垃圾回收器的基本原理是什么？垃圾回收器可以马上回收内存吗？有什么办法主动通知虚拟机进行垃圾回收？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-中会存在内存泄漏吗，请简单描述。"><span class="nav-number">2.9.</span> <span class="nav-text">Java 中会存在内存泄漏吗，请简单描述。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝和浅拷贝"><span class="nav-number">2.10.</span> <span class="nav-text">深拷贝和浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-gc-和-Runtime-gc-会做什么事情？"><span class="nav-number">2.11.</span> <span class="nav-text">System.gc() 和 Runtime.gc() 会做什么事情？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#finalize-方法什么时候被调用？析构函数-finalization-的目的是什么？"><span class="nav-number">2.12.</span> <span class="nav-text">finalize() 方法什么时候被调用？析构函数 (finalization) 的目的是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果对象的引用被置为-null，垃圾收集器是否会立即释放对象占用的内存？"><span class="nav-number">2.13.</span> <span class="nav-text">如果对象的引用被置为 null，垃圾收集器是否会立即释放对象占用的内存？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是分布式垃圾回收（DGC）？它是如何工作的？"><span class="nav-number">2.14.</span> <span class="nav-text">什么是分布式垃圾回收（DGC）？它是如何工作的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#串行（serial）收集器和吞吐量（throughput）收集器的区别是什么？"><span class="nav-number">2.15.</span> <span class="nav-text">串行（serial）收集器和吞吐量（throughput）收集器的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Java-中，对象什么时候可以被垃圾回收？"><span class="nav-number">2.16.</span> <span class="nav-text">在 Java 中，对象什么时候可以被垃圾回收？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简述-Java-内存分配与回收策率以及-Minor-GC-和-MajorGC"><span class="nav-number">2.17.</span> <span class="nav-text">简述 Java 内存分配与回收策率以及 Minor GC 和 MajorGC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-的永久代中会发生垃圾回收么？"><span class="nav-number">2.18.</span> <span class="nav-text">JVM 的永久代中会发生垃圾回收么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-中垃圾收集的方法有哪些？"><span class="nav-number">2.19.</span> <span class="nav-text">Java 中垃圾收集的方法有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是类加载器，类加载器有哪些？"><span class="nav-number">2.20.</span> <span class="nav-text">什么是类加载器，类加载器有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器双亲委派模型机制？"><span class="nav-number">2.21.</span> <span class="nav-text">类加载器双亲委派模型机制？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+      <div id="music163player">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448724050&auto=0&height=66"></iframe>
+      </div>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">翎祎児㤾</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8EnYI3lo055oPaUPw9q15PgA-gzGzoHsz", "tCqaCeEinbik59cVG6GWmixT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <a href="https://github.com/wangqianyi2017"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+</body>
+</html>
