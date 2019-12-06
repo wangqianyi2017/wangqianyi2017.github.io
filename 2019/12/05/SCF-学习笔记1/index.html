@@ -87,21 +87,21 @@
 
 
 
-<meta name="description" content="SCF是58自主研发的RPC框架，致力于在分布式环境下提供高性能、高可靠和透明化的RPC 远程调用方案。RPC是远程过程调用（Remote Procedure Call）的缩写，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。">
+<meta name="description" content="网上找到的参考资料：58集团RPC框架SCF的设计与实践">
 <meta name="keywords" content="框架，SCF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SCF-学习笔记1">
 <meta property="og:url" content="http://yoursite.com/2019/12/05/SCF-学习笔记1/index.html">
 <meta property="og:site_name" content="翎祎児㤾的博客">
-<meta property="og:description" content="SCF是58自主研发的RPC框架，致力于在分布式环境下提供高性能、高可靠和透明化的RPC 远程调用方案。RPC是远程过程调用（Remote Procedure Call）的缩写，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/SCF/SCF-学习笔记1/0.png">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/SCF/SCF-学习笔记1/1.png">
-<meta property="og:image" content="http://yoursite.com/images/blog_pic/SCF/SCF-学习笔记1/2.png">
-<meta property="og:updated_time" content="2019-12-05T17:38:48.098Z">
+<meta property="og:description" content="网上找到的参考资料：58集团RPC框架SCF的设计与实践">
+<meta property="og:image" content="http://yoursite.com/images/blog_pic/SCF/SCF学习笔记1/0.png">
+<meta property="og:image" content="http://yoursite.com/images/blog_pic/SCF/SCF学习笔记1/1.png">
+<meta property="og:image" content="http://yoursite.com/images/blog_pic/SCF/SCF学习笔记1/2.png">
+<meta property="og:updated_time" content="2019-12-06T05:56:35.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SCF-学习笔记1">
-<meta name="twitter:description" content="SCF是58自主研发的RPC框架，致力于在分布式环境下提供高性能、高可靠和透明化的RPC 远程调用方案。RPC是远程过程调用（Remote Procedure Call）的缩写，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。">
-<meta name="twitter:image" content="http://yoursite.com/images/blog_pic/SCF/SCF-学习笔记1/0.png">
+<meta name="twitter:description" content="网上找到的参考资料：58集团RPC框架SCF的设计与实践">
+<meta name="twitter:image" content="http://yoursite.com/images/blog_pic/SCF/SCF学习笔记1/0.png">
 
 
 
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  531
+                  445
                 </span>
               
 
@@ -409,7 +409,9 @@
       
 
       
-        <p>SCF是58自主研发的RPC框架，致力于在分布式环境下提供高性能、高可靠和透明化的RPC 远程调用方案。RPC是远程过程调用（Remote Procedure Call）的缩写，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。<br><a id="more"></a><br>网上找到的参考资料：<a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA%3D%3D&amp;mid=2651011413&amp;idx=2&amp;sn=1d5859d13715e8ee52a1962ae3b3358b&amp;chksm=bdbec1068ac94810685347603a36d6aa1c53b7cf743c8091ae0c58f935732863b3c8ba1f1c71&amp;mpshare=1&amp;scene=23&amp;srcid=%23rd" target="_blank" rel="external">58集团RPC框架SCF的设计与实践</a><br>这篇文章在SCF原理这块说的很清楚，有些概念没有整的特别清楚，等有时间专门看一下。没有查到58的SCF的全称是什么，我猜测是Server Client Factory，等之后确认再来更新。<br>简写一下，自己是如何搭建一个SCF。</p>
+        <p>网上找到的参考资料：<a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA%3D%3D&amp;mid=2651011413&amp;idx=2&amp;sn=1d5859d13715e8ee52a1962ae3b3358b&amp;chksm=bdbec1068ac94810685347603a36d6aa1c53b7cf743c8091ae0c58f935732863b3c8ba1f1c71&amp;mpshare=1&amp;scene=23&amp;srcid=%23rd" target="_blank" rel="external">58集团RPC框架SCF的设计与实践</a></p>
+<a id="more"></a>
+<p>这篇文章在SCF原理这块说的很清楚，有些概念没有整的特别清楚，等有时间专门看一下。没有查到58的SCF的全称是什么，我猜测是Server Client Factory，等之后确认再来更新。<br>简写一下，自己是如何搭建一个SCF。</p>
 <ol>
 <li>搭建服务端S</li>
 <li>搭建客户端C，依赖注入服务端S的jar包</li>
@@ -421,13 +423,14 @@
 </ol>
 <p>项目工程图示：</p>
 <ol>
-<li>服务端<br><img src="/images/blog_pic/SCF/SCF-学习笔记1/0.png" alt="0.png"></li>
-<li>客户端<br><img src="/images/blog_pic/SCF/SCF-学习笔记1/1.png" alt="1.png"></li>
-<li>SCF<br><img src="/images/blog_pic/SCF/SCF-学习笔记1/2.png" alt="2.png"></li>
+<li>服务端<br><img src="/images/blog_pic/SCF/SCF学习笔记1/0.png" alt="0.png"></li>
+<li>客户端<br><img src="/images/blog_pic/SCF/SCF学习笔记1/1.png" alt="1.png"></li>
+<li>SCF<br><img src="/images/blog_pic/SCF/SCF学习笔记1/2.png" alt="2.png"></li>
 </ol>
 <p>代码路径：</p>
 <p>-仓库：SCFTest<br>-项目：demoserver，democlient</p>
-<p>遇到的问题：<br>1.写服务端的时候，依赖的jar包一直都未能导入，后来查询原因，maven_settings.xml要用58的，其次要修改文件里的<strong><em><localrepository>本地安装maven库的地址</localrepository></em></strong>。<br>2.在写客户端的时候，scf.config, scf_log4j.xml这两个配置文件，要注意配置IP，端口，服务名<br>3.在服务器上部署SCF的时候，也要编写scf_config，scf_log4j.xml，这是服务端的配置文件，与客户端不同，不要混为一谈。在这里有一个需要注意的地方，日志配置文件有log4j/log4j2两种，需要跟SCF依赖包对应起来使用，不然就会看不见日志。</p>
+<p>遇到的问题：<br>1.写服务端的时候，依赖的jar包一直都未能导入，后来查询原因，maven_settings.xml要用58的，其次要修改文件里的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;localRepository&gt;本地安装maven库的地址&lt;/localRepository&gt;</div></pre></td></tr></table></figure></p>
+<p>2.在写客户端的时候，scf.config, scf_log4j.xml这两个配置文件，要注意配置IP，端口，服务名<br>3.在服务器上部署SCF的时候，也要编写scf_config，scf_log4j.xml，这是服务端的配置文件，与客户端不同，不要混为一谈。在这里有一个需要注意的地方，日志配置文件有log4j/log4j2两种，需要跟SCF依赖包对应起来使用，不然就会看不见日志。</p>
 <p>下次尝试，将服务端依赖的jar包和工程一起打成服务端的jar包后，去掉lib，是否还可以启动scf2.</p>
 
       
